@@ -1,0 +1,9 @@
+## Please edit your name into this file under the appropriate header
+to confirm that you have access to the repo and can pull/push 
+successfully. ##
+
+Contributors:
+	Programmers:
+		Ben Brownstein
+
+	Project Manager:
