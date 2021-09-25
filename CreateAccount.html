@@ -6,22 +6,25 @@
 
     <!-- <link rel="stylesheet" href="WebsiteCSS.css"> -->
     <title>Create a New Account</title>
+    <script src ="CreateAccountScript.js"></script>
 </head>
 <body>
     <h1>Create a New Account</h1>
+    <form id = myform>
 
-    <label for="username"><b>Username:</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+    <label> Username:</label>
+    <input type="text" placeholder="Enter Username" name="username"required>
 
 
-    <label for="password"><b>Password</b></label>
+    <label><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
 
-    <label for="password_confirm"><b>Confirm Password</b></label>
+    <label><b>Confirm Password</b></label>
     <input type="password" placeholder="Confirm Password" name="password_confirm" required>
 
-    <div>
-        <button type="submit" class="signup">Create an Account</button>
-        </div>
+    <p>
+        <button type="submit" onclick='CreateAcc(); return false'>Create an Account</button>
+    </p>
+    </form>
 </body>
 </html>
