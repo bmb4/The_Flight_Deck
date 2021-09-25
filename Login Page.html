@@ -5,20 +5,24 @@
     <link rel="stylesheet" href="WebsiteCSS.css">
     <meta charset="utf-8" />
     <title>Login Page</title>
+
 </head>
 <body>
     <!-- need some basic script on back end to redirect to dummy pages -->
     <h1 style="text-align:center ; color:white">User Login</h1>
-    <form action="/LoginScript.js"><!--Remeber to update this addr when organizing files-->
+    <form id="credentials" ; onsubmit="testy_bo_besty()">
         <label for="username" style="text-align:center ; color:white">Username:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password" style="text-align:center ; color:white">Password:</label><br>
         <input type="password" id="password" name="password"><br>
-        <input type="checkbox" id="skynet" name="T1000" value="johnconnor" />
-        <label for="skynet" style="color:white">I am not a robot</label><br /> 
-        <input type="submit" value="Game Time" /><br />
-        <a href="newuserpage.html">Create new account</a><br />    
+        <input type="button" value="Game Time" /><br />
+        <a href="newuserpage.html">Create new account</a><br /><!--Needs to be linked properly at merge-->
     </form>
-        <script src="LoginScript.js"></script>
+    <script>
+        function testy_bo_besty() {
+            alert("Hello");
+        }
+    </script><!--Remeber to update this addr when organizing files-->
+
 </body>
 </html>

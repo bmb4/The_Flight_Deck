@@ -7,5 +7,5 @@ let password = "12345";
 
 
 function testy_bo_besty() {
-    document.getElementById()
+  alert("test");
 }
