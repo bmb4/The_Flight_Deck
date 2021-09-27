@@ -1,7 +1,7 @@
 import socketserver
 import util
 import sys
-from Examples import MongoDbExample
+#from Examples import MongoDbExample
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
