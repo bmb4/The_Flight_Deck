@@ -9,7 +9,7 @@ def getHandler(self, request):
     if path == "":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
-    if path == "static":
+    elif path == "static":
         content = util.getFile("templates/static/WebsiteCSS.css")
         return responses.create200(content, "text/css", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
