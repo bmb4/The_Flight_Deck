@@ -1,4 +1,4 @@
 build:
   docker:
-    web: Dockerfile
+    web: Dockerfile_Heroku
 #If you don't include a run section, Heroku uses the cmd specified in the Dockerfile
