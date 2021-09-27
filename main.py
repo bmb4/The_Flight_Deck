@@ -22,13 +22,10 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
                 self.request.sendall(util.httpParser(self, received_data))
 
 if __name__ == '__main__':
-    print("Hello world")
-    MongoDbExample.addRandomNumber()
-    MongoDbExample.showAllNums()
-
+    port = int(sys.argv[1]) if len(sys.argv) >1 else 5000
+    print(port)
     host = "0.0.0.0"
     # host = "localhost"
-    port = 8000
 
     server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
     server.serve_forever()
