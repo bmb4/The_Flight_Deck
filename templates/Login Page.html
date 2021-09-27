@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="static/WebsiteCSS.css">
+    <meta charset="utf-8" />
+    <title>Login Page</title>
+
+</head>
+<body>
+    <!-- need some basic script on back end to redirect to dummy pages -->
+    <h1 style="text-align:center ; color:white">User Login</h1>
+    <form onsubmit="testy_bo_besty()">
+        <label for="username" style="text-align:center; color:white">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password" style="text-align:center; color:white">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="Game Time"><br />
+        <a href="newuserpage.html">Create new account(dead link)</a><br /><!--Needs to be linked properly at merge-->
+    </form>
+    <script>
+        function testy_bo_besty() {
+            var hcvals = ["bmb4", "12345"];
+            var subun = document.getElementById("username");
+            var subpw = document.getElementById("password");
+            if (hcvals[0] == subun.value && hcvals[1] == subpw.value) {
+                alert("Welcome back " + subun.value);
+            }
+            else {
+                alert("Incorrect login credentials");
+            }
+        }
+    </script><!--Remeber to update this addr when organizing files-->
+
+</body>
+</html>
