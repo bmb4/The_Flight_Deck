@@ -4,4 +4,4 @@ WORKDIR /root
 COPY . .
 RUN pip install -r requirements.txt
 EXPOSE $PORT
-CMD python3 main.py $PORT
+CMD /wait && python3 main.py $PORT
