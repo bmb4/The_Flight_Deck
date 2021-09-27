@@ -10,5 +10,5 @@ class User:
         self.stats[stat] = newNum
 
     def asDict(self):
-        newDict = {"username": self.username, "password": self.password, "settings": self.stats}
+        newDict = {"username": self.username, "password": self.password, "stats": self.stats}
         return newDict
