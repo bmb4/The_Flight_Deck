@@ -1,9 +1,29 @@
-# This is a sample Python script.
+import socketserver
+import util
+import sys
 
-def hey_you(noun):
-    greeting = "Hello, " + noun + "!"
-    print(greeting)
+class MyTCPHandler(socketserver.BaseRequestHandler):
+    def handle(self):
+                received_data = self.request.recv(1024)
+
+                client_id = self.client_address[0] #+ ":" + str(self.client_address[1])
+                print(client_id + " is sending data:")
+
+                # if self.request not in self.clientSockets:
+                #     print("NEW CLIENT")
+                #     self.clientSockets.append(self.request)
+                # print(self.clientSockets)
+
+                print("\n\n")
+                sys.stdout.flush()
+                sys.stderr.flush()
+
+                self.request.sendall(util.httpParser(self, received_data))
 
 if __name__ == '__main__':
-    noun = "World"
-    hey_you(noun)
+    host = "0.0.0.0"
+    # host = "localhost"
+    port = 8000
+
+    server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
+    server.serve_forever()
