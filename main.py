@@ -1,6 +1,7 @@
 import socketserver
 import util
 import sys
+from Examples import MongoDbExample
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -21,6 +22,10 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
                 self.request.sendall(util.httpParser(self, received_data))
 
 if __name__ == '__main__':
+    print("Hello world")
+    MongoDbExample.addRandomNumber()
+    MongoDbExample.showAllNums()
+
     host = "0.0.0.0"
     # host = "localhost"
     port = 8000

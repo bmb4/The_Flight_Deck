@@ -1,7 +1,7 @@
 import random
 import pymongo
 
-myClient = pymongo.MongoClient("mongodb://localhost:27017/")
+myClient = pymongo.MongoClient("mongodb://mongo:27017/")
 db = myClient["db"]
 numbers = db["numbers"]
 
