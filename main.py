@@ -1,7 +1,10 @@
 import socketserver
 import util
 import sys
-#from Examples import MongoDbExample
+import os
+import pymongo
+
+password = os.environ.get('DB_PASSWORD')
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -32,3 +35,6 @@ if __name__ == '__main__':
     print(port)
     server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
     server.serve_forever()
+
+    client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@four-in-a-sequence.3v48s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
