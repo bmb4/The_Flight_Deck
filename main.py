@@ -28,14 +28,6 @@ if __name__ == '__main__':
     ##print("Hello world")
     ##MongoDbExample.addRandomNumber()
     ##MongoDbExample.showAllNums()
-
-    host = "0.0.0.0"
-    # host = "localhost"
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    print(port)
-    server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
-    server.serve_forever()
-
     client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@four-in-a-sequence.3v48s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
 
@@ -44,3 +36,12 @@ if __name__ == '__main__':
     test.insert_one({"name":"John"})
     user = test.find_one({"name": "John"})
     print(user)
+
+    host = "0.0.0.0"
+    # host = "localhost"
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    print(port)
+    server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
+    server.serve_forever()
+
+   
