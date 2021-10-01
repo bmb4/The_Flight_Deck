@@ -38,3 +38,9 @@ if __name__ == '__main__':
 
     client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@four-in-a-sequence.3v48s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
+
+    db = client["db"]
+    test = db["test"]
+    test.insert_one({"name":"John"})
+    user = test.find_one({"name": "John"})
+    print(user)
