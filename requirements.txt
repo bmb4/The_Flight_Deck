@@ -1,4 +1,5 @@
 pymongo
 bcrypt
+#One of these two commands
 #/usr/local/bin/python3 -m pip install "pymongo[srv]"
-pip install pymongo[srv]
+#pip install pymongo[srv]
