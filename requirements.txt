@@ -1,5 +1,5 @@
 dnspython
-pymongo
+pymongo[srv]
 bcrypt
 #fake comment
 #Failed commands
