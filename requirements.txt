@@ -1,2 +1,18 @@
-pymongo
+dnspython
+pymongo[srv]
 bcrypt
+#fake comment
+#Failed commands
+#/usr/local/bin/python3 -m pip install "pymongo[srv]"
+#pip3 install pymongo[srv]
+#$ python -m pip install 'pymongo[srv]'
+
+# Full error message:
+
+# File "/root/main.py", line 32, in <module>
+# client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+# File "/usr/local/lib/python3.9/site-packages/pymongo/mongo_client.py", line 670, in __init__
+# File "/usr/local/lib/python3.9/site-packages/pymongo/uri_parser.py", line 449, in parse_uri
+# raise ConfigurationError(
+# pymongo.errors.ConfigurationError: The "dnspython" module must be installed to use mongodb+srv:// URIs. To fix this error install pymongo with the srv extra:
+# /usr/local/bin/python3 -m pip install "pymongo[srv]"

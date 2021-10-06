@@ -1,4 +1,4 @@
-import random
+""" #import random
 import pymongo
 
 myClient = pymongo.MongoClient("mongodb://mongo:27017/")
@@ -20,4 +20,4 @@ def showAllNums():
 if __name__ == '__main__':
     addRandomNumber()
     showAllNums()
-    print("Test")
+    print("Test") """
