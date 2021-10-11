@@ -29,7 +29,6 @@ if __name__ == '__main__':
     ##print("Hello world")
     ##MongoDbExample.addRandomNumber()
     ##MongoDbExample.showAllNums()
-    #DB name correct below? I think so
     client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
     db = client.test
 
