@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="static/Website.CSS">
     <title>Create a New Account</title>
-    <script src="../CreateAccountScript.js"></script>
+    <script data-main="../CreateAccountScript.js" src="../require.js"></script>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
             <input type="password" placeholder="Confirm Password" name="password_confirm" required>
         </p>
         <p>
-            <button type="submit" onclick='CreateAcc(); return false'>Create an Account</button>
+            <button type="submit" onclick='AddAccount(); return false'>Create an Account</button>
         </p>
     </form>
 </body>
