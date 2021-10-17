@@ -28,3 +28,10 @@ def updateUser(user):
     name = user.username
     users.delete_one({"username": name})
     saveUser(user)
+
+def getLeaders():
+    for doc in users.find().sort('wins', pymongo.DESCENDING):
+        print(doc)
+
+
+
