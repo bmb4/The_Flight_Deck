@@ -31,3 +31,5 @@ def updateUser(user):
     users.delete_one({"username": name})
     saveUser(user)
 
+def getLeaders():
+    return users.find().sort('wins', pymongo.DESCENDING)
