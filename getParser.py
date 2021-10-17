@@ -9,6 +9,9 @@ def getHandler(self, request):
     if path == "":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
+    elif path == "LandingPage":
+        content = util.getFile("templates/Landing Page.html")
+        return responses.create200(content, "text/html", len(content))
     elif path == "static":
         content = util.getFile("templates/static/WebsiteCSS.css")
         return responses.create200(content, "text/css", len(content))
