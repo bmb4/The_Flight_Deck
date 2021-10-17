@@ -1,5 +1,6 @@
 import util
 import responses
+import DbHandler
 
 authentication_messages = []
 
@@ -16,7 +17,14 @@ def getHandler(self, request):
         content = util.getFile("templates/Landing Page.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "leaderboard":
-        content = util.getFile("templates/leaderboard.html)
+        leaders = DbHandler.getLeaders()
+        content = util.getFile("templates/leaderboard.html")
+        content = content.replace('{{ Wins 1 }}', leaders[0]['wins'])
+        content = content.replace('{{ Wins 2 }}', leaders[1]['wins'])
+        content = content.replace('{{ Wins 3 }}', leaders[2]['wins'])
+        content = content.replace('{{ Username 1 }}', leaders[0]['username'])
+        content = content.replace('{{ Username 2 }}', leaders[1]['username'])
+        content = content.replace('{{ Username 3 }}', leaders[2]['username'])
         return responses.create200(content, "text/html", len(content))        
     elif path == "static":
         content = util.getFile("templates/static/WebsiteCSS.css")

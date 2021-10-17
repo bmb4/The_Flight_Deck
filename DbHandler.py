@@ -30,8 +30,8 @@ def updateUser(user):
     saveUser(user)
 
 def getLeaders():
-    for doc in users.find().sort('wins', pymongo.DESCENDING):
-        print(doc)
+    return users.find().sort('wins', pymongo.DESCENDING)
+
 
 
 
