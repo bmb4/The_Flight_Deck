@@ -11,7 +11,7 @@ def getHandler(self, request):
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "login":
+    elif path == "Login Page":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "LandingPage":
