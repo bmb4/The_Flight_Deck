@@ -3,9 +3,9 @@ import os
 import pymongo
 from flask import Flask, request, render_template, flash
 
-password = os.environ.get('DB_PASSWORD')
+dbpassword = os.environ.get('DB_PASSWORD')
 
-client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://bmb4:"+dbpassword+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
 
 db = client["DB"]
 test = db["Test"]
