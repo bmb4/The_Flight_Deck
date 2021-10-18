@@ -3,8 +3,8 @@ import User as u
 import os
 
 password = os.environ.get('DB_PASSWORD')
-myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
-db = myClient["DB"]
+myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+db = myClient["db"]
 users = db["users"]
 
 def saveUser(user):
@@ -30,3 +30,6 @@ def updateUser(user):
     name = user.username
     users.delete_one({"username": name})
     saveUser(user)
+
+def getLeaders():
+    return users.find().sort('wins', pymongo.DESCENDING)
