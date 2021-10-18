@@ -16,7 +16,7 @@ test = db["Test"]
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "really secret key"
 
-@app.route('/')
+@app.route('/createaccount', methods = ['GET'])
 def index():
     return render_template('CreateAccount.html')
 

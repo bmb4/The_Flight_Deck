@@ -17,7 +17,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
                 #     print("NEW CLIENT")
                 #     self.clientSockets.append(self.request)
                 # print(self.clientSockets)
-
+                #Token comment to make a difference in merge
                 print("\n\n")
                 sys.stdout.flush()
                 sys.stderr.flush()
@@ -35,9 +35,10 @@ if __name__ == '__main__':
 
     db = client["db"]
     test = db["test"]
-    test.insert_one({"name":"John"})
-    user = test.find_one({"name": "John"})
-    print(user)
+    ##Get working mongo
+    ##test.insert_one({"name":"John"})
+    ##user = test.find_one({"name": "John"})
+    ##print(user)
 
     host = "0.0.0.0"
     # host = "localhost"
