@@ -2,6 +2,7 @@ dnspython
 pymongo[srv]
 bcrypt
 flask
+php
 #fake comment
 #Failed commands
 #/usr/local/bin/python3 -m pip install "pymongo[srv]"

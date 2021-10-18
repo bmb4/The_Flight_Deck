@@ -35,13 +35,14 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "inSession.php":
         content = util.getFile("inSession.php")
-        return responses.create200(content, "application/x-httpd-php", len(content))
+        return responses.create200(content, "text/html", len(content))
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "get_stats":
-        print([x for x in DbHandler.db])
-        content = json.dumps([x for x in DbHandler.db])
+        # cur = DbHandler.users.find()
+        # content = json.dumps([print(user) for user in cur])
+        content = ''
         return responses.create200(content, "application/json", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 

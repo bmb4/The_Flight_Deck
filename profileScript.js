@@ -11,8 +11,11 @@ var user = {
 
 $(document).ready(function(){
     $.ajax({
+        type: 'GET',
         url: 'inSession.php',
+        dataType: 'text',
         success: function(data){
+            text = data;
             alert(data);
             $.ajax({
                 url: '/get_stats',
