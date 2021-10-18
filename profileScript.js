@@ -1,17 +1,41 @@
-// secure: use cookies to get current logged in user and grab data
-// maybe store current user as query string for simplicity
 var user = {
-        "username": "player1",
-        "password": "123456",
-        "stats": {
-            "Games Played": 0,
-            "Wins": 0,
-            "Losses": 0,
-            "Draws": 0
-        },
-        "profilePic": "../images/cat.jpg"
-    }
+    "username": "",
+    "stats": {
+        'losses': 0,
+        'wins': 0,
+        'draws': 0,
+        'played': 0
+    },
+    "profilePic": "../images/cat.jpg"
+}
 
+$(document).ready(function(){
+    $.ajax({
+        url: 'inSession.php',
+        success: function(data){
+            alert(data);
+            $.ajax({
+                url: '/get_stats',
+                success: function(info){
+                    var d = JSON.parse(info);
+                    for (let i = 0; i < d; i++) {if (d[i]['username']==data) {updateStats(d[i]);}}
+                    loadStats();
+                }
+            });
+        }
+    });
+});
+
+function updateStats(userInfo){
+    stats = {
+        'losses': userInfo['losses'],
+        'wins': userInfo['wins'],
+        'draws': userInfo['draws'],
+        'played': userInfo['played']
+    }
+    user['username'] = userInfo['username'];
+    user['stats'] = stats;
+}
 
 function loadStats(){
     document.getElementById("hUsername").innerHTML = user["username"]

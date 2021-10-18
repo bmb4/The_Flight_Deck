@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static/Website.css">
     <title>Profile Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../profileScript.js"></script>
     <style>
         body {padding: 150px 0;}
@@ -30,11 +31,10 @@
 
     </style>
 </head>
-<body onload="loadStats()">
+<body>
     <h1>Profile</h1>
     <div id="container">
         <div style="display:flex;align-items:center;padding:20px;">
-
             <div id="divPfp" class="profile">
                 <img id="imgPfp" style="border-radius:50%;height:150px;width:150px;object-fit:cover;" src=""/>    <!--temp image-->
                 <div id="innerDiv">
@@ -45,7 +45,6 @@
                 </div>
             </div>
             <h2 id="hUsername" class="profile" style="display:inline-block;">Insert username</h2>
-
         </div>
         <table id="tbStats" style="width:100%">
             <tr>
