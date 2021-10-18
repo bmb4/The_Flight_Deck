@@ -5,6 +5,7 @@ import os
 import pymongo
 
 password = os.environ.get('DB_PASSWORD')
+port = 5000
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -26,12 +27,11 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
 if __name__ == '__main__':
 
-    ##print("Hello world")
-    ##MongoDbExample.addRandomNumber()
-    ##MongoDbExample.showAllNums()
-    #DB name correct below? I think so
-    client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
-    #db = client.test
+
+
+    client = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+    db = client.test
+
 
     #db = client["db"]
     #test = db["test"]
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     ##user = test.find_one({"name": "John"})
     ##print(user)
 
-    host = "0.0.0.0"
-    # host = "localhost"
+    # host = "0.0.0.0"
+    host = "localhost"
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     print(port)
 
