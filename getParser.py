@@ -1,7 +1,7 @@
 import util
 import responses
 import DbHandler
-import json
+import os
 
 authentication_messages = []
 
@@ -35,13 +35,13 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "inSession.php":
         content = util.getFile("inSession.php")
+        # os.system('php inSession.php')
         return responses.create200(content, "text/html", len(content))
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "get_stats":
-        # cur = DbHandler.users.find()
-        # content = json.dumps([print(user) for user in cur])
+        # content = DbHandler.allUsers()
         content = ''
         return responses.create200(content, "application/json", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
