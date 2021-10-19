@@ -49,6 +49,7 @@ def getBoundary(header):
     return boundary
 
 def formParser(data, boundary):
+    print(data)
     dictionary = {}
     parts = data.split(("--" + boundary).encode())
     print(parts)
