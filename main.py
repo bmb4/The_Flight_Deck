@@ -3,6 +3,10 @@ import util
 import sys
 import os
 import pymongo
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = "really secret key"
 
 password = os.environ.get('DB_PASSWORD')
 port = 5000
