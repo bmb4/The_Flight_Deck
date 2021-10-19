@@ -16,7 +16,7 @@ def httpParser(self, data):
     if requestType == "GET":
         return getParser.getHandler(self, request)
     elif requestType == "POST":
-        return #postParser.postHandler(self, request)
+        return postParser.postHandler(self, request)
     else:
         print("big oops")
 
@@ -38,4 +38,25 @@ def getFile(fileName):
     content = file.read()
     file.close()
     return content
+
+def getBoundary(header):
+    lines = header.split("\r\n")
+    boundary = ""
+    for line in lines:
+        if "boundary=" in line:
+            boundary = line.split("boundary=")[1].strip()
+    return boundary
+
+def formParser(data, boundary):
+    dictionary = {}
+    parts = data.split(("--" + boundary).encode())
+    for part in parts[1:-1]:
+        split = part.split(double_new_line)
+        if "filename".encode() in split[0]:
+            name = findFilename(split[0])
+        else:
+            name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
+        data = split[1].strip(new_line)
+        dictionary[name] = data
+    return dictionary
 
