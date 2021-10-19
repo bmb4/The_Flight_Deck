@@ -2,10 +2,6 @@ import util
 import responses
 import DbHandler
 import os
-from flask import Flask
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = "really secret key"
 
 authentication_messages = []
 
@@ -21,9 +17,9 @@ def getHandler(self, request):
     elif path == "landingpage":
         content = util.getFile("templates/Landing Page.html")
         return responses.create200(content, "text/html", len(content))
-    # elif path == "signup":
-    #     content = util.getFile("templates/CreateAccount.html")
-    #     return responses.create200(content, "text/html", len(content))
+    elif path == "signup":
+         content = util.getFile("templates/CreateAccount.html")
+         return responses.create200(content, "text/html", len(content))
     elif path == "tutorial":
         content = util.getFile("templates/Tutorialpage.html")
         return responses.create200(content, "text/html", len(content))        

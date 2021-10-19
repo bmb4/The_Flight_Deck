@@ -30,7 +30,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
                 self.request.sendall(util.httpParser(self, received_data))
 
 if __name__ == '__main__':
-
+    app.run(debug = True)
 
 
     client = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
