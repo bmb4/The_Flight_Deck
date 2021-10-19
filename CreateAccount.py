@@ -4,10 +4,11 @@ import pymongo
 from flask import Flask, request, render_template, flash
 import User
 import responses
+import DbHandler
 
 password = os.environ.get('DB_PASSWORD')
 
-client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
 
 db = client["DB"]
 UserAccounts = db["UserAccounts"]
@@ -23,20 +24,18 @@ UserAccounts = db["UserAccounts"]
 #
 # @app.route('/createaccount',methods = ['POST'])
 def createaccount(form):
-    username = form['username'].decode()
-    password = form['password'].decode()
-    passsword2 = form['password_confirm'].decode()
+    username = form['username']
+    password = form['password']
+    passsword2 = form['password_confirm']
     Message =("Account Created!!!<br> username: "+username+"<br>password: "+ password)
-    userlist = UserAccounts.find({"username":username})
     if password != passsword2:
         flash('Passwords do not match')
         return responses.create301("/signup")
-    if len(list(userlist)) == 0:
+    if not DbHandler.nameExists(username) == 0:
         newUser = User.User(username, password)
-        UserAccounts.insert_one(newUser.asDict())
+        DbHandler.saveUser(newUser)
         return responses.create301("/landingpage")
     else:
-        print(len(list(userlist)))
         return responses.create301("/signup")
 
 
