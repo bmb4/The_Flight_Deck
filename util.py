@@ -59,5 +59,7 @@ def formParser(data, boundary):
             name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
         data = split[1].strip(new_line)
         dictionary[name] = data
+
+    print(dictionary)
     return dictionary
 

@@ -23,9 +23,9 @@ UserAccounts = db["UserAccounts"]
 #
 # @app.route('/createaccount',methods = ['POST'])
 def createaccount(form):
-    username = form['username']
-    password = form['password']
-    passsword2 = form['password_confirm']
+    username = form['username'].decode()
+    password = form['password'].decode()
+    passsword2 = form['password_confirm'].decode()
     Message =("Account Created!!!<br> username: "+username+"<br>password: "+ password)
     userlist = UserAccounts.find({"username":username})
     if password != passsword2:
