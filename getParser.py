@@ -11,11 +11,14 @@ def getHandler(self, request):
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "Login Page":
+    elif path == "login":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "LandingPage":
+    elif path == "landingpage":
         content = util.getFile("templates/Landing Page.html")
+        return responses.create200(content, "text/html", len(content))
+    elif path == "signup":
+        content = util.getFile("templates/CreateAccount.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
