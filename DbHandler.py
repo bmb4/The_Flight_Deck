@@ -6,7 +6,7 @@ import os
 
 password = str(os.environ.get('DB_PASSWORD'))
 myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
-db = myClient["db"]
+db = myClient["DB"]
 users = db["UserAccounts"]
 
 def saveUser(user):

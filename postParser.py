@@ -1,3 +1,4 @@
+import responses
 import util
 import CreateAccount
 import Login
@@ -8,7 +9,7 @@ def postHandler(self, request):
     contentLen = util.getContentLen(request[0])
     boundary = util.getBoundary(request[0])
     data = buffer(self, request[1], contentLen)
-    inputs = util.formParser(data, boundary)
+    inputs = util.formParser(data,boundary)
     if path == "createaccount":
         return CreateAccount.createaccount(inputs)
     elif path == "login":

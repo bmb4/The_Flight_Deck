@@ -51,15 +51,38 @@ def getBoundary(header):
 def formParser(data, boundary):
     dictionary = {}
     parts = data.split(("--" + boundary).encode())
-    for part in parts[1:-1]:
-        split = part.split(double_new_line)
-        if "filename".encode() in split[0]:
-            name = findFilename(split[0])
+    parts = parts[0].split("&".encode())
+    print(parts)
+    try:
+        for part in parts:
+            split = part.split("=".encode())
+            dictionary[split[0].decode()] = split[1].decode()
+        print(dictionary)
+        return dictionary
+    except:
+        for part in parts[1:-1]:
+            split = part.split(double_new_line)
+            if "filename".encode() in split[0]:
+                name = findFilename(split[0])
+            else:
+                name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
+            data = split[1].strip(new_line)
+            dictionary[name] = data.decode()
+
+        print(dictionary)
+        return dictionary
+
+def findFilename(bytestring):
+    decoded_bytes = bytestring.decode()
+    index_of_filename = decoded_bytes.index('; filename=')
+    updated_bytes = decoded_bytes[index_of_filename:]
+    string = ""
+    for char in updated_bytes:
+        if char == '\r':
+            break
         else:
-            name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
-        data = split[1].strip(new_line)
-        dictionary[name] = data
-
-    print(dictionary)
-    return dictionary
-
+            string += char
+    index_of_quote = string.index('"')
+    filename = string[index_of_quote+1:len(string)-1]
+    print(filename)
+    return filename
