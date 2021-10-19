@@ -12,8 +12,6 @@ db = client["DB"]
 UserAccounts = db["UserAccounts"]
 
 
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "really secret key"
 
