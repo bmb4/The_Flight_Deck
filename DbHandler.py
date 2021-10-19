@@ -36,7 +36,7 @@ def updateUser(user):
 
 def getLeaders():
     userlist = users.find({})
-    for doc in userlist: print(doc)
+    #for doc in userlist: print(doc)
     userWins = []
     for user in userlist:
         name = user["username"]
