@@ -11,3 +11,8 @@ def postHandler(self, request):
     if path == "createaccount":
         return CreateAccount.createaccount(inputs)
     return responses.create404("Content not found.", "text/plain", 18)
+
+def buffer(self, data, contentLen):
+    while len(data) < contentLen - 2:
+        data += self.request.recv(4096)
+    return data
