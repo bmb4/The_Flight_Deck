@@ -1,5 +1,6 @@
 import util
 import CreateAccount
+import Login
 
 def postHandler(self, request):
     path = util.getPath(request[0])
@@ -10,6 +11,8 @@ def postHandler(self, request):
     inputs = util.formParser(data, boundary)
     if path == "createaccount":
         return CreateAccount.createaccount(inputs)
+    elif path == "login":
+        return Login.login(inputs)
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
