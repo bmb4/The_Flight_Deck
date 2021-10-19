@@ -51,15 +51,18 @@ def getBoundary(header):
 def formParser(data, boundary):
     dictionary = {}
     parts = data.split(("--" + boundary).encode())
-    parts = parts[0].split("&".encode())
     print(parts)
     try:
+
+        parts = parts[0].split("&".encode())
         for part in parts:
             split = part.split("=".encode())
             dictionary[split[0].decode()] = split[1].decode()
         print(dictionary)
         return dictionary
     except:
+
+        parts = parts[0].split("+".encode())
         for part in parts[1:-1]:
             split = part.split(double_new_line)
             if "filename".encode() in split[0]:

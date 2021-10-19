@@ -34,7 +34,7 @@ def updateUser(user):
     saveUser(user)
 
 def getLeaders():
-    userlist = users.find()
+    userlist = users.find({})
     userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
 
