@@ -25,6 +25,7 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))        
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
+        print(leaders)
         content = util.getFile("templates/leaderboard.html")
         content = content.replace('{{ Wins 1 }}', leaders[0][1])
         content = content.replace('{{ Wins 2 }}', leaders[1][1])

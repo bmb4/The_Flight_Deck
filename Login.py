@@ -2,6 +2,7 @@ from logging import NullHandler
 import os
 import pymongo
 import responses
+import DbHandler
 
 
 password = os.environ.get('DB_PASSWORD')
@@ -15,16 +16,14 @@ test = db["UserAccounts"]
 def login(form):
     username = form['username']
     password = form['password']
-    userlist = test.find({"username":username})
-    FailMessage = ("Invalid username or password")
-    if len(list(userlist)) == 0:
-        return FailMessage
-    elif password != userlist[0]['password']:
-        return FailMessage
-    elif password ==  userlist[0]['password']:
+    if not DbHandler.nameExists(username):
+        return responses.create301("/login")
+    else :
+        correctUser = DbHandler.getUser(username)
+        if correctUser.password == password:
             #route to landing or profile page
             return responses.create301("/landingpage")
-    else:
-        return ("unknown error")
+        else:
+            return responses.create301("/login")
 
 
