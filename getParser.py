@@ -20,6 +20,9 @@ def getHandler(self, request):
     elif path == "signup":
         content = util.getFile("templates/CreateAccount.html")
         return responses.create200(content, "text/html", len(content))
+    elif path == "tutorial":
+        content = util.getFile("templates/Tutorialpage.html")
+        return responses.create200(content, "text/html", len(content))        
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
         content = util.getFile("templates/leaderboard.html")
