@@ -12,6 +12,12 @@ def postHandler(self, request):
     print(path)
     if path == "simple_get_profile":
         input_name = request[1].decode().split('=')[1]
+        # if DbHandler.nameExists(input_name):
+        #     response = DbHandler.getUser(input_name).asDict()
+        # else: response = response = {"username": '', "password": '', "stats": {
+        #             "played": 0, "wins": 0, "losses": 0, "draws": 0
+        #         }}
+        # print('response: ' + response)
         response = {"username": input_name, "password": '123456', "stats": {
             "played": 6, "wins": 1, "losses": 2, "draws": 3
         }}

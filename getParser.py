@@ -10,7 +10,7 @@ def getHandler(self, request):
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "Login Page":
+    elif path == "login":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "LandingPage":
@@ -35,6 +35,14 @@ def getHandler(self, request):
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
+    # elif path == "inSession.php":
+    #     content = util.getFile("inSession.php")
+    #     return responses.create200(content, "text/html", len(content))
+    # elif path == "get_stats":
+    #     # content = DbHandler.allUsers()
+    #     username = main.addressToUsername[self.client_address[0]]
+    #     content = json.dumps(DbHandler.getUser(username).asDict())
+    #     return responses.create200(content, "application/json", len(content))
     elif path == 'images':
         image_path = request[0].split("\r\n")[0].split(' ')[1].split('/')[2]
         print(path+'/'+image_path)

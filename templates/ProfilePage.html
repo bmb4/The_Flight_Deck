@@ -8,6 +8,12 @@
     <script src="../profileScript.js"></script>
     <style>
         body {padding: 150px 0;}
+        .arrow {
+            transform:rotate(135deg); -webkit-transform:rotate(135deg);
+            border: solid black; border-width: 0 3px 3px 0;
+            display: inline-block; float: left;
+            padding: 10px; margin-left: 200px;
+        }
         td {
             border-radius: 10px;
             background-color: #E2E2E2;
@@ -32,6 +38,7 @@
     </style>
 </head>
 <body>
+    <i class="arrow left" onclick="window.location.href='/LandingPage'"></i><br/>
     <h1>Profile</h1>
     <div id="container">
         <div style="display:flex;align-items:center;padding:20px;">
