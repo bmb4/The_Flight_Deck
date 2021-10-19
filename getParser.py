@@ -23,7 +23,7 @@ def getHandler(self, request):
     elif path == "tutorial":
         content = util.getFile("templates/Tutorialpage.html")
         return responses.create200(content, "text/html", len(content))        
-    elif path == "leaderboard":+
+    elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
         content = util.getFile("templates/leaderboard.html")
         content = content.replace('{{ Wins 1 }}', leaders[0]['wins'])
