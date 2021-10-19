@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/Website.css">
+    <title>Profile Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../profileScript.js"></script>
+    <style>
+        body {padding: 150px 0;}
+        td {
+            border-radius: 10px;
+            background-color: #E2E2E2;
+            padding: 20px;
+        }
+        #container {
+            background-color:#99AFFF;
+            border:10px solid #FFF500;
+            border-radius: 20px;
+            margin: 0 200px;
+        }
+        .profile {margin-left: 30px;}
+        #divPfp {position:relative;}
+        #imgPfp {display:block;}
+        #innerDiv, #innerBtn {opacity:0;}
+        #innerDiv {position:absolute;top:0;left:0;bottom:0;right:0;}
+        #innerBtn {position:relative;width:100%;top:50%;bottom:50%;background-color:grey;color:white}
+
+        #divPfp:hover img {opacity: 0.3;}
+        #divPfp:hover #innerDiv, #innerBtn {opacity: 1;}
+
+    </style>
+</head>
+<body>
+    <h1>Profile</h1>
+    <div id="container">
+        <div style="display:flex;align-items:center;padding:20px;">
+            <div id="divPfp" class="profile">
+                <img id="imgPfp" style="border-radius:50%;height:150px;width:150px;object-fit:cover;" src=""/>    <!--temp image-->
+                <div id="innerDiv">
+                    <button id="innerBtn" type="submit" onclick="changePfp()">Change profile picture</button>
+                    <form action="/file-upload" method="post" enctype="multipart/form-data">
+                        <input id="innerFile" type="file" accept="image/*" style="display:none;"/>
+                    </form>
+                </div>
+            </div>
+            <h2 id="hUsername" class="profile" style="display:inline-block;">Insert username</h2>
+        </div>
+        <table id="tbStats" style="width:100%">
+            <tr>
+                <td id="played">Games played: </td>
+                <td id="wins">Wins: </td>
+            </tr>
+            <tr>
+                <td id="losses">Losses: </td>
+                <td id="draws">Draws: </td>
+            </tr>
+        </table>
+    </div>
+    <div id="hideDiv"></div>
+    <input type="button" onclick="location.href='https://four-in-a-sequence.herokuapp.com/tutorial';" value="Tutorial" />  
+
+</body>
+</html>

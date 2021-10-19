@@ -1,0 +1,30 @@
+   
+/*To link to this file on your webpage:
+    <head>
+    <link rel="stylesheet" href="Website.css">
+</head>
+    Reference:
+    https://www.w3schools.com/html/html_css.asp
+*/
+body {
+    padding: 250px 0;
+    text-align:center;
+    background-color: #3F5CF3
+}
+h1{color:#FFFFFF}
+h2{color:#FFFFFF}
+p{color:#FFFFFF}
+label{
+ 
+
+color: #FFFFFF;
+}
+
+input{
+  
+
+background: #FFFFFF;
+}
+.error{
+    color: #FFFFFF;
+}

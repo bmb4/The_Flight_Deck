@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="static/Website.CSS">
+    <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    table.center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .myButton {
+      padding: 0px;
+      display:block;
+      position:fixed;
+      top:0px;
+      right: 0px;
+      background-color: green;
+      color: white;
+      text-align:center;
+    }
+
+    </style>
+    <a href="Login Page.html" class="myButton">Username</a>
+    <h1 style="font-size:50px;">Leaderboard</h1>
+</head>
+
+<body>
+
+  <table class="center" style="background-color:#FFFFFF">
+  <tr>
+    <th>User</th>
+    <th>Wins</th>
+  </tr>
+  <tr>
+    <td>{{ Username 1 }}</td>
+    <td>{{ Wins 1 }}</td>
+  </tr>
+  <tr>
+    <td>{{ Username 2 }}</td>
+    <td>{{ Wins 2 }}</td>
+  </tr>
+    <tr>
+    <td>{{ Username 3 }}</td>
+    <td>{{ Wins 3 }}</td>
+  </tr>
+  </table>
+
+</body>
+</html>

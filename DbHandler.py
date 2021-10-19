@@ -1,9 +1,13 @@
+import json
+
 import pymongo
 import User as u
+import os
 
-myClient = pymongo.MongoClient("mongodb://mongo:27017/")
+password = str(os.environ.get('DB_PASSWORD'))
+myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
 db = myClient["db"]
-users = db["users"]
+users = db["UserAccounts"]
 
 def saveUser(user):
     users.insert_one(user.asDict())
@@ -28,3 +32,16 @@ def updateUser(user):
     name = user.username
     users.delete_one({"username": name})
     saveUser(user)
+
+def getLeaders():
+    userlist = users.find()
+    userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
+    return userWins
+
+
+# def allUsers():
+#     cursor = users.find({})
+#     out = list()
+#     for user in cursor:
+#         out.append(getUser(user['username']).asDict())
+#     return json.dump(out)

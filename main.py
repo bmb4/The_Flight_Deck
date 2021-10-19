@@ -3,8 +3,13 @@ import util
 import sys
 import os
 import pymongo
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = "really secret key"
 
 password = os.environ.get('DB_PASSWORD')
+port = 5000
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -26,17 +31,18 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
 if __name__ == '__main__':
 
-    ##print("Hello world")
-    ##MongoDbExample.addRandomNumber()
-    ##MongoDbExample.showAllNums()
-    client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+
+
+    client = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
     db = client.test
+
 
     #db = client["db"]
     #test = db["test"]
-    #test.insert_one({"name":"John"})
-    #user = test.find_one({"name": "John"})
-    #print(user)
+    ##Get working mongo
+    ##test.insert_one({"name":"John"})
+    ##user = test.find_one({"name": "John"})
+    ##print(user)
 
     host = "0.0.0.0"
     # host = "localhost"
