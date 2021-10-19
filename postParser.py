@@ -10,7 +10,7 @@ def postHandler(self, request):
     boundary = util.getBoundary(request[0])
     data = buffer(self, request[1], contentLen)
     inputs = util.formParser(data,boundary)
-    if path == "createaccount":
+    if path == "signup":
         return CreateAccount.createaccount(inputs)
     elif path == "login":
         return Login.login(inputs)
