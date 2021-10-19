@@ -7,7 +7,7 @@ import os
 password = str(os.environ.get('DB_PASSWORD'))
 myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
 db = myClient["db"]
-users = db["users"]
+users = db["UserAccounts"]
 
 def saveUser(user):
     users.insert_one(user.asDict())
@@ -34,7 +34,10 @@ def updateUser(user):
     saveUser(user)
 
 def getLeaders():
-    return users.find().sort('wins', pymongo.DESCENDING)
+    users = users.find()
+    userWins = [(user["username"],user["stats"]["Wins"]) for user in users].sort(key = lambda x: x[1])
+    return userWins
+
 
 # def allUsers():
 #     cursor = users.find({})
