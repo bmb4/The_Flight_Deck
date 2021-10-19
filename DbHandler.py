@@ -3,6 +3,7 @@ import json
 import pymongo
 import User as u
 import os
+from operator import itemgetter
 
 password = str(os.environ.get('DB_PASSWORD'))
 myClient = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
@@ -36,8 +37,16 @@ def updateUser(user):
 def getLeaders():
     userlist = users.find({})
     for doc in userlist: print(doc)
+    userWins = []
+    for user in userlist:
+        name = user["username"]
+        print(name)
+        wins = user["stats"]["Wins"]
+        userWins += (name,wins)
+    userWins.sort(key=itemgetter(1))
+    print(userWins)
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
-    return userlist
+    return userWins
 
 
 # def allUsers():
