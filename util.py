@@ -52,6 +52,7 @@ def formParser(data, boundary):
     dictionary = {}
     parts = data.split(("--" + boundary).encode())
     parts = parts[0].split("&".encode())
+    print(parts)
     for part in parts:
         split = part.split("=".encode())
         dictionary[split[0].decode()] = split[1].decode()
