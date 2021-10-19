@@ -31,7 +31,7 @@ def createaccount(form):
     if password != passsword2:
         flash('Passwords do not match')
         return responses.create301("/signup")
-    if not DbHandler.nameExists(username) == 0:
+    if not DbHandler.nameExists(username):
         newUser = User.User(username, password)
         DbHandler.saveUser(newUser)
         return responses.create301("/landingpage")
