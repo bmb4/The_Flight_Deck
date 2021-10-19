@@ -1,4 +1,5 @@
 import getParser
+import postParser
 
 double_new_line = "\r\n\r\n".encode()
 new_line = "\r\n".encode()
@@ -16,7 +17,7 @@ def httpParser(self, data):
     if requestType == "GET":
         return getParser.getHandler(self, request)
     elif requestType == "POST":
-        return #postParser.postHandler(self, request)
+        return postParser.postHandler(self, request)
     else:
         print("big oops")
 
@@ -39,3 +40,8 @@ def getFile(fileName):
     file.close()
     return content
 
+def getFileBytes(fileName):
+    file = open(fileName, 'rb')
+    content = file.read()
+    file.close()
+    return content

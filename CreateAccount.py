@@ -2,6 +2,7 @@ from logging import NullHandler
 import os
 import pymongo
 from flask import Flask, request, render_template, flash
+import main
 
 password = os.environ.get('DB_PASSWORD')
 
@@ -34,6 +35,9 @@ def createaccount():
     if len(list(userlist)) == 0:
         mydict = { "username": username, "password": password}
         user = test.insert_one(mydict)
+        # keeping track of current logged in users                      # COMMENTED OUT FOR LATER USE
+        # main.addressToUsername[request.remote_address] = username
+        # main.usernameToAddress[username] = request.remote_address     # implemented for logging out
         return Message
     else:
         print(len(list(userlist)))
