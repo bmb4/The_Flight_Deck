@@ -53,23 +53,24 @@ def formParser(data, boundary):
     parts = data.split(("--" + boundary).encode())
     parts = parts[0].split("&".encode())
     print(parts)
-    for part in parts:
-        split = part.split("=".encode())
-        dictionary[split[0].decode()] = split[1].decode()
-    print(dictionary)
-    return dictionary
-    # print(parts)
-    # for part in parts[1:-1]:
-    #     split = part.split(double_new_line)
-    #     if "filename".encode() in split[0]:
-    #         name = findFilename(split[0])
-    #     else:
-    #         name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
-    #     data = split[1].strip(new_line)
-    #     dictionary[name] = data
-    #
-    # print(dictionary)
-    # return dictionary
+    try:
+        for part in parts:
+            split = part.split("=".encode())
+            dictionary[split[0].decode()] = split[1].decode()
+        print(dictionary)
+        return dictionary
+    except:
+        for part in parts[1:-1]:
+            split = part.split(double_new_line)
+            if "filename".encode() in split[0]:
+                name = findFilename(split[0])
+            else:
+                name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
+            data = split[1].strip(new_line)
+            dictionary[name] = data.decode()
+
+        print(dictionary)
+        return dictionary
 
 def findFilename(bytestring):
     decoded_bytes = bytestring.decode()
