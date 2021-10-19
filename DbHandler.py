@@ -36,8 +36,8 @@ def updateUser(user):
 def getLeaders():
     userlist = users.find({})
     for doc in userlist: print(doc)
-    userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
-    return userWins
+    # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
+    return userlist
 
 
 # def allUsers():
