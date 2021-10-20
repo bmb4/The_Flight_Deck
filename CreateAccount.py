@@ -28,7 +28,7 @@ def createaccount(form):
     password = form['password']
     passsword2 = form['password_confirm']
     if password != passsword2:
-       
+
         return responses.create301("/signup")
     if not DbHandler.nameExists(username):
         newUser = User.User(username, password)
