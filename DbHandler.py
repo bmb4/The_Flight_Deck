@@ -42,8 +42,8 @@ def getLeaders():
         name = user["username"]
         #print(name)
         wins = user["stats"]["Wins"]
-        userWins += (name,wins)
-    # userWins.sort(key=itemgetter(1))
+        userWins += tuple(name,wins)
+    userWins.sort(key=itemgetter(1))
     print(userWins)
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
