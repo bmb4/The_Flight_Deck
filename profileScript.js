@@ -31,6 +31,7 @@ var user = {
 // GRAB FROM DB VIA PROMPT OF INPUT USERNAME
 $(document).ready(function() {
     var username = prompt("Please enter your username:", '');
+    if (username == '' || username == null) { username = ''; }
     $.ajax({
         type: 'POST',
         url: '/simple_get_profile',
@@ -94,7 +95,7 @@ function updateStats(data){
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
     }
-    else { alert('Prompt cancelled, proceed to default template'); }
+    else { alert('User not found, using default Guest template'); }
     console.log(user);
     displayInfo();
 }
