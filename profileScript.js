@@ -35,6 +35,7 @@ $(document).ready(function() {
         type: 'POST',
         url: '/simple_get_profile',
         data: {username: username},
+        dataType: text,
         success: function(data){    // data as User class asDict() formatting
             updateStats(data);
         }
