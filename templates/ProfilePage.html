@@ -8,6 +8,12 @@
     <script src="../profileScript.js"></script>
     <style>
         body {padding: 150px 0;}
+        .arrow {
+            transform:rotate(135deg); -webkit-transform:rotate(135deg);
+            border: solid black; border-width: 0 3px 3px 0;
+            display: inline-block; float: left;
+            padding: 10px; margin-left: 200px;
+        }
         td {
             border-radius: 10px;
             background-color: #E2E2E2;
@@ -32,28 +38,29 @@
     </style>
 </head>
 <body>
+    <i class="arrow left" onclick="window.location.href='/LandingPage'"></i><br/>
     <h1>Profile</h1>
     <div id="container">
         <div style="display:flex;align-items:center;padding:20px;">
             <div id="divPfp" class="profile">
                 <img id="imgPfp" style="border-radius:50%;height:150px;width:150px;object-fit:cover;" src=""/>    <!--temp image-->
                 <div id="innerDiv">
-                    <button id="innerBtn" type="submit" onclick="changePfp()">Change profile picture</button>
+                    <button id="innerBtn" type="submit" onclick="changePfp()">Change profile picture to cat.jpg or duck.png</button>
                     <form action="/file-upload" method="post" enctype="multipart/form-data">
                         <input id="innerFile" type="file" accept="image/*" style="display:none;"/>
                     </form>
                 </div>
             </div>
-            <h2 id="hUsername" class="profile" style="display:inline-block;">Insert username</h2>
+            <h2 id="username" class="profile" style="display:inline-block;">Hello, </h2>
         </div>
         <table id="tbStats" style="width:100%">
             <tr>
-                <td id="played">Games played: </td>
-                <td id="wins">Wins: </td>
+                <td class='tdStats' id="played">Games played: </td>
+                <td class='tdStats' id="wins">Wins: </td>
             </tr>
             <tr>
-                <td id="losses">Losses: </td>
-                <td id="draws">Draws: </td>
+                <td class='tdStats' id="losses">Losses: </td>
+                <td class='tdStats' id="draws">Draws: </td>
             </tr>
         </table>
     </div>

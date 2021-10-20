@@ -27,7 +27,6 @@ def createaccount(form):
     username = form['username']
     password = form['password']
     passsword2 = form['password_confirm']
-    
     if password != passsword2:
        
         return responses.create301("/signup")

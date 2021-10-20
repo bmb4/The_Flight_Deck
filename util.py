@@ -40,6 +40,12 @@ def getFile(fileName):
     file.close()
     return content
 
+def getFileBytes(fileName):
+    file = open(fileName, 'rb')
+    content = file.read()
+    file.close()
+    return content
+
 def getBoundary(header):
     lines = header.split("\r\n")
     boundary = ""

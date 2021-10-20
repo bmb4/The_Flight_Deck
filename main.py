@@ -6,6 +6,8 @@ import pymongo
 
 password = os.environ.get('DB_PASSWORD')
 port = 5000
+# addressToUsername = {}   # client address to username     # COMMENTED OUT FOR LATER USE
+# usernameToAddress = {}        # implemented for logging out
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
@@ -47,4 +49,4 @@ if __name__ == '__main__':
     server = socketserver.ThreadingTCPServer((host, port), MyTCPHandler)
     server.serve_forever()
 
-   
+

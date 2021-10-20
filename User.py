@@ -3,7 +3,7 @@ class User:
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.stats = {"Games Played": 0, "Wins": 0, "Losses": 0, "Draws": 0}
+        self.stats = {"played": 0, "wins": 0, "losses": 0, "draws": 0}
         return
 
     def updateStats(self, stat, newNum):
