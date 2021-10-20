@@ -2,7 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" href="static/Website.css">
+    <link rel="stylesheet" href="static/css/Website.css">
     <meta charset="utf-8" />
     <title>Login Page</title>
 
@@ -18,19 +18,5 @@
         <input type="submit" value="Game Time"><br />
         <a href="https://four-in-a-sequence.herokuapp.com/signup">Create new account</a><br /><!--Needs to be linked properly at merge-->
     </form>
-    <script>
-        function testy_bo_besty() {
-            var hcvals = ["bmb4", "12345"];
-            var subun = document.getElementById("username");
-            var subpw = document.getElementById("password");
-            if (hcvals[0] == subun.value && hcvals[1] == subpw.value) {
-                alert("Welcome back " + subun.value);
-            }
-            else {
-                alert("Incorrect login credentials");
-            }
-        }
-    </script>
-
 </body>
 </html>
