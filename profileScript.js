@@ -36,7 +36,6 @@ $(document).ready(function() {
         url: '/simple_get_profile',
         data: {username: username},
         success: function(data){    // data as User class asDict() formatting
-            console.log(data);
             updateStats(data);
         }
     });
@@ -81,6 +80,7 @@ $(document).ready(function() {
 
 function updateStats(data){
     // INPUT IN JSON FORMATTING, UPDATE user OBJECT AND LOAD STATS
+    console.log('input data is: '+data);
     userInfo = JSON.parse(data);
     if (userInfo != '') {
         input = prompt("[1]Cats or [2]ducks?",'type number');
