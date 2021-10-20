@@ -35,7 +35,7 @@ def getHandler(self, request):
     elif path == "static":
         content = util.getFile("templates/static/WebsiteCSS.css")
         return responses.create200(content, "text/css", len(content))
-    elif path == "Profile":
+    elif path == "ProfilePage":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "profileScript.js":
