@@ -54,6 +54,6 @@ def getHandler(self, request):
         print(path+'/'+image_path)
         mime = 'image/'+image_path.split('.')[1]
         content = util.getFileBytes(path+'/'+image_path)
-        return responses.create200Images(content, mime, len(content))
+        return responses.create200Bytes(content, mime, len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 

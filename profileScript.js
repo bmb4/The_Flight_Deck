@@ -1,50 +1,45 @@
 var user = {
-    "username": "Template username",
-    "password": "optional info",
+    "username": "Guest User",
+    "password": "not used",
     "stats": {
-        'losses': 1,
-        'wins': 2,
-        'draws': 3,
-        'played': 6
+        'played': 0,
+        'wins': 0,
+        'losses': 0,
+        'draws': 0
     },
-    "profilePic": "../images/cat.jpg"
+    "profilePic": "../images/default.jpeg"
 }
 
 // BACKUP 3
 // ALL PROMPTS, DISPLAY BASED ON INPUT
-$(document).ready(function() {
-    var prompts = {"username":'Unknown User','played':'40','wins':'15','losses':'20','draws':'5'};
-    for (var key of Object.keys(prompts)){
-        input = prompt("Please enter "+key, '');
-        if (input == null || input == '') {
-            alert("Prompt cancelled, using default value for "+key);
-            input = prompts[key]
-        }
-        $('#'+key).append(input);
-    }
-    input = prompt("[1]Cats or [2]ducks?",'type number');
-    if (input == '2'){user["profilePic"] = "../images/duck.png";}
-    displayPic();
-});
+//$(document).ready(function() {
+//    var prompts = {"username":'Unknown User','Games Played':'40','Wins':'15','Losses':'20','Draws':'5'};
+//    for (var key of Object.keys(prompts)){
+//        input = prompt("Please enter "+key, '');
+//        if (input == null || input == '') {
+//            alert("Prompt cancelled, using default value for "+key);
+//            input = prompts[key]
+//        }
+//        $('#'+key).append(input);
+//    }
+//    input = prompt("[1]Cats or [2]ducks?",'type number');
+//    if (input == '2'){user["profilePic"] = "../images/duck.png";}
+//    displayPic();
+//});
 
 // BACKUP 2
 // GRAB FROM DB VIA PROMPT OF INPUT USERNAME
-//$(document).ready(function() {
-//    var username = prompt("Please enter your username:", '');
-//    if (username == null || username == '') {
-//        alert('Prompt cancelled, proceed to default template');
-//    } else {
-//        $.ajax({
-//            type: 'POST',
-//            url: '/simple_get_profile',
-//            data: {username: username},
-//            dataType: 'text',
-//            success: function(data){    // data as User class asDict() formatting
-//                loadStats(data);
-//            }
-//        });
-//   }
-//});
+$(document).ready(function() {
+    var username = prompt("Please enter your username:", '');
+    $.ajax({
+        type: 'POST',
+        url: '/simple_get_profile',
+        data: {username: username},
+        success: function(data){    // data as User class asDict() formatting
+            updateStats(data);
+        }
+    });
+});
 
 // BACKUP !
 // STORING CURRENT USER VIA CLIENT ADDRESSES
@@ -75,7 +70,7 @@ $(document).ready(function() {
 //                success: function(info){
 //                    var d = JSON.parse(info);
 //                    for (let i = 0; i < d; i++) {if (d[i]['username']==data) {updateStats(d[i]);}}
-//                    loadStats();
+//                    updateStats();
 //                }
 //            });
 //        }
@@ -83,25 +78,33 @@ $(document).ready(function() {
 //});
 
 
-function loadStats(data){
+function updateStats(data){
     // INPUT IN JSON FORMATTING, UPDATE user OBJECT AND LOAD STATS
     userInfo = JSON.parse(data);
-    stats = JSON.parse(userInfo['stats']);
-    user['username'] = userInfo['username'];
-    user['stats'] = stats;
+    if (userInfo != '') {
+        input = prompt("[1]Cats or [2]ducks?",'type number');
+        if (input == '1'){user["profilePic"] = "../images/cat.jpg";}
+        else if (input == '2'){user["profilePic"] = "../images/duck.png";}
 
+        stats = JSON.parse(userInfo['stats']);
+        user['username'] = userInfo['username'];
+        user['stats']['played'] = stats['Games Played'];
+        user['stats']['wins'] = stats['Wins'];
+        user['stats']['losses'] = stats['Losses'];
+        user['stats']['draws'] = stats['Draws'];
+    }
+    else { alert('Prompt cancelled, proceed to default template'); }
     console.log(user);
-    // UPDATE ELEMENTS WITH USER DATA
+    displayInfo();
+}
+
+function displayInfo(){
     $("#username").append(user["username"]);
     $('.tdStats').each(function() {
         category = $(this).attr('id');
         $(this).append(user['stats'][category]);
         console.log(user['stats']);
     });
-    displayPic();
-}
-
-function displayPic(){
     $('#imgPfp').attr("src", user['profilePic']);
 }
 
@@ -112,7 +115,7 @@ function changePfp(){
         var files = this.files;
         console.log(files);
         user['profilePic'] = "../images/" + files[0]["name"];
-        displayPic();
+        $('#imgPfp').attr("src", user['profilePic']);
     },
     false)
 }

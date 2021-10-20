@@ -13,7 +13,7 @@ def create301(newPath):
                "\r\nX-Content-Type-Options: nosniff\r\n\r\n"
     return response.encode()
 
-def create200Images(content, mime, length):
+def create200Bytes(content, mime, length):
     response = b"HTTP/1.1 200 OK\r\nContent-Type: " + mime.encode() + b"\r\nContent-Length: " + str(
         length).encode() + b"\r\nX-Content-Type-Options: nosniff\r\n\r\n" + content
     return response
