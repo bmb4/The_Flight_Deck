@@ -38,17 +38,19 @@ def getLeaders():
     userlist = users.find({})
     #for doc in userlist: print(doc)
     userWins = [("Dummy", -1)]
+    print(userWins)
     for user in userlist:
         name = user["username"]
         #print(name)
         wins = user["stats"]["Wins"]
-        userWins = userWins.append(tuple([name,wins]))
-    #userWins.sort(key=itemgetter(1))
+        userWins.append((name,wins))
+    userWins.sort(key=itemgetter(1),reverse=True)
     print(userWins)
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
 
-
+if __name__ == '__main__':
+    getLeaders()
 # def allUsers():
 #     cursor = users.find({})
 #     out = list()
