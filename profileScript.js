@@ -31,11 +31,11 @@ var user = {
 // GRAB FROM DB VIA PROMPT OF INPUT USERNAME
 $(document).ready(function() {
     var username = prompt("Please enter your username:", '');
-    if (username == '' || username == null) { username = ''; }
+    console.log('input is: '+username);
     $.ajax({
         type: 'POST',
         url: '/simple_get_profile',
-        data: {username: username},
+        data: username,
         success: function(data){    // data as User class asDict() formatting
             updateStats(data);
         }
@@ -81,7 +81,6 @@ $(document).ready(function() {
 
 function updateStats(data){
     // INPUT IN JSON FORMATTING, UPDATE user OBJECT AND LOAD STATS
-    console.log('input data is: '+data);
     userInfo = JSON.parse(data);
     if (userInfo != '') {
         input = prompt("[1]Cats or [2]ducks?",'type number');
