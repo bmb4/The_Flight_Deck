@@ -17,8 +17,9 @@ def postHandler(self, request):
     elif path == "login":
         return Login.login(inputs)
     elif path == "simple_get_profile":
-        input_name = request[1].decode()
-        print('INPUT DATA IS: '+input_name)
+        input_name = request[1].decode().split('=')
+        input_name = input_name[1] if len(input_name) > 1 else input_name[0]
+        print('INPUT DATA IS: ' + input_name)
         if DbHandler.nameExists(input_name):
             content = DbHandler.getUser(input_name).asDict()
             content['stats'] = json.dumps(content['stats'])
