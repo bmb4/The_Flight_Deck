@@ -10,13 +10,13 @@
 <body>
     <!-- need some basic script on back end to redirect to dummy pages -->
     <h1 style="text-align:center ; color:white">User Login</h1>
-    <form onsubmit="testy_bo_besty()">
+    <form action = "/login" method="post">
         <label for="username" style="text-align:center; color:white">Username:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password" style="text-align:center; color:white">Password:</label><br>
         <input type="password" id="password" name="password"><br>
         <input type="submit" value="Game Time"><br />
-        <a href="CreateAccount.html">Create new account</a><br /><!--Needs to be linked properly at merge-->
+        <a href="https://four-in-a-sequence.herokuapp.com/signup">Create new account</a><br /><!--Needs to be linked properly at merge-->
     </form>
     <script>
         function testy_bo_besty() {
@@ -30,8 +30,7 @@
                 alert("Incorrect login credentials");
             }
         }
-    </script><!--Remeber to update this addr when organizing files-->
-    <p><a href="Tutorialpage.html">Tutorial Page(back button check test)</a></p>
+    </script>
 
 </body>
 </html>

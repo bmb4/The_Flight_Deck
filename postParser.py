@@ -1,16 +1,22 @@
-import json
-
-import util
 import responses
+import util
+import CreateAccount
+import Login
+import json
 import DbHandler
 
-authentication_messages = []
-
 def postHandler(self, request):
-    # DOES NOT HANDLE UTF-8 NOR MULTIPART-FORM DATA
     path = util.getPath(request[0])
     print(path)
-    if path == "simple_get_profile":
+    contentLen = util.getContentLen(request[0])
+    boundary = util.getBoundary(request[0])
+    data = buffer(self, request[1], contentLen)
+    inputs = util.formParser(data,boundary)
+    if path == "signup":
+        return CreateAccount.createaccount(inputs)
+    elif path == "login":
+        return Login.login(inputs)
+    elif path == "simple_get_profile":
         input_name = request[1].decode().split('=')[1]
         # if DbHandler.nameExists(input_name):
         #     response = DbHandler.getUser(input_name).asDict()
@@ -25,3 +31,7 @@ def postHandler(self, request):
         return responses.create200(json.dumps(response), "text/plain", len(json.dumps(response)))
     return responses.create404("Content not found.", "text/plain", 18)
 
+def buffer(self, data, contentLen):
+    while len(data) < contentLen - 2:
+        data += self.request.recv(4096)
+    return data

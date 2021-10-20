@@ -13,19 +13,25 @@ def getHandler(self, request):
     elif path == "login":
         content = util.getFile("templates/Login Page.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "LandingPage":
+    elif path == "landingpage":
         content = util.getFile("templates/Landing Page.html")
         return responses.create200(content, "text/html", len(content))
+    elif path == "signup":
+         content = util.getFile("templates/CreateAccount.html")
+         return responses.create200(content, "text/html", len(content))
+    elif path == "tutorial":
+        content = util.getFile("templates/Tutorialpage.html")
+        return responses.create200(content, "text/html", len(content))        
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
         content = util.getFile("templates/leaderboard.html")
-        content = content.replace('{{ Wins 1 }}', leaders[0]['wins'])
-        content = content.replace('{{ Wins 2 }}', leaders[1]['wins'])
-        content = content.replace('{{ Wins 3 }}', leaders[2]['wins'])
-        content = content.replace('{{ Username 1 }}', leaders[0]['username'])
-        content = content.replace('{{ Username 2 }}', leaders[1]['username'])
-        content = content.replace('{{ Username 3 }}', leaders[2]['username'])
-        return responses.create200(content, "text/html", len(content))
+        content = content.replace('{{ Wins 1 }}', str(leaders[0][1]))
+        content = content.replace('{{ Wins 2 }}', str(leaders[1][1]))
+        content = content.replace('{{ Wins 3 }}', str(leaders[2][1]))
+        content = content.replace('{{ Username 1 }}', str(leaders[0][0]))
+        content = content.replace('{{ Username 2 }}', str(leaders[1][0]))
+        content = content.replace('{{ Username 3 }}', str(leaders[2][0]))
+        return responses.create200(content, "text/html", str(len(content)))
     elif path == "static":
         content = util.getFile("templates/static/WebsiteCSS.css")
         return responses.create200(content, "text/css", len(content))

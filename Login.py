@@ -1,42 +1,29 @@
 from logging import NullHandler
 import os
 import pymongo
-from flask import Flask, request, render_template, flash
+import responses
+import DbHandler
+
 
 password = os.environ.get('DB_PASSWORD')
 
-client = pymongo.MongoClient("mongodb+srv://bmb4:"+password+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://bmb4:"+str(password)+"@Four-in-a-Sequence.3v48s.mongodb.net/DB?retryWrites=true&w=majority")
 
 db = client["DB"]
-test = db["Test"]
+test = db["UserAccounts"]
 
 
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = "really secret key"
-
-#@app.route('/')
-#def index():
-#    return render_template('Login page.html')
-
-   
-@app.route('/Login Page',methods = ['POST'])
-def login():
-    username = request.form['username']
-    password = request.form['password']
-    userlist = test.find({"username":username})
-    FailMessage = ("Invalid username or password")
-    if len(list(userlist)) == 0:
-        return FailMessage
-    elif password != userlist[0]['password']:
-        return FailMessage
-    elif password ==  userlist[0]['password']:
+def login(form):
+    username = form['username']
+    password = form['password']
+    if not DbHandler.nameExists(username):
+        return responses.create301("/login")
+    else :
+        correctUser = DbHandler.getUser(username)
+        if correctUser.password == password:
             #route to landing or profile page
-            return 
-    else:
-        return ("unknown error")
+            return responses.create301("/landingpage")
+        else:
+            return responses.create301("/login")
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
