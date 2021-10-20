@@ -31,12 +31,12 @@ var user = {
 // GRAB FROM DB VIA PROMPT OF INPUT USERNAME
 $(document).ready(function() {
     var username = prompt("Please enter your username:", '');
-    print(username);
     $.ajax({
         type: 'POST',
         url: '/simple_get_profile',
         data: {username: username},
         success: function(data){    // data as User class asDict() formatting
+            console.log(data);
             updateStats(data);
         }
     });

@@ -17,7 +17,7 @@ def postHandler(self, request):
     elif path == "login":
         return Login.login(inputs)
     elif path == "simple_get_profile":
-        input_name = request[1].decode()
+        input_name = request[1].decode().split('=')
         print(input_name)
         input_name = ''
         if DbHandler.nameExists(input_name):
