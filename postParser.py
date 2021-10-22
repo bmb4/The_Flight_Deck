@@ -17,14 +17,13 @@ def postHandler(self, request):
     elif path == "login":
         return Login.login(inputs)
     elif path == "simple_get_profile":
-        input_name = request[1].decode()
+        input_name = data.decode().split('=')[1]
         print(input_name)
-        input_name.split('=')[1]
         if DbHandler.nameExists(input_name):
             content = DbHandler.getUser(input_name).asDict()
             content['stats'] = json.dumps(content['stats'])
-            content = json.dumps(content)
         else: content = ''
+        content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
