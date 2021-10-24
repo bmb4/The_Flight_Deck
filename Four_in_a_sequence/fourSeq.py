@@ -53,7 +53,8 @@ def dropPiece(player: int, column: int, board: np.ndarray):
 
 def chickenDinner():
     pygame.mixer.stop()
-    win = pygame.mixer.Sound("sounds/win.mp3")
+    pygame.mixer.music.stop()
+    win = pygame.mixer.Sound("sounds/win.ogg")
     win.play()
     while pygame.mixer.get_busy():
         pygame.time.delay(10)
