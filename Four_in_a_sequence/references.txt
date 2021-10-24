@@ -1,0 +1,12 @@
+To help me create this program the following references were used:
+
+https://www.pygame.org/docs/
+https://www.youtube.com/watch?v=XpYz-q1lxu8
+
+the YouTube video is from freecodecamp.org and it was created by 
+Keith Galli.
+
+I used his framework and I tried my best to make it my own unique program
+but obviously it is a basic game.  I tried to get fancy with
+winCheck, but for some reason I currently have a brain fart for a more
+efficient algorithm for finding the downward sloping diagonal wins.
