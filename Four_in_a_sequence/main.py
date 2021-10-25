@@ -8,7 +8,7 @@ game_over = False
 turn = 0
 column = 0
 fullColumns = [0,0,0,0,0,0,0]
-gameplaySongSelectionList = ["sounds/play.ogg", "sounds/play2.ogg", "sounds/play3.ogg", "sounds/play4.ogg", "sounds/play5.ogg", "sounds/play6.ogg", "sounds/play7.ogg"]
+gameplaySongSelectionList = ["sounds/play.mp3", "sounds/play2.mp3", "sounds/play3.mp3", "sounds/play4.mp3", "sounds/play5.mp3", "sounds/play6.mp3", "sounds/play7.mp3"]
 
 if __name__ == '__main__':
     board = fourSeq.create_board()
@@ -20,9 +20,8 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(size)
     fourSeq.display_board(screen, board)
     song = random.choice(gameplaySongSelectionList)
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play()
-    #play.play()
+    play = pygame.mixer.Sound(song)
+    play.play()
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -36,7 +35,7 @@ if __name__ == '__main__':
                     pygame.draw.circle(screen, fourSeq.RED, (x, 50), fourSeq.RADIUS)
                 pygame.display.update()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                dropFX = pygame.mixer.Sound("sounds/drop.ogg")
+                dropFX = pygame.mixer.Sound("sounds/drop.mp3")
                 dropFX.play()
                 pygame.draw.rect(screen, fourSeq.CERULEAN, (0, 0, width, fourSeq.SQUARE))
                 dropHere = event.pos[0]
@@ -44,9 +43,7 @@ if __name__ == '__main__':
                 if turn == 0:
                     column = fourSeq.playerInput(turn, dropHere)
                     # make sure the column falls within correct range
-                    # although programmers start counting at zero
-                    # most of our users will start at one
-                    if column in range(1, 8):
+                    if column in range(0, 7):
                         if fourSeq.dropPiece(turn + 1, column, board):
                             print(np.flip(board, 0))
                             fourSeq.display_board(screen, np.flip(board,0))
@@ -54,9 +51,9 @@ if __name__ == '__main__':
                                 print(f"player{turn + 1} Wins!!!!!")
                                 fourSeq.chickenDinner()
                                 game_over = True
-                            if board[5][column - 1] != 0:
-                                fullColumns[column - 1] = column
-                            if fullColumns == [1, 2, 3, 4, 5, 6, 7]:
+                            if board[5][column] != 0:
+                                fullColumns[column] = column
+                            if fullColumns == [0,1,2,3,4,5,6]:
                                 print("DRAW!!!!!")
                                 game_over = True
                             turn += 1
@@ -68,7 +65,7 @@ if __name__ == '__main__':
                     # make sure the column falls within correct range
                     # although programmers start counting at zero
                     # most of our users will start at one
-                    if column in range(1, 8):
+                    if column in range(0, 7):
                         if fourSeq.dropPiece(turn + 1, column, board):
                             print(np.flip(board, 0))
                             fourSeq.display_board(screen, np.flip(board,0))
@@ -76,9 +73,9 @@ if __name__ == '__main__':
                                 print(f"player{turn + 1} Wins!!!!!")
                                 fourSeq.chickenDinner()
                                 game_over = True
-                            if board[5][column - 1] != 0:
-                                fullColumns[column - 1] = column
-                            if fullColumns == [1, 2, 3, 4, 5, 6, 7]:
+                            if board[5][column] != 0:
+                                fullColumns[column] = column
+                            if fullColumns == [0,1,2,3,4,5,6]:
                                 print("DRAW!!!!!")
                                 game_over = True
                             turn = 0

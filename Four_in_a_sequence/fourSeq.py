@@ -34,17 +34,18 @@ def display_board(screen: pygame.surface, board: np.ndarray):
 
 # this function requests and returns the user input
 def playerInput(turn: int, column: int):
-    return int(math.ceil(column/SQUARE))
+    return int(math.floor(column/SQUARE))
 # this function finds the first open row in the requested column
 # and inserts the player number into the first open slot
 # if the requested column is full, it alerts the user
 # and returns false, otherwise it returns true
 def dropPiece(player: int, column: int, board: np.ndarray):
-    if board[5][column - 1] == 0:
+    if board[5][column] == 0:
         openRow = 0
         while openRow < 6:
-            if board[openRow][column - 1] == 0:
-                board[openRow][column - 1] = player
+            if board[openRow][column] == 0:
+                board[openRow][column] = player
+
                 return True
             else:  openRow += 1
     else:
@@ -53,8 +54,7 @@ def dropPiece(player: int, column: int, board: np.ndarray):
 
 def chickenDinner():
     pygame.mixer.stop()
-    pygame.mixer.music.stop()
-    win = pygame.mixer.Sound("sounds/win.ogg")
+    win = pygame.mixer.Sound("sounds/win.mp3")
     win.play()
     while pygame.mixer.get_busy():
         pygame.time.delay(10)
@@ -104,11 +104,32 @@ def winCheck(player: int, board: np.ndarray):
                     return True
             else: count = 0
 
-    #negative sloping diagonals
-    for _col in range(4):
-        for _row in range(3, 6):
-            if board[_row][_col] == player and board[_row - 1][_col + 1] == player and board[_row - 2][_col + 2] and board[_row - 3][_col + 3] == player:
-                return True
+    # negative sloping diagonals
+    # first we check all cases which begin in column 0
+    # these can only be in rows 3 to 5
+    # note these numbers are the array indexes
+    for row in range(3,6):
+        count = 0
+        for _row, _column in zip(range(row, -1, -1), range(0, row + 1)):
+            if board[_row][_column] == player:
+                count += 1
+                if count >= 4:
+                    return True
+            else: count = 0
+
+    # these negative sloping diagonals
+    # begin in column one up to column 3
+    # for each beginning column
+    # we check the rows in the range (-1) + column
+    # these are the "upper half" of the board
+    for column in range(1,4):
+        count = 0
+        for _row, _column in zip(range(5, (-2) + column, -1), range(column, 7)):
+            if board[_row][_column] == player:
+                count += 1
+                if count >= 4:
+                    return True
+            else: count = 0
 
     return False
 
