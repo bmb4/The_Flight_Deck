@@ -45,7 +45,6 @@ def dropPiece(player: int, column: int, board: np.ndarray):
         while openRow < 6:
             if board[openRow][column] == 0:
                 board[openRow][column] = player
-
                 return True
             else:  openRow += 1
     else:
@@ -61,7 +60,7 @@ def chickenDinner():
         pygame.event.poll()
 
 def winCheck(player: int, board: np.ndarray):
-    # check diagonals SW to NE
+    # check positive sloping diagonals
     # because we need to have four in a sequence
     # on diagonals we can only count rows 1 and 2 to get four
     # from this direction, which is like the upper half
@@ -120,7 +119,7 @@ def winCheck(player: int, board: np.ndarray):
     # these negative sloping diagonals
     # begin in column one up to column 3
     # for each beginning column
-    # we check the rows in the range (-1) + column
+    # we check the rows in the range (-2) + column
     # these are the "upper half" of the board
     for column in range(1,4):
         count = 0
