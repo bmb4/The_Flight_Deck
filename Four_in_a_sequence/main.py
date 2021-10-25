@@ -8,7 +8,7 @@ game_over = False
 turn = 0
 column = 0
 fullColumns = [0,0,0,0,0,0,0]
-gameplaySongSelectionList = ["sounds/play.mp3", "sounds/play2.mp3", "sounds/play3.mp3", "sounds/play4.mp3", "sounds/play5.mp3", "sounds/play6.mp3", "sounds/play7.mp3"]
+gameplaySongSelectionList = ["sounds/play.ogg", "sounds/play2.ogg", "sounds/play3.ogg", "sounds/play4.ogg", "sounds/play5.ogg", "sounds/play6.ogg", "sounds/play7.ogg"]
 
 if __name__ == '__main__':
     board = fourSeq.create_board()
@@ -35,7 +35,7 @@ if __name__ == '__main__':
                     pygame.draw.circle(screen, fourSeq.RED, (x, 50), fourSeq.RADIUS)
                 pygame.display.update()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                dropFX = pygame.mixer.Sound("sounds/drop.mp3")
+                dropFX = pygame.mixer.Sound("sounds/drop.ogg")
                 dropFX.play()
                 pygame.draw.rect(screen, fourSeq.CERULEAN, (0, 0, width, fourSeq.SQUARE))
                 dropHere = event.pos[0]
