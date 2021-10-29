@@ -1,6 +1,7 @@
 import util
 import responses
 import DbHandler
+import WebsocketHandler
 
 authentication_messages = []
 
@@ -41,6 +42,10 @@ def getHandler(self, request):
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
+    elif path == "websocket":
+        accept = WebsocketHandler.createConnection(request[0])
+        self.request.sendall(responses.create101(accept))
+        WebsocketHandler.loop(self)
     # elif path == "inSession.php":
     #     content = util.getFile("inSession.php")
     #     return responses.create200(content, "text/html", len(content))
