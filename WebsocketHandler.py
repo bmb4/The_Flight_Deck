@@ -23,7 +23,7 @@ def getKey(header):
     return key
 
 def loop(self):
-    user = ""
+    user = self.addressToUser[self.client_address[0]]
     try:
         while True:
             received_data = self.request.recv(4096).strip()
@@ -31,7 +31,7 @@ def loop(self):
             clientJson = json.loads(parse)
             print(clientJson)
     except:
-        del self.userToSocket[user]
+        del self.userToAddress[user]
         pass
 
 def frameParser(data):
