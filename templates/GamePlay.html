@@ -5,11 +5,24 @@
     <link rel="stylesheet" href="static/Website.css">
     <title>Game Play</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function gameResult(elem) {
+            result = elem.value;
+            $.ajax({
+                type: 'POST',
+                url: '/game_result',
+                data: {result: result},
+                //success: function(data){
+                //    alert('');
+                //}
+            });
+        }
+    </script>
 </head>
 <body>
 <h1>Game</h1>
-<button onclick="win">Win</button>
-<button onclick="lose">Lose</button>
-<button onclick="draw">Draw</button>
+<button onclick="gameResult(this)" value="Wins">Win</button>
+<button onclick="gameResult(this)" value="Losses">Lose</button>
+<button onclick="gameResult(this)" value="Draws">Draw</button>
 </body>
 </html>
