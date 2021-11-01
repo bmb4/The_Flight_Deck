@@ -35,7 +35,6 @@ $(document).ready(function() {
         type: 'POST',
         url: '/simple_get_profile',
         data: {username: username},
-        dataType: text,
         success: function(data){    // data as User class asDict() formatting
             updateStats(data);
         }
@@ -94,7 +93,7 @@ function updateStats(data){
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
     }
-    else { alert('Prompt cancelled, proceed to default template'); }
+    else { alert('User not found, using default Guest template'); }
     console.log(user);
     displayInfo();
 }
