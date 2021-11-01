@@ -12,19 +12,23 @@ def postHandler(self, request):
     boundary = util.getBoundary(request[0])
     data = buffer(self, request[1], contentLen)
     inputs = util.formParser(data,boundary)
+    cookies = util.getCookies(request[0])
     if path == "signup":
         return CreateAccount.createaccount(inputs)
     elif path == "login":
         return Login.login(inputs)
     elif path == "simple_get_profile":
         input_name = data.decode().split('=')[1]
-        print(input_name)
         if DbHandler.nameExists(input_name):
             content = DbHandler.getUser(input_name).asDict()
             content['stats'] = json.dumps(content['stats'])
         else: content = ''
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
+    elif path == 'game_result':
+        user, result = cookies['user'], inputs['result']
+        DbHandler.updateStats(user, result)
+        return responses.create301('/Profile')
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
