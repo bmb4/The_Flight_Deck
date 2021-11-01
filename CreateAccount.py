@@ -33,7 +33,7 @@ def createaccount(form):
     if not DbHandler.nameExists(username):
         newUser = User.User(username, password)
         DbHandler.saveUser(newUser)
-        return responses.create301("/landingpage")
+        return responses.create301("/landingpage", 'Set-Cookie: user='+username+'/r/n')
     else:
         return responses.create301("/signup")
 

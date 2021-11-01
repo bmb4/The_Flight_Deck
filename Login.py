@@ -22,7 +22,7 @@ def login(form):
         correctUser = DbHandler.getUser(username)
         if correctUser.password == password:
             #route to landing or profile page
-            return responses.create301("/landingpage")
+            return responses.create301("/landingpage", 'Set-Cookie: user='+username+'\r\n')
         else:
             return responses.create301("/login")
 
