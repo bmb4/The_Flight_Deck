@@ -59,8 +59,10 @@ def getCookies(header):
     cookies = {}
     for line in lines:
         if "Cookie: " in line:
-            for key, val in line.split("Cookie: ")[1].split('; '):
+            for cookie in line.split("Cookie: ")[1].split('; '):
+                key, val = cookie.split('=')
                 cookies[key] = val
+    # cookies['user'] = 'tester1'       # for testing purposes only
     return cookies
 
 def formParser(data, boundary):
