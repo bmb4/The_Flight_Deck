@@ -49,6 +49,11 @@ def getLeaders():
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
 
+def updateStats(user, result):
+    info = getUser(user).stats
+    users.update({'username': user},
+                 {"$set": {result: str(info[result]+1), "Games Played": str(info['Games Played']+1)}})
+
 if __name__ == '__main__':
     getLeaders()
 # def allUsers():
