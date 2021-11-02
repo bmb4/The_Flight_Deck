@@ -38,6 +38,9 @@ def getHandler(self, request):
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
+    elif path == "newgame":
+        content = util.getFile("templates/GamePage.html")
+        return responses.create200(content, "text/html", len(content))    
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
