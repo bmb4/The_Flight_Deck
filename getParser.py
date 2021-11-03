@@ -39,7 +39,7 @@ def getHandler(self, request):
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "newgame":
+    elif "NewGame" in path:
         content = util.getFile("templates/GamePage.html")
         return responses.create200(content, "text/html", len(content))    
     elif path == "profileScript.js":
@@ -72,7 +72,7 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames += ("\r\n" + name)
+            addedNames += '<p><a href = "https://four-in-a-sequence.herokuapp.com/NewGame&' + name + '>' + name + '</a></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
