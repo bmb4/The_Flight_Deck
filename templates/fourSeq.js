@@ -31,7 +31,8 @@ const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
 
 function dropChecker(id) {
-    if (pcs[id] == 6) {
+    if (pcs[id] >= 6) {
+        alert("this column is full!");
     } else {
         if (player == 1) {
             columns[id][5 - pcs[id]].style.background = 'purple';
