@@ -46,18 +46,78 @@ function dropChecker(id) {
             alert("Draw!!!!!");
         }
         if (moves > 6) {
-            winCheck();
+            if (player == 2) {
+                winCheck1();
+            } else {
+                winCheck2();
+            }
         }
     }
 }
 
-function winCheck() {
-    var full = 0;
+function winCheck1() {
     var count = 0;
-    if (columns[0][5].style.background == 'purple') {
-        count += 1;
-    } else {
-        count = 0;
+    // First we will check for vertical wins
+    for (let _col = 0; _col < 7; _col++) {
+        for (let _row = 5; _row > -1; _row--) {
+            if (columns[_col][_row].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+        }
+    }
+
+    count = 0;
+
+    for (_row = 0; _row < 6; _row++) {
+        for (_col = 0; _col < 7; _col++) {
+            if (rows[_row][_col].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+        }
     }
 }
+
+
+function winCheck2() {
+    var count = 0;
+
+    for (let _col = 0; _col < 7; _col++) {
+        for (let _row = 5; _row > -1; _row--) {
+            if (columns[_col][_row].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+        }
+    }
+
+    count = 0;
+
+    for (_row = 0; _row < 6; _row++) {
+        for (_col = 0; _col < 7; _col++) {
+            if (rows[_row][_col].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+        }
+    }
+}
+
 
