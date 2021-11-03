@@ -69,7 +69,7 @@ def formParser(data, boundary):
     #     return dictionary
     # except:
 
-    parts = parts[0].split("+".encode())
+    #parts = parts[0].split("+".encode())
     for part in parts[1:-1]:
         split = part.split(double_new_line)
         if "filename".encode() in split[0]:
