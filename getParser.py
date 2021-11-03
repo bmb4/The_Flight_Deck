@@ -72,8 +72,9 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames += '<p><a href = "https://four-in-a-sequence.herokuapp.com/NewGame&' + name + '>' + name + '</a></p>'
+            addedNames = addedNames + '<p><a href = "https://four-in-a-sequence.herokuapp.com/NewGame&' + name + '>' + name + '</a></p>'
         content = content.replace("{{names}}", addedNames)
+        print(content)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
