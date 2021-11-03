@@ -1,6 +1,6 @@
+document.getElementById("col11").onclick = function() {colorElementRed()};
 
-
-const allCells = document.querySelectorAll('box');
-
-
-allCells[7].style.background-color = #FF007F;
+function colorElementRed(id) {
+    var el = document.getElementById(id);
+    el.style.color = "red";
+  }
