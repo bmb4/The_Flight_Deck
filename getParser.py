@@ -71,7 +71,7 @@ def getHandler(self, request):
     elif path == "InvitePage":
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
-        for name in self.usersToAddress:
+        for name in self.userToAddress:
             addedNames += "\n" + name
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
