@@ -8,6 +8,7 @@ var pcs4 = 0;
 var pcs5 = 0;
 var pcs6 = 0;
 var pcs7 = 0;
+var moves = 0;
 
 var pcs = [pcs1, pcs2, pcs3, pcs4, pcs5, pcs6, pcs7];
 
@@ -31,7 +32,6 @@ const rows = [row1, row2, row3, row4, row5, row6];
 
 function dropChecker(id) {
     if (pcs[id] == 6) {
-        //alert("too many pieces");
     } else {
         if (player == 1) {
             columns[id][5 - pcs[id]].style.background = 'purple';
@@ -41,20 +41,23 @@ function dropChecker(id) {
             player = 1;
         }
         pcs[id] += 1;
-        winCheck();
+        moves += 1;
+        if (moves == 42) {
+            alert("Draw!!!!!");
+        }
+        if (moves > 6) {
+            winCheck();
+        }
     }
 }
 
 function winCheck() {
     var full = 0;
     var count = 0;
-    for (let sidewinder = 0; sidewinder < 7; sidewinder++) {
-        if (pcs[sidewinder] == 6) {
-            full += 1;
-        }
-        if (full == 7) {
-            alert("DRAW!");
-        }
+    if (columns[0][5].style.background == 'purple') {
+        count += 1;
+    } else {
+        count = 0;
     }
 }
 
