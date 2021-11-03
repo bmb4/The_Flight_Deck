@@ -46,6 +46,12 @@ def getHandler(self, request):
         accept = WebsocketHandler.createConnection(request[0])
         self.request.sendall(responses.create101(accept))
         WebsocketHandler.loop(self)
+    elif path == "functions.js":
+        file = open("functions.js")
+        # file = open("bonus_page/functions.js")
+        content = file.read()
+        file.close()
+        return responses.create200(content, "text/javascript", len(content))
     # elif path == "inSession.php":
     #     content = util.getFile("inSession.php")
     #     return responses.create200(content, "text/html", len(content))
