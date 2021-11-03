@@ -72,7 +72,7 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames += "\n" + name
+            addedNames += ("\r\n" + name)
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
