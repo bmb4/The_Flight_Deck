@@ -58,6 +58,9 @@ function dropChecker(id) {
 
 function winCheck1() {
     var count = 0;
+    var iterations = 0;
+    var _colSlide = 0;
+    var _rowPush = 0;
     // First we will check for vertical wins
     for (let _col = 0; _col < 7; _col++) {
         for (let _row = 5; _row > -1; _row--) {
@@ -93,9 +96,8 @@ function winCheck1() {
     // on bottom half of the board
     // if slicing along row0,col0 to row5, col5
 
-    var iterations = 0;
     for (let _col = 0; _col < (6 - iterations); _col++) {
-        var _colSlide = 0;
+        _colSlide = 0;
         for (let _row = (0 + iterations); _row < 6; _row++) {
             if (rows[_row][_col + _colSlide - iterations].style.background == 'purple') {
                 count += 1;
@@ -131,6 +133,53 @@ function winCheck1() {
             _colSlide += 1;
         }
         iterations += 1;
+    }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on top half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _row = 5; _row > 2; _row--) {
+        _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            if (rows[_row - _rowPush][_col].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+            _rowPush += 1;
+        }
+        iterations += 1;
+    }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on bottom half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 5; _row > (iterations - 1); _row--) {
+            if (rows[_row][_col + _colSlide].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+            _colSlide += 1;
+        }
+        iterations += 1;
+        
     }
 }
 
@@ -202,6 +251,45 @@ function winCheck2() {
             _colSlide += 1;
         }
         iterations += 1;
+    }
+
+    count = 0;
+
+    iterations = 0;
+    for (let _row = 5; _row > 2; _row--) {
+        var _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            if (rows[_row - _rowPush][_col].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+            _rowPush += 1;
+        }
+        iterations += 1;
+    }
+
+    count = 0;
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 5; _row > (iterations - 1); _row--) {
+            if (rows[_row][_col + _colSlide].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }
+            _colSlide += 1;
+        }
+        iterations += 1;
+        
     }
 }
     
