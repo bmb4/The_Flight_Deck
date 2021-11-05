@@ -73,7 +73,7 @@ function winCheck1() {
     }
 
     count = 0;
-
+    // Next check for horizontal wins
     for (_row = 0; _row < 6; _row++) {
         for (_col = 0; _col < 7; _col++) {
             if (rows[_row][_col].style.background == 'purple') {
@@ -86,6 +86,55 @@ function winCheck1() {
             }
         }
     }
+
+    count = 0;
+
+    // next check for negative sloping diagonals
+    // which begin in column 0
+    for (_row = 0; _row < 3; _row++) {
+        var slide = 0;
+        for (_col = 0; _col < 5; _col++) {
+            if (rows[_row + slide][_col].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }         
+            slide += 1;   
+        }
+    }
+
+
+    count = 0;
+
+    // next check for negative sloping diagonals 
+    // which begin in colum 1, 2, or 3
+    var lessRows = 0;
+    for (_col = 1; _col < 4; _col++) {
+        var colPush = 0;
+        for (_row = 0; _row < (6 - lessRows); _row++) {          
+            if (rows[_row][_col + colPush].style.background == 'purple') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 1 WINS!!!");
+                }
+            }else {
+                count = 0;
+            }       
+            colPush += 1;  
+        }
+        lessRows += 1;
+    }
+
+    count = 0;
+
+    // next check for positive sloping diagonals 
+    // which begin in column 0
+
+    
+
 }
 
 
@@ -119,6 +168,44 @@ function winCheck2() {
             }
         }
     }
+
+    count = 0;
+
+    count = 0;
+    for (_row = 0; _row < 3; _row++) {
+        var slide = 0;
+        for (_col = 0; _col < 5; _col++) {
+            if (rows[_row + slide][_col].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            } else {
+                count = 0;
+            }         
+            slide += 1;   
+        }
+    }
+
+    count = 0;
+    var lessRows = 0;
+    for (_col = 1; _col < 4; _col++) {
+        var colPush = 0;
+        for (_row = 0; _row < (6 - lessRows); _row++) {          
+            if (rows[_row][_col + colPush].style.background == 'green') {
+                count += 1;
+                if (count >= 4) {
+                    alert("PLAYER 2 WINS!!!");
+                }
+            }else {
+                count = 0;
+            }       
+            colPush += 1;  
+        }
+        lessRows += 1;
+    }
 }
+    
+
 
 
