@@ -74,8 +74,8 @@ function winCheck1() {
 
     count = 0;
     // Next check for horizontal wins
-    for (_row = 0; _row < 6; _row++) {
-        for (_col = 0; _col < 7; _col++) {
+    for (let _row = 0; _row < 6; _row++) {
+        for (let _col = 0; _col < 7; _col++) {
             if (rows[_row][_col].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
@@ -89,52 +89,49 @@ function winCheck1() {
 
     count = 0;
 
-    // next check for negative sloping diagonals
-    // which begin in column 0
-    for (_row = 0; _row < 3; _row++) {
-        var slide = 0;
-        for (_col = 0; _col < 5; _col++) {
-            if (rows[_row + slide][_col].style.background == 'purple') {
+    // negative sloping diagonal wins 
+    // on bottom half of the board
+    // if slicing along row0,col0 to row5, col5
+
+    var iterations = 0;
+    for (let _col = 0; _col < (6 - iterations); _col++) {
+        var _colSlide = 0;
+        for (let _row = (0 + iterations); _row < 6; _row++) {
+            if (rows[_row][_col + _colSlide - iterations].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
                 }
             } else {
                 count = 0;
-            }         
-            slide += 1;   
+            }
+            _colSlide += 1;
         }
+        iterations += 1;
     }
-
 
     count = 0;
 
-    // next check for negative sloping diagonals 
-    // which begin in colum 1, 2, or 3
-    var lessRows = 0;
-    for (_col = 1; _col < 4; _col++) {
-        var colPush = 0;
-        for (_row = 0; _row < (6 - lessRows); _row++) {          
-            if (rows[_row][_col + colPush].style.background == 'purple') {
+    // negative sloping diagonal wins 
+    // on top half of the board
+    // if slicing along row0,col0 to row5, col5
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 0; _row < (6 - iterations); _row++) {
+            if (rows[_row][_col + _colSlide].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
                 }
-            }else {
+            } else {
                 count = 0;
-            }       
-            colPush += 1;  
+            }    
+            _colSlide += 1;
         }
-        lessRows += 1;
+        iterations += 1;
     }
-
-    count = 0;
-
-    // next check for positive sloping diagonals 
-    // which begin in column 0
-
-    
-
 }
 
 
@@ -156,8 +153,8 @@ function winCheck2() {
 
     count = 0;
 
-    for (_row = 0; _row < 6; _row++) {
-        for (_col = 0; _col < 7; _col++) {
+    for (let _row = 0; _row < 6; _row++) {
+        for (let _col = 0; _col < 7; _col++) {
             if (rows[_row][_col].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
@@ -171,38 +168,40 @@ function winCheck2() {
 
     count = 0;
 
-    count = 0;
-    for (_row = 0; _row < 3; _row++) {
-        var slide = 0;
-        for (_col = 0; _col < 5; _col++) {
-            if (rows[_row + slide][_col].style.background == 'green') {
+    var iterations = 0;
+    for (let _col = 0; _col < (6 - iterations); _col++) {
+        var _colSlide = 0;
+        for (let _row = (0 + iterations); _row < 6; _row++) {
+            if (rows[_row][_col + _colSlide - iterations].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
                 }
             } else {
                 count = 0;
-            }         
-            slide += 1;   
+            }
+            _colSlide += 1;
         }
+        iterations += 1;
     }
 
     count = 0;
-    var lessRows = 0;
-    for (_col = 1; _col < 4; _col++) {
-        var colPush = 0;
-        for (_row = 0; _row < (6 - lessRows); _row++) {          
-            if (rows[_row][_col + colPush].style.background == 'green') {
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 0; _row < (6 - iterations); _row++) {
+            if (rows[_row][_col + _colSlide].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
                 }
-            }else {
+            } else {
                 count = 0;
-            }       
-            colPush += 1;  
+            }    
+            _colSlide += 1;
         }
-        lessRows += 1;
+        iterations += 1;
     }
 }
     
