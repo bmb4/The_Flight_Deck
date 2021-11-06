@@ -73,7 +73,9 @@ function winCheck1() {
     for (let _col = 0; _col < 7; _col++) {
         for (let _row = 5; _row > -1; _row--) {
             if (columns[_col][_row].style.background == 'purple') {
+                alert("found purple");
                 count += 1;
+                alert(count);
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
                     p1win = true;
