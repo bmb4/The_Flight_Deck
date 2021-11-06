@@ -99,6 +99,7 @@ function winCheck1() {
     for (let _row = 0; _row < 3; _row++) {
         _rowPush = 0;
         for (let _col = 0; _col < (6 - iterations); _col++) {
+            alert("loop in winCheck1");
             if (rows[_row + _rowPush][_col].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
