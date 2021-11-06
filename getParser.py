@@ -39,7 +39,7 @@ def getHandler(self, request):
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
-    elif "NewGame" in path:
+    elif path == "NewGame":
         content = util.getFile("templates/GamePage.html")
         return responses.create200(content, "text/html", len(content))    
     elif path == "profileScript.js":
@@ -72,7 +72,7 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames = addedNames + '<p><a href = "/NewGame&' + name + '">' + name + '</a></p>'
+            addedNames = addedNames + '<p><button onclick="socket.send(JSON.stringify({"type": "invite", "name" : ' + name + '>' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         print(content)
         return responses.create200(content, "text/html", len(content))

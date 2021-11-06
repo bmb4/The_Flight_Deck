@@ -42,7 +42,17 @@ def loop(self):
                 self.request.sendall(frame)
 
                 #other player = recipient. should be sent in the clientJson
-                self.userToSocket[recipient].sendall(frame)
+                self.userToAddress[recipient].sendall(frame)
+            if clientJson["type"] == "invite":
+                player1 = user
+                player2 = clientJson["name"]
+                self.games = self.games.append((player1,player2))
+                returnMessage = {"type": "invite"}
+                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+                frame = frameCreator(returnMessage.encode())
+
+                self.userToAddress[player1].sendall(frame)
+                self.userToAddress[player2].sendall(frame)
     except:
         del self.userToAddress[user]
         pass
