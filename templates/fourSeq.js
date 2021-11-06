@@ -9,6 +9,8 @@ var pcs5 = 0;
 var pcs6 = 0;
 var pcs7 = 0;
 var moves = 0;
+var p1win = false;
+var p2win = false;
 
 var pcs = [pcs1, pcs2, pcs3, pcs4, pcs5, pcs6, pcs7];
 
@@ -53,6 +55,12 @@ function dropChecker(id) {
                 winCheck2();
             }
         }
+        if (p1win == true) {
+            alert("player1 wins");
+        }
+        if (p2win == true) {
+            alert("player2 wins");
+        }    
     }
 }
 
@@ -68,6 +76,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    p1win = true;
                 }
             } else {
                 count = 0;
