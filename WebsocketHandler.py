@@ -33,11 +33,12 @@ def loop(self):
             if clientJson["type"] == "move":
                 ### read the json for the move and return the json from the game logic
 
-
+        
                 ###return message is structured like the example below. Can use any key/value though
-                #returnMessage = {"type": "chat", "name": user, "message": message}
+                #returnMessage = {"type": "move", "name": user, "column": int}
                 returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
                 frame = frameCreator(returnMessage.encode())
+                #sends back to initial sender
                 self.request.sendall(frame)
 
                 #other player = recipient. should be sent in the clientJson
