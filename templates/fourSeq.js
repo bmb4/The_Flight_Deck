@@ -57,6 +57,7 @@ function dropChecker(id) {
 }
 
 function winCheck1() {
+    alert("winCheck1");
     var count = 0;
     var iterations = 0;
     var _colSlide = 0;
@@ -185,6 +186,7 @@ function winCheck1() {
 
 
 function winCheck2() {
+    alert("winCheck2");
     var count = 0;
     var iterations = 0;
     var _colSlide = 0;
