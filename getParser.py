@@ -45,7 +45,7 @@ def getHandler(self, request):
         content = util.getFile("templates/gamePage.html")
         return responses.create200(content, "text/html", len(content))    
     elif path == "fourSeq.js":
-        content = util.getFile("fourSeq.js")
+        content = util.getFile("templates/fourSeq.js")
         return responses.create200(content, "text/javascript", len(content))
     # elif path == "inSession.php":
     #     content = util.getFile("inSession.php")
