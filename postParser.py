@@ -16,7 +16,7 @@ def postHandler(self, request):
     if path == "signup":
         return CreateAccount.createaccount(inputs)
     elif path == "login":
-        return Login.login(inputs)
+        return Login.login(self, inputs)
     elif path == "simple_get_profile":
         input_name = data.decode().split('=')[1]
         if DbHandler.nameExists(input_name):
