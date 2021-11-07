@@ -72,7 +72,7 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames = addedNames + '<p><button onclick="socket.send(JSON.stringify({"type": "invite", "name" : "' + name + '"}))">' + name + '</button></p>'
+            addedNames = addedNames + '<p><button onclick=\"socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\">' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         print(content)
         return responses.create200(content, "text/html", len(content))
