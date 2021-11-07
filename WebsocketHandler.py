@@ -18,11 +18,14 @@ def createConnection(header):
 
 def getKey(header):
     lines = header.split("\r\n")
-    print("Lines: ",lines)
-    key = ""
-    for line in lines:
-        if "Sec-WebSocket-Key: " in line:
-            key = line.split("Sec-Websocket-Key: ")[1]
+    # print("Lines: ",lines)
+    # key = ""
+    # for line in lines:
+    #     if "Sec-WebSocket-Key: " in line:
+    #         key = line.split("Sec-Websocket-Key: ")[1]
+    # return key
+    key = lines[7].split("Sec-Websocket-Key: ")[1]
+    print(key)
     return key
 
 def loop(self):
