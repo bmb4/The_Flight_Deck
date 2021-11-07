@@ -22,7 +22,7 @@ def getKey(header):
     key = ""
     for line in lines:
         if "Sec-WebSocket-Key: " in line:
-            key = line.split("Sec-WebSocket-Key: ")[1]
+            key = line.split("Sec-Websocket-Key: ")[1]
     return key
 
 def loop(self):
