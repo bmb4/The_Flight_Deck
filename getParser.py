@@ -47,6 +47,7 @@ def getHandler(self, request):
         return responses.create200(content, "text/javascript", len(content))
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
+        print(accept)
         self.request.sendall(responses.create101(accept))
         WebsocketHandler.loop(self)
     elif path == "functions.js":
@@ -74,7 +75,6 @@ def getHandler(self, request):
         for name in self.userToAddress:
             addedNames = addedNames + '<p><button onclick=\'socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\'>' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
-        print(content)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
