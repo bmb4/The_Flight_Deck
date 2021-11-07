@@ -67,10 +67,10 @@ a:link, a:visited {
     box-shadow: 0 9px rgb(221, 207, 12);
   }
   
-  .gamebutton:hover {background-color: #3e8e41}
+  .gamebutton:hover {background-color: #e7883a}
   
   .gamebutton:active {
-    background-color: #3e8e41;
+    background-color: #ffffff;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }

@@ -1,3 +1,5 @@
+//let socket = new WebSocket('ws://' + window.location.host + `/websocket`);
+
 const spaces = document.querySelectorAll('.box');
 var gameLive = true;
 var player = 1;
@@ -29,6 +31,25 @@ const col7 = [spaces[6], spaces[13], spaces[20], spaces[27], spaces[34], spaces[
 
 const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
+
+function packJSON(id) {
+    const rawJSON = {type:"move",pid:null,col:id};
+    packedData = JSON.stringify(rawJSON);
+    alert(packedData);
+    //rawJSON.pid = "how to ref?";
+    //rawJSON.col = elemid;
+    //const packedJSON= JSON.stringify(rawJSON);
+    //send packedJSON to server
+    
+    
+
+}
+
+function unpackJSON(package){
+    //received from server
+    const data = JSON.parse(package);
+    dropChecker(data.col);
+}
 
 function dropChecker(id) {
     if (pcs[id] >= 6) {
