@@ -38,5 +38,4 @@ def createaccount(form):
         return responses.create301("/signup")
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+   
