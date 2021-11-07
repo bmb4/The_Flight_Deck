@@ -77,6 +77,7 @@ function winCheck1() {
                 }
             } else {
                 count = 0;
+                alert("did not find purple here");
             }
         }
     }
