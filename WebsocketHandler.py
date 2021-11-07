@@ -26,6 +26,7 @@ def loop(self):
     user = self.addressToUser[self.client_address[0]]
     try:
         while True:
+            print("Socket: ",self.request.client_address[0])
             received_data = self.request.recv(4096).strip()
             parse = frameParser(received_data).decode()
             clientJson = json.loads(parse)
