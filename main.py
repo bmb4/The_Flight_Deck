@@ -12,6 +12,7 @@ port = 5000
 class MyTCPHandler(socketserver.BaseRequestHandler):
     addressToUser = {}
     userToAddress = {}
+    games = []
     def handle(self):
                 received_data = self.request.recv(1024)
 

@@ -34,12 +34,12 @@ def getHandler(self, request):
         content = content.replace('{{ Username 3 }}', str(leaders[2][0]))
         return responses.create200(content, "text/html", str(len(content)))
     elif path == "static":
-        content = util.getFile("templates/static/WebsiteCSS.css")
+        content = util.getFile("templates/static/Website.CSS")
         return responses.create200(content, "text/css", len(content))
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "newgame":
+    elif path == "NewGame":
         content = util.getFile("templates/GamePage.html")
         return responses.create200(content, "text/html", len(content))    
     elif path == "profileScript.js":
@@ -47,6 +47,7 @@ def getHandler(self, request):
         return responses.create200(content, "text/javascript", len(content))
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
+        print(accept)
         self.request.sendall(responses.create101(accept))
         WebsocketHandler.loop(self)
     elif path == "functions.js":
@@ -71,8 +72,8 @@ def getHandler(self, request):
     elif path == "InvitePage":
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
-        for name in self.usersToAddress:
-            addedNames += "\n" + name
+        for name in self.userToAddress:
+            addedNames = addedNames + '<p><button onclick=\'socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\'>' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)

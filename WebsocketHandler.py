@@ -8,7 +8,9 @@ GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 def createConnection(header):
     key = getKey(header)
+    print(key)
     key = key + GUID
+    print(key)
     hashed = hashlib.sha1(key.encode()).digest()
     base64_bytes = base64.b64encode(hashed)
     target = base64_bytes.decode("ascii")
@@ -26,6 +28,7 @@ def loop(self):
     user = self.addressToUser[self.client_address[0]]
     try:
         while True:
+            print("Socket: ",self.request.client_address[0])
             received_data = self.request.recv(4096).strip()
             parse = frameParser(received_data).decode()
             clientJson = json.loads(parse)
@@ -42,7 +45,17 @@ def loop(self):
                 self.request.sendall(frame)
 
                 #other player = recipient. should be sent in the clientJson
-                self.userToSocket[recipient].sendall(frame)
+                self.userToAddress[recipient].sendall(frame)
+            if clientJson["type"] == "invite":
+                player1 = user
+                player2 = clientJson["name"]
+                self.games = self.games.append((player1,player2))
+                returnMessage = {"type": "invite"}
+                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+                frame = frameCreator(returnMessage.encode())
+
+                self.userToAddress[player1].sendall(frame)
+                self.userToAddress[player2].sendall(frame)
     except:
         del self.userToAddress[user]
         pass
