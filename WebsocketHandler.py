@@ -8,7 +8,9 @@ GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 def createConnection(header):
     key = getKey(header)
+    print(key)
     key = key + GUID
+    print(key)
     hashed = hashlib.sha1(key.encode()).digest()
     base64_bytes = base64.b64encode(hashed)
     target = base64_bytes.decode("ascii")
