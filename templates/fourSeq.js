@@ -377,7 +377,7 @@ function game_result(isDraw, winner, loser) {
     $.ajax({
         type: 'POST',
         url: '/game_result',
-        data: {isDraw: isDraw, winner: winner, loser: loser},
+        data: JSON.stringify({isDraw: isDraw, winner: winner, loser: loser}),
         success: function(data){
             $(".modal-title").html(data);
             $("#endgameModal").modal();

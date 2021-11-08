@@ -52,7 +52,7 @@ def getLeaders():
 def applyGameResults(isDraw, winner, loser):
     winner_info = getUser(winner).stats
     loser_info = getUser(loser).stats
-    if isDraw == 'true':
+    if isDraw:
         users.update({'username': winner}, {"$set": { 'stats.Draws': int(winner_info['Draws']) + 1, "stats.Games Played": int(winner_info['Games Played']) + 1 }})
         users.update({'username': loser}, {"$set": { 'stats.Draws': int(loser_info['Draws']) + 1, "stats.Games Played": int(loser_info['Games Played']) + 1 }})
     else:
