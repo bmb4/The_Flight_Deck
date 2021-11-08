@@ -22,13 +22,7 @@ def login(self, form):
         correctUser = DbHandler.getUser(username)
         if correctUser.password == password:
             #route to landing or profile page
-            #also add username and address to dicts
-            self.addressToUser[self.client_address[0]] = username
-            self.userToAddress[username] = self.client_address[0]
-            self.lastKnownAddress[username] = self.client_address[0]
 
-
-            return responses.create301WithCookie("/landingpage", self.client_address[0])
         else:
             return responses.create301("/login")
 

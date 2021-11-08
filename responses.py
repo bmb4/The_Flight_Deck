@@ -16,9 +16,9 @@ def create404(content, mime, length):
         length) + "\r\nX-Content-Type-Options: nosniff\r\n\r\n" + content
     return response.encode()
 
-def create301(newPath):
+def create301(newPath, cookie=''):
     response = "HTTP/1.1 301 Moved Permanently\r\nLocation: " + newPath + "\r\nContent-Length:0" + \
-               "\r\nX-Content-Type-Options: nosniff\r\n\r\n"
+               "\r\nX-Content-Type-Options: nosniff" + cookie + "\r\n\r\n"
     return response.encode()
 
 def create200Bytes(content, mime, length):
