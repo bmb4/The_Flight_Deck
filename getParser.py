@@ -10,6 +10,7 @@ def getHandler(self, request):
     print(path)
     cookie = util.getCookie(request[0])
     print("Cookie: ", cookie)
+    del self.userToAddress[cookie]
     self.addressToUser[self.client_address[0]] = cookie
     self.userToAddress[cookie] = self.client_address[0]
     if path == "":
