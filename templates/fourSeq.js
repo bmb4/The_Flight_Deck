@@ -379,8 +379,11 @@ function game_result(isDraw, winner, loser) {
         url: '/game_result',
         data: {isDraw: isDraw, winner: winner, loser: loser},
         success: function(data){
+            $(".modal-title").html(data);
             $("#endgameModal").modal();
-            $("#endgameModal").on('hide.bs.modal', function() { });
+            $(".gamebutton").each(function() {
+                $(this).prop("disabled", true);
+            });
         }
     });
 }
