@@ -64,7 +64,7 @@ function dropChecker(id) {
         pcs[id] += 1;
         moves += 1;
         if (moves == 42) {
-//            alert("Draw!!!!!");
+            alert("Draw!!!!!");
             game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
@@ -85,7 +85,7 @@ function winCheck1() {
             if (columns[_col][_row].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                 }
             } else {
@@ -101,7 +101,7 @@ function winCheck1() {
             if (rows[_row][_col].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                 }
             } else {
@@ -123,7 +123,7 @@ function winCheck1() {
             if (rows[_row][_col + _colSlide - iterations].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                 }
             } else {
@@ -147,7 +147,7 @@ function winCheck1() {
             if (rows[_row][_col + _colSlide].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                 }
             } else {
@@ -168,7 +168,7 @@ function winCheck2() {
             if (columns[_col][_row].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                 }
             } else {
@@ -184,7 +184,7 @@ function winCheck2() {
             if (rows[_row][_col].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                 }
             } else {
@@ -202,7 +202,7 @@ function winCheck2() {
             if (rows[_row][_col + _colSlide - iterations].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                 }
             } else {
@@ -222,7 +222,7 @@ function winCheck2() {
             if (rows[_row][_col + _colSlide].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                 }
             } else {
