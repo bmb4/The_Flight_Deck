@@ -96,3 +96,9 @@ def findFilename(bytestring):
     filename = string[index_of_quote+1:len(string)-1]
     print(filename)
     return filename
+
+def getCookie(request):
+    cookie = ""
+    if "Cookie: name=" in request:
+        cookie = request.split("Cookie: name=")[1].split("\r\n")[0]
+    return cookie
