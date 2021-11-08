@@ -33,7 +33,7 @@ def getHandler(self, request):
         content = content.replace('{{ Username 3 }}', str(leaders[2][0]))
         return responses.create200(content, "text/html", str(len(content)))
     elif path == "static":
-        content = util.getFile("templates/static/WebsiteCSS.css")
+        content = util.getFile("templates/static/Website.css")
         return responses.create200(content, "text/css", len(content))
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
