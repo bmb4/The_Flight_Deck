@@ -25,6 +25,11 @@ def postHandler(self, request):
         else: content = ''
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
+    elif path == 'verify_users':
+        users, content = json.loads(inputs['users']), 'True'
+        for name in users:
+            if not DbHandler.nameExists(name): content = 'False'
+        return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
         result = inputs['result']
         DbHandler.updateStats(result)
