@@ -3,7 +3,6 @@ def create101(accept):
                "Connection: Upgrade \r\n" \
                "Upgrade: websocket\r\n" \
                "X-Content-Type-Options: nosniff\r\n" \
-               "Sec-WebSocket-Extensions: deflate-frame\r\n" \
                "Sec-WebSocket-Accept: " + accept + "\r\n\r\n"
     return response.encode()
 
