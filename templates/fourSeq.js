@@ -211,7 +211,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("aPLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
@@ -228,7 +228,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("bPLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
@@ -250,7 +250,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("cPLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
@@ -274,10 +274,8 @@ function winCheck2() {
             let check = rows[_row][_col + _colSlide];
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
-                alert(_row);
-                alert(_column);
                 if (count >= 4) {
-                    alert("dPLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
@@ -302,7 +300,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("ePLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
@@ -327,7 +325,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("fPLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     return;
                 }
             } else {
