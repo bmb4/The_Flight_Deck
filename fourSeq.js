@@ -29,6 +29,9 @@ var pcs5 = 0;
 var pcs6 = 0;
 var pcs7 = 0;
 var moves = 0;
+const _purple = "rgb(120, 0, 138)";
+const _green = "rgb(0, 215, 0)";
+
 
 var pcs = [pcs1, pcs2, pcs3, pcs4, pcs5, pcs6, pcs7];
 
@@ -55,16 +58,16 @@ function dropChecker(id) {
         alert("this column is full!");
     } else {
         if (player == 1) {
-            columns[id][5 - pcs[id]].style.background = 'purple';
+            columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
         } else {
-            columns[id][5 - pcs[id]].style.background = 'green';
+            columns[id][5 - pcs[id]].style.background = _green;
             player = 1;
         }
         pcs[id] += 1;
         moves += 1;
         if (moves == 42) {
-            alert("Draw!!!!!");
+//            alert("Draw!!!!!");
             game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
@@ -73,20 +76,25 @@ function dropChecker(id) {
             } else {
                 winCheck2();
             }
-        }
+        }  
     }
 }
 
 function winCheck1() {
     var count = 0;
+    var iterations = 0;
+    var _colSlide = 0;
+    var _rowPush = 0;
     // First we will check for vertical wins
     for (let _col = 0; _col < 7; _col++) {
         for (let _row = 5; _row > -1; _row--) {
-            if (columns[_col][_row].style.background == 'purple') {
+            let check = columns[_col][_row];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -98,11 +106,13 @@ function winCheck1() {
     // Next check for horizontal wins
     for (let _row = 0; _row < 6; _row++) {
         for (let _col = 0; _col < 7; _col++) {
-            if (rows[_row][_col].style.background == 'purple') {
+            let check = rows[_row][_col];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -116,20 +126,21 @@ function winCheck1() {
     // on bottom half of the board
     // if slicing along row0,col0 to row5, col5
 
-    var iterations = 0;
-    for (let _col = 0; _col < (6 - iterations); _col++) {
-        var _colSlide = 0;
-        for (let _row = (0 + iterations); _row < 6; _row++) {
-            if (rows[_row][_col + _colSlide - iterations].style.background == 'purple') {
+    for (let _row = 0; _row < 3; _row++) {
+        _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            let check = rows[_row + _rowPush][_col];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
+                    return;
                 }
             } else {
                 count = 0;
             }
-            _colSlide += 1;
+            _rowPush += 1;
         }
         iterations += 1;
     }
@@ -144,11 +155,13 @@ function winCheck1() {
     for (let _col = 1; _col < 4; _col++) {
         _colSlide = 0;
         for (let _row = 0; _row < (6 - iterations); _row++) {
-            if (rows[_row][_col + _colSlide].style.background == 'purple') {
+            let check = rows[_row][_col + _colSlide];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -156,20 +169,78 @@ function winCheck1() {
             _colSlide += 1;
         }
         iterations += 1;
+    }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on top half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _row = 5; _row > 2; _row--) {
+        _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            let check = rows[_row - _rowPush][_col];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
+                count += 1;
+                if (count >= 4) {
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
+                    return;
+                }
+            } else {
+                count = 0;
+            }
+            _rowPush += 1;
+        }
+        iterations += 1;
+    }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on bottom half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 5; _row > (iterations - 1); _row--) {
+            let check = rows[_row][_col + _colSlide];
+            if (window.getComputedStyle(check).backgroundColor == _purple) {
+                count += 1;
+                if (count >= 4) {
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
+                    return;
+                }
+            } else {
+                count = 0;
+            }
+            _colSlide += 1;
+        }
+        iterations += 1;
+        
     }
 }
 
 
 function winCheck2() {
     var count = 0;
-
+    var iterations = 0;
+    var _colSlide = 0;
+    var _rowPush = 0;
+    // First we will check for vertical wins
     for (let _col = 0; _col < 7; _col++) {
         for (let _row = 5; _row > -1; _row--) {
-            if (columns[_col][_row].style.background == 'green') {
+            let check = columns[_col][_row];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -178,14 +249,16 @@ function winCheck2() {
     }
 
     count = 0;
-
+    // Next check for horizontal wins
     for (let _row = 0; _row < 6; _row++) {
         for (let _col = 0; _col < 7; _col++) {
-            if (rows[_row][_col].style.background == 'green') {
+            let check = rows[_row][_col];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -195,35 +268,46 @@ function winCheck2() {
 
     count = 0;
 
-    var iterations = 0;
-    for (let _col = 0; _col < (6 - iterations); _col++) {
-        var _colSlide = 0;
-        for (let _row = (0 + iterations); _row < 6; _row++) {
-            if (rows[_row][_col + _colSlide - iterations].style.background == 'green') {
+    // negative sloping diagonal wins 
+    // on bottom half of the board
+    // if slicing along row0,col0 to row5, col5
+
+    for (let _row = 0; _row < 3; _row++) {
+        _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            let check = rows[_row + _rowPush][_col];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
+                    return;
                 }
             } else {
                 count = 0;
             }
-            _colSlide += 1;
+            _rowPush += 1;
         }
         iterations += 1;
     }
 
     count = 0;
 
+    // negative sloping diagonal wins 
+    // on top half of the board
+    // if slicing along row0,col0 to row5, col5
+
     iterations = 0;
     for (let _col = 1; _col < 4; _col++) {
         _colSlide = 0;
         for (let _row = 0; _row < (6 - iterations); _row++) {
-            if (rows[_row][_col + _colSlide].style.background == 'green') {
+            let check = rows[_row][_col + _colSlide];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
+                    return;
                 }
             } else {
                 count = 0;
@@ -232,7 +316,62 @@ function winCheck2() {
         }
         iterations += 1;
     }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on top half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _row = 5; _row > 2; _row--) {
+        _rowPush = 0;
+        for (let _col = 0; _col < (6 - iterations); _col++) {
+            let check = rows[_row - _rowPush][_col];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
+                count += 1;
+                if (count >= 4) {
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
+                    return;
+                }
+            } else {
+                count = 0;
+            }
+            _rowPush += 1;
+        }
+        iterations += 1;
+    }
+
+    count = 0;
+
+    // positive sloping diagonal wins
+    // on bottom half of board
+    // if slicing along col0, row6 to col5, row0
+
+    iterations = 0;
+    for (let _col = 1; _col < 4; _col++) {
+        _colSlide = 0;
+        for (let _row = 5; _row > (iterations - 1); _row--) {
+            let check = rows[_row][_col + _colSlide];
+            if (window.getComputedStyle(check).backgroundColor == _green) {
+                count += 1;
+                if (count >= 4) {
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
+                    return;
+                }
+            } else {
+                count = 0;
+            }
+            _colSlide += 1;
+        }
+        iterations += 1;
+        
+    }
 }
+
+
 
 function game_result(isDraw, winner, loser) {
     $.ajax({
@@ -248,6 +387,3 @@ function game_result(isDraw, winner, loser) {
         }
     });
 }
-
-
-
