@@ -46,7 +46,7 @@ def getHandler(self, request):
     elif path == "NewGame":
         content = util.getFile("templates/gamePage.html")
         return responses.create200(content, "text/html", len(content))    
-    elift path == "fourSeq.js":
+    elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "profileScript.js":
