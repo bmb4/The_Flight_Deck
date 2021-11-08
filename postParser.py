@@ -31,9 +31,9 @@ def postHandler(self, request):
             if not DbHandler.nameExists(name): content = 'False'
         return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
-        result = inputs['result']
-        DbHandler.updateStats(result)
-        return responses.create301('/Profile')
+        isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
+        DbHandler.updateStats(isDraw, winner, loser)
+        return responses.create200('', "text/plain", 0)
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
