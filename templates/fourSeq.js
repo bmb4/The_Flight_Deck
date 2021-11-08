@@ -1,3 +1,23 @@
+var player1_username = ''
+var player2_username = ''
+
+$(document).ready(function() {
+    var player1 = prompt("Please enter first player's username:", '');
+    var player2 = prompt("Please enter second player's your username:", '');
+    $.ajax({
+        type: 'POST',
+        url: '/verify_users',
+        data: { users: json.stringify([player1, player2]) },
+        success: function(data){
+            if (data == "False") {
+                alert("Must enter valid players' username");
+                location.reload();
+            }
+            else { player1_username = player1; player2_username = player2; }
+        }
+    });
+});
+
 const spaces = document.querySelectorAll('.box');
 var gameLive = true;
 var player = 1;
