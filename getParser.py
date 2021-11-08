@@ -71,9 +71,6 @@ def getHandler(self, request):
         mime = 'image/' + image_path.split('.')[1]
         content = util.getFileBytes(path + '/' + image_path)
         return responses.create200Bytes(content, mime, len(content))
-    elif path == 'gamePlay':
-        content = util.getFile("templates/GamePlay.html")
-        return responses.create200(content, "text/html", len(content))
     elif path == "InvitePage":
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
