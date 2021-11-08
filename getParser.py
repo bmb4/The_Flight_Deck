@@ -22,11 +22,11 @@ def getHandler(self, request):
         content = util.getFile("templates/Landing Page.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "signup":
-         content = util.getFile("templates/CreateAccount.html")
-         return responses.create200(content, "text/html", len(content))
+        content = util.getFile("templates/CreateAccount.html")
+        return responses.create200(content, "text/html", len(content))
     elif path == "tutorial":
         content = util.getFile("templates/Tutorialpage.html")
-        return responses.create200(content, "text/html", len(content))        
+        return responses.create200(content, "text/html", len(content))
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
         content = util.getFile("templates/leaderboard.html")
@@ -45,7 +45,7 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "NewGame":
         content = util.getFile("templates/gamePage.html")
-        return responses.create200(content, "text/html", len(content))    
+        return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
         return responses.create200(content, "text/javascript", len(content))
@@ -72,9 +72,9 @@ def getHandler(self, request):
     #     return responses.create200(content, "application/json", len(content))
     elif path == 'images':
         image_path = request[0].split("\r\n")[0].split(' ')[1].split('/')[2]
-        print(path+'/'+image_path)
-        mime = 'image/'+image_path.split('.')[1]
-        content = util.getFileBytes(path+'/'+image_path)
+        print(path + '/' + image_path)
+        mime = 'image/' + image_path.split('.')[1]
+        content = util.getFileBytes(path + '/' + image_path)
         return responses.create200Bytes(content, mime, len(content))
     elif path == "InvitePage":
         content = util.getFile("templates/InvitePage.html")
