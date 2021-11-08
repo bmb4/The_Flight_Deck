@@ -11,6 +11,7 @@ var pcs7 = 0;
 var moves = 0;
 const _purple = "rgb(120, 0, 138)";
 const _green = "rgb(0, 215, 0)";
+const _white = "rgb(0, 0, 0)";
 
 
 var pcs = [pcs1, pcs2, pcs3, pcs4, pcs5, pcs6, pcs7];
@@ -57,6 +58,7 @@ function dropChecker(id) {
             }
         }  
     }
+    
 }
 
 function winCheck1() {
@@ -71,7 +73,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -79,7 +81,7 @@ function winCheck1() {
             }
         }
     }
-
+    
     count = 0;
     // Next check for horizontal wins
     for (let _row = 0; _row < 6; _row++) {
@@ -88,7 +90,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -110,7 +112,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -135,7 +137,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -160,7 +162,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -185,7 +187,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+                    $('#p1win').modal('show')
                     return;
                 }
             } else {
@@ -211,7 +213,8 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                    
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -228,7 +231,8 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                    
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -250,7 +254,8 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                    
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -275,7 +280,8 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                   
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -300,7 +306,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -325,7 +331,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+                    $('#p2win').modal('show')
                     return;
                 }
             } else {
@@ -336,4 +342,8 @@ function winCheck2() {
         iterations += 1;
         
     }
+}
+
+function rematch(){
+   location.reload()
 }
