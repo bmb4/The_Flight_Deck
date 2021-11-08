@@ -1,5 +1,5 @@
-var player1_username = ''
-var player2_username = ''
+var player1_username = '';
+var player2_username = '';
 
 $(document).ready(function() {
     var player1 = prompt("Please enter first player's username:", '');
@@ -7,7 +7,7 @@ $(document).ready(function() {
     $.ajax({
         type: 'POST',
         url: '/verify_users',
-        data: { users: json.stringify([player1, player2]) },
+        data: { users: JSON.stringify([player1, player2]) },
         success: function(data){
             if (data == "False") {
                 alert("Must enter valid players' username");
@@ -373,7 +373,7 @@ function winCheck2() {
 
 
 
-function gameResult(isDraw, winner, loser) {
+function game_result(isDraw, winner, loser) {
     $.ajax({
         type: 'POST',
         url: '/game_result',
