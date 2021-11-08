@@ -8,6 +8,10 @@ authentication_messages = []
 def getHandler(self, request):
     path = util.getPath(request[0])
     print(path)
+    cookie = util.getCookie(request[0])
+    print("Cookie: ", cookie)
+    self.addressToUser[self.client_address[0]] = cookie
+    self.userToAddress[cookie] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
