@@ -1,7 +1,6 @@
 import util
 import responses
 import DbHandler
-import WebsocketHandler
 
 authentication_messages = []
 
@@ -47,20 +46,10 @@ def getHandler(self, request):
         content = util.getFile("templates/gamePage.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
-        content = util.getFile("templates/fourSeq.js")
+        content = util.getFile("fourSeq.js")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
-        return responses.create200(content, "text/javascript", len(content))
-    elif path == "websocket":
-        accept = WebsocketHandler.createConnection(request[0])
-        print(accept)
-        self.request.sendall(responses.create101(accept))
-        WebsocketHandler.loop(self, cookie)
-    elif path == "functions.js":
-        file = open("functions.js")
-        content = file.read()
-        file.close()
         return responses.create200(content, "text/javascript", len(content))
     # elif path == "inSession.php":
     #     content = util.getFile("inSession.php")
@@ -76,12 +65,5 @@ def getHandler(self, request):
         mime = 'image/' + image_path.split('.')[1]
         content = util.getFileBytes(path + '/' + image_path)
         return responses.create200Bytes(content, mime, len(content))
-    elif path == "InvitePage":
-        content = util.getFile("templates/InvitePage.html")
-        addedNames = ""
-        for name in self.userToAddress:
-            addedNames = addedNames + '<p><button onclick=\'socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\'>' + name + '</button></p>'
-        content = content.replace("{{names}}", addedNames)
-        return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
