@@ -32,7 +32,7 @@ def postHandler(self, request):
         return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
         isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
-        DbHandler.updateStats(isDraw, winner, loser)
+        DbHandler.applyGameResults(isDraw, winner, loser)
         return responses.create200('', "text/plain", 0)
     return responses.create404("Content not found.", "text/plain", 18)
 

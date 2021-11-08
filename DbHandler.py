@@ -49,10 +49,15 @@ def getLeaders():
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
 
-def updateStats(user, result):
-    info = getUser(user).stats
-    users.update({'username': user},
-                 {"$set": {result: str(info[result]+1), "Games Played": str(info['Games Played']+1)}})
+def applyGameResults(isDraw, winner, loser):
+    winner_info = getUser(winner).stats
+    loser_info = getUser(loser).stats
+    if isDraw:
+        users.update({'username': winner}, {"$set": {'Draws': str(winner_info['Draws']+1), "Games Played": str(winner_info['Games Played']+1)}})
+        users.update({'username': loser}, {"$set": {'Draws': str(loser_info['Draws']+1), "Games Played": str(loser_info['Games Played']+1)}})
+    else:
+        users.update({'username': winner}, {"$set": {'Wins': str(winner_info['Wins']+1), "Games Played": str(winner_info['Games Played']+1)}})
+        users.update({'username': loser}, {"$set": {'Wins': str(loser_info['Losses']+1), "Games Played": str(loser_info['Games Played']+1)}})
 
 if __name__ == '__main__':
     getLeaders()
