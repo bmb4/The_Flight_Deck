@@ -54,6 +54,17 @@ def getBoundary(header):
             boundary = line.split("boundary=")[1].strip()
     return boundary
 
+def getCookies(header):
+    lines = header.split("\r\n")
+    cookies = {}
+    for line in lines:
+        if "Cookie: " in line:
+            for cookie in line.split("Cookie: ")[1].split('; '):
+                key, val = cookie.split('=')
+                cookies[key] = val
+    # cookies['user'] = 'tester1'       # for testing purposes only
+    return cookies
+
 def formParser(data, boundary):
     print(data)
     dictionary = {}
