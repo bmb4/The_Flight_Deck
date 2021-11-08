@@ -11,7 +11,7 @@ def getHandler(self, request):
     cookie = util.getCookie(request[0])
     print("Cookie: ", cookie)
     if cookie != "":
-        self.lastKnownAddress[self.adressToUser[cookie]] = self.client_address[0]
+        self.lastKnownAddress[self.addressToUser[cookie]] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
