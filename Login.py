@@ -13,7 +13,7 @@ db = client["DB"]
 test = db["UserAccounts"]
 
 
-def login(form):
+def login(self, form):
     username = form['username']
     password = form['password']
     if not DbHandler.nameExists(username):
@@ -22,7 +22,7 @@ def login(form):
         correctUser = DbHandler.getUser(username)
         if correctUser.password == password:
             #route to landing or profile page
-            return responses.create301("/landingpage", '\r\nSet-Cookie: user='+username)
+
         else:
             return responses.create301("/login")
 

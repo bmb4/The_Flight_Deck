@@ -10,6 +10,10 @@ port = 5000
 # usernameToAddress = {}        # implemented for logging out
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
+    addressToUser = {}
+    userToAddress = {}
+    lastKnownAddress = {}
+    games = []
     def handle(self):
                 received_data = self.request.recv(1024)
 

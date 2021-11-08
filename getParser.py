@@ -1,12 +1,17 @@
 import util
 import responses
 import DbHandler
+import WebsocketHandler
 
 authentication_messages = []
 
 def getHandler(self, request):
     path = util.getPath(request[0])
     print(path)
+    cookie = util.getCookie(request[0])
+    print("Cookie: ", cookie)
+    if cookie != "":
+        self.lastKnownAddress[self.addressToUser[cookie]] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
@@ -38,14 +43,13 @@ def getHandler(self, request):
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
+    elif path == "NewGame":
+        content = util.getFile("templates/GamePage.html")
+        return responses.create200(content, "text/html", len(content))    
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
-    elif path == "newgame":
-        content = util.getFile("templates/gamePage.html")
-        return responses.create200(content, "text/html", len(content))    
-    elif path == "fourSeq.js":
-        content = util.getFile("templates/fourSeq.js")
+
         return responses.create200(content, "text/javascript", len(content))
     # elif path == "inSession.php":
     #     content = util.getFile("inSession.php")
@@ -61,7 +65,6 @@ def getHandler(self, request):
         mime = 'image/' + image_path.split('.')[1]
         content = util.getFileBytes(path + '/' + image_path)
         return responses.create200Bytes(content, mime, len(content))
-    elif path == 'gamePlay':
-        content = util.getFile("templates/GamePlay.html")
+
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
