@@ -54,33 +54,44 @@ def getBoundary(header):
             boundary = line.split("boundary=")[1].strip()
     return boundary
 
+def getCookies(header):
+    lines = header.split("\r\n")
+    cookies = {}
+    for line in lines:
+        if "Cookie: " in line:
+            for cookie in line.split("Cookie: ")[1].split('; '):
+                key, val = cookie.split('=')
+                cookies[key] = val
+    # cookies['user'] = 'tester1'       # for testing purposes only
+    return cookies
+
 def formParser(data, boundary):
     print(data)
     dictionary = {}
     parts = data.split(("--" + boundary).encode())
     print(parts)
-    try:
+    # try:
+    #
+    #     parts = parts[0].split("&".encode())
+    #     for part in parts:
+    #         split = part.split("=".encode())
+    #         dictionary[split[0].decode()] = split[1].decode()
+    #     print(dictionary)
+    #     return dictionary
+    # except:
 
-        parts = parts[0].split("&".encode())
-        for part in parts:
-            split = part.split("=".encode())
-            dictionary[split[0].decode()] = split[1].decode()
-        print(dictionary)
-        return dictionary
-    except:
+    #parts = parts[0].split("+".encode())
+    for part in parts[1:-1]:
+        split = part.split(double_new_line)
+        if "filename".encode() in split[0]:
+            name = findFilename(split[0])
+        else:
+            name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
+        data = split[1].strip(new_line)
+        dictionary[name] = data.decode()
 
-        parts = parts[0].split("+".encode())
-        for part in parts[1:-1]:
-            split = part.split(double_new_line)
-            if "filename".encode() in split[0]:
-                name = findFilename(split[0])
-            else:
-                name = split[0].decode().split("name=")[1].strip("\r\n").replace('"','')
-            data = split[1].strip(new_line)
-            dictionary[name] = data.decode()
-
-        print(dictionary)
-        return dictionary
+    print(dictionary)
+    return dictionary
 
 def findFilename(bytestring):
     decoded_bytes = bytestring.decode()
@@ -96,3 +107,9 @@ def findFilename(bytestring):
     filename = string[index_of_quote+1:len(string)-1]
     print(filename)
     return filename
+
+def getCookie(request):
+    cookie = ""
+    if "Cookie: name=" in request:
+        cookie = request.split("Cookie: name=")[1].split("\r\n")[0]
+    return cookie
