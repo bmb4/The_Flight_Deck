@@ -26,14 +26,16 @@ def postHandler(self, request):
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'verify_users':
-        users, content = json.loads(inputs['users']), 'True'
-        for name in users:
-            if not DbHandler.nameExists(name): content = 'False'
+        users, content = json.loads(data.decode()), 'valid'
+        if not DbHandler.nameExists(users[0]) or not DbHandler.nameExists(users[1]) or users[0] == users[1]: content = 'invalid'
         return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
+        inputs = json.loads(data.decode())
         isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
         DbHandler.applyGameResults(isDraw, winner, loser)
-        return responses.create200('', "text/plain", 0)
+        if isDraw: content = "IT'S A DRAW"
+        else: content = 'Winner is <b>' + winner + "</b> :) <br> Better luck next time <b>" + loser + "</b> :("
+        return responses.create200(content, "text/plain", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
