@@ -1,3 +1,23 @@
+var player1_username = '';
+var player2_username = '';
+
+$(document).ready(function() {
+    var player1 = prompt("Please enter first player's username:", '');
+    var player2 = prompt("Please enter second player's your username:", '');
+    $.ajax({
+        type: 'POST',
+        url: '/verify_users',
+        data: JSON.stringify([player1, player2]),
+        success: function(data) {
+            if (data == "invalid") {
+                alert("Entered invalid username(s). Going back to landing page......");
+                location.href = "/landingpage";
+            }
+            else { player1_username = player1; player2_username = player2; }
+        }
+    });
+});
+
 const spaces = document.querySelectorAll('.box');
 var gameLive = true;
 var player = 1;
@@ -44,7 +64,8 @@ function dropChecker(id) {
         pcs[id] += 1;
         moves += 1;
         if (moves == 42) {
-            alert("Draw!!!!!");
+//            alert("Draw!!!!!");
+            game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
             if (player == 2) {
@@ -64,7 +85,8 @@ function winCheck1() {
             if (columns[_col][_row].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
                 }
             } else {
                 count = 0;
@@ -79,7 +101,8 @@ function winCheck1() {
             if (rows[_row][_col].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
                 }
             } else {
                 count = 0;
@@ -100,7 +123,8 @@ function winCheck1() {
             if (rows[_row][_col + _colSlide - iterations].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
                 }
             } else {
                 count = 0;
@@ -123,7 +147,8 @@ function winCheck1() {
             if (rows[_row][_col + _colSlide].style.background == 'purple') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 1 WINS!!!");
+//                    alert("PLAYER 1 WINS!!!");
+                    game_result(false, player1_username, player2_username);
                 }
             } else {
                 count = 0;
@@ -143,7 +168,8 @@ function winCheck2() {
             if (columns[_col][_row].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
                 }
             } else {
                 count = 0;
@@ -158,7 +184,8 @@ function winCheck2() {
             if (rows[_row][_col].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
                 }
             } else {
                 count = 0;
@@ -175,7 +202,8 @@ function winCheck2() {
             if (rows[_row][_col + _colSlide - iterations].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
                 }
             } else {
                 count = 0;
@@ -194,7 +222,8 @@ function winCheck2() {
             if (rows[_row][_col + _colSlide].style.background == 'green') {
                 count += 1;
                 if (count >= 4) {
-                    alert("PLAYER 2 WINS!!!");
+//                    alert("PLAYER 2 WINS!!!");
+                    game_result(false, player2_username, player1_username);
                 }
             } else {
                 count = 0;
@@ -204,7 +233,21 @@ function winCheck2() {
         iterations += 1;
     }
 }
-    
+
+function game_result(isDraw, winner, loser) {
+    $.ajax({
+        type: 'POST',
+        url: '/game_result',
+        data: JSON.stringify({isDraw: isDraw, winner: winner, loser: loser}),
+        success: function(data){
+            $(".modal-title").html(data);
+            $("#endgameModal").modal();
+            $(".gamebutton").each(function() {
+                $(this).prop("disabled", true);
+            });
+        }
+    });
+}
 
 
 
