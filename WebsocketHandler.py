@@ -35,10 +35,19 @@ def loop(self):
             print(clientJson)
             if clientJson["type"] == "move":
                 ### read the json for the move and return the json from the game logic
-
-        
+                player = user
+                recipient = ''
+                for i in MyTCPHandler.games:#or however you ref it.
+                    if i[0] == player:
+                        recipient = i[1]
+                        break
+                    elif i[1] == player:
+                        recipient = i[0]
+                        break
+                if recipient == '':
+                    print("error recipient not found")
                 ###return message is structured like the example below. Can use any key/value though
-                #returnMessage = {"type": "move", "name": user, "column": int}
+                returnMessage = {"column":clientJson["col"] }
                 returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
                 frame = frameCreator(returnMessage.encode())
                 #sends back to initial sender

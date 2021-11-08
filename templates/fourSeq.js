@@ -33,16 +33,9 @@ const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
 
 function packJSON(id) {
-    const rawJSON = {type:"move",pid:null,col:id};
-    packedData = JSON.stringify(rawJSON);
-    alert(packedData);
-    //rawJSON.pid = "how to ref?";
-    //rawJSON.col = elemid;
-    //const packedJSON= JSON.stringify(rawJSON);
+    const rawJSON = {type:"move",col:id};
+    const packedJSON= JSON.stringify(rawJSON);
     //send packedJSON to server
-    
-    
-
 }
 
 function unpackJSON(package){
