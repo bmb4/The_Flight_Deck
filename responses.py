@@ -25,3 +25,8 @@ def create200Bytes(content, mime, length):
     response = b"HTTP/1.1 200 OK\r\nContent-Type: " + mime.encode() + b"\r\nContent-Length: " + str(
         length).encode() + b"\r\nX-Content-Type-Options: nosniff\r\n\r\n" + content
     return response
+
+def create301WithCookie(path, cookie):
+    response = f"HTTP/1.1 301 Moved Permanently\r\nLocation: {path}\r\nContent-Length:0" + \
+               f"\r\nX-Content-Type-Options: nosniff\r\nSet-Cookie: name={cookie}\r\n\r\n"
+    return response.encode()

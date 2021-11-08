@@ -1,4 +1,4 @@
-let socket = new WebSocket('ws://' + window.location.host + `/websocket`);
+let socket = new WebSocket('ws://' + window.location.host + '/websocket');
 
 socket.onmessage = parseMessage;
 

@@ -16,16 +16,20 @@ def createConnection(header):
 
 def getKey(header):
     lines = header.split("\r\n")
-    key = ""
-    for line in lines:
-        if "Sec-WebSocket-Key: " in line:
-            key = line.split("Sec-WebSocket-Key: ")[1]
+    # key = ""
+    # for line in lines:
+    #     if "Sec-WebSocket-Key: " in line:
+    #         key = line.split("Sec-Websocket-Key: ")[1]
+    # return key
+    key = lines[7].split("Sec-Websocket-Key: ")[1]
     return key
 
-def loop(self):
-    user = self.addressToUser[self.client_address[0]]
+def loop(self, cookie):
+    print("START OF LOOP:", self.addressToUser, self.client_address[0])
+    user = self.addressToUser[cookie]
     try:
         while True:
+            print("Socket: ",self.request.client_address[0])
             received_data = self.request.recv(4096).strip()
             parse = frameParser(received_data).decode()
             clientJson = json.loads(parse)
@@ -54,7 +58,6 @@ def loop(self):
                 self.userToAddress[player1].sendall(frame)
                 self.userToAddress[player2].sendall(frame)
     except:
-        del self.userToAddress[user]
         pass
 
 def frameParser(data):

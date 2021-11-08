@@ -8,6 +8,10 @@ authentication_messages = []
 def getHandler(self, request):
     path = util.getPath(request[0])
     print(path)
+    cookie = util.getCookie(request[0])
+    print("Cookie: ", cookie)
+    if cookie != "":
+        self.lastKnownAddress[self.addressToUser[cookie]] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
@@ -39,19 +43,20 @@ def getHandler(self, request):
     elif path == "Profile":
         content = util.getFile("templates/ProfilePage.html")
         return responses.create200(content, "text/html", len(content))
-    elif path == "profileScript.js":
-        content = util.getFile("profileScript.js")
-        return responses.create200(content, "text/javascript", len(content))
-    elif path == "newgame":
+    elif path == "NewGame":
         content = util.getFile("templates/gamePage.html")
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
         return responses.create200(content, "text/javascript", len(content))
+    elif path == "profileScript.js":
+        content = util.getFile("profileScript.js")
+        return responses.create200(content, "text/javascript", len(content))
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
+        print(accept)
         self.request.sendall(responses.create101(accept))
-        WebsocketHandler.loop(self)
+        WebsocketHandler.loop(self, cookie)
     elif path == "functions.js":
         file = open("functions.js")
         content = file.read()
@@ -75,9 +80,8 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames = addedNames + '<p><button onclick="socket.send(JSON.stringify({"type": "invite", "name" : ' + name + '>' + name + '</button></p>'
+            addedNames = addedNames + '<p><button onclick=\'socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\'>' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
-        print(content)
         return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
