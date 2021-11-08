@@ -26,8 +26,8 @@ def postHandler(self, request):
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
-        user, result = cookies['user'], inputs['result']
-        DbHandler.updateStats(user, result)
+        result = inputs['result']
+        DbHandler.updateStats(result)
         return responses.create301('/Profile')
     return responses.create404("Content not found.", "text/plain", 18)
 
