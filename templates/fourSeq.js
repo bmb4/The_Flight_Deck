@@ -68,6 +68,7 @@ function dropChecker(id) {
         moves += 1;
         if (moves == 42) {
             alert("Draw!!!!!");
+            game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
             if (player == 2) {
@@ -92,6 +93,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -109,6 +111,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -131,6 +134,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -156,6 +160,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -181,6 +186,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -206,6 +212,7 @@ function winCheck1() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 1 WINS!!!");
+                    game_result(true, player1_username, player2_username);
                     return;
                 }
             } else {
@@ -232,6 +239,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -249,6 +257,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -271,6 +280,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -296,6 +306,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -321,6 +332,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -346,6 +358,7 @@ function winCheck2() {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
+                    game_result(true, player2_username, player1_username);
                     return;
                 }
             } else {
@@ -356,4 +369,18 @@ function winCheck2() {
         iterations += 1;
         
     }
+}
+
+
+
+function gameResult(isDraw, winner, loser) {
+    $.ajax({
+        type: 'POST',
+        url: '/game_result',
+        data: {isDraw: isDraw, winner: winner, loser: loser},
+        success: function(data){
+            $("#endgameModal").modal();
+            $("#endgameModal").on('hide.bs.modal', function() { });
+        }
+    });
 }
