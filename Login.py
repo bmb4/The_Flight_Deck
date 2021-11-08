@@ -25,9 +25,10 @@ def login(self, form):
             #also add username and address to dicts
             self.addressToUser[self.client_address[0]] = username
             self.userToAddress[username] = self.client_address[0]
+            self.lastKnownAddress[username] = self.client_address[0]
 
 
-            return responses.create301WithCookie("/landingpage", username)
+            return responses.create301WithCookie("/landingpage", self.client_address[0])
         else:
             return responses.create301("/login")
 

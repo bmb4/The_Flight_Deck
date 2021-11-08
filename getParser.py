@@ -11,11 +11,7 @@ def getHandler(self, request):
     cookie = util.getCookie(request[0])
     print("Cookie: ", cookie)
     if cookie != "":
-        oldAddress = self.userToAddress[cookie]
-        del self.userToAddress[cookie]
-        del self.addressToUser[oldAddress]
-    self.addressToUser[self.client_address[0]] = cookie
-    self.userToAddress[cookie] = self.client_address[0]
+        self.lastKnownAddress[self.adressToUser[cookie]] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
@@ -57,7 +53,7 @@ def getHandler(self, request):
         accept = WebsocketHandler.createConnection(request[0])
         print(accept)
         self.request.sendall(responses.create101(accept))
-        WebsocketHandler.loop(self)
+        WebsocketHandler.loop(self, cookie)
     elif path == "functions.js":
         file = open("functions.js")
         content = file.read()

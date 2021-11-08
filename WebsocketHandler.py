@@ -27,9 +27,9 @@ def getKey(header):
     print(key)
     return key
 
-def loop(self):
+def loop(self, cookie):
     print(self.addressToUser, self.client_address[0])
-    user = self.addressToUser[self.client_address[0]]
+    user = self.addressToUser[cookie]
     try:
         while True:
             print("Socket: ",self.request.client_address[0])
