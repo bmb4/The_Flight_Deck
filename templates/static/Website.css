@@ -46,7 +46,7 @@ a:link, a:visited {
   /* 7 columns 6 rows + 1 row of buttons*/
   .game-board{
     display: grid;
-    grid-template-columns: 75px 75px 75px 75px 75px 75px 75px; 
+    grid-template-columns: 75px 75px 75px 75px 75px 75px 75px;
     grid-template-rows: 75px 75px 75px 75px 75px 75px;
     justify-content: center;
   }
@@ -65,9 +65,9 @@ a:link, a:visited {
     border-radius: 15px;
     box-shadow: 0 9px rgb(221, 207, 12);
   }
-  
+
   .gamebutton:hover {background-color: #3e8e41}
-  
+
   .gamebutton:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
