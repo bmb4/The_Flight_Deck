@@ -1,8 +1,7 @@
 var	request	= new XMLHttpRequest();
 request.onreadystatechange	=	function(){
-    alert(this.readyState + this.status)
-    if	(this.readyState === 4 && this.status === 301){
-        alert("after if")
+    if	(this.readyState === 4 && this.status === 200){
+        alert(this.responseText)
         window.location.href = "NewGame"
     }
 };
