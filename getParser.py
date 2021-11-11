@@ -8,10 +8,8 @@ authentication_messages = []
 def getHandler(self, request):
     path = util.getPath(request[0])
     print(path)
-    # cookie = util.getCookie(request[0])
-    # print("Cookie: ", cookie)
-    # if cookie != "":
-    #     self.lastKnownAddress[self.addressToUser[cookie]] = self.client_address[0]
+    cookie = util.getCookie(request[0])
+    print("Cookie: ", cookie)
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
@@ -56,8 +54,12 @@ def getHandler(self, request):
         accept = WebsocketHandler.createConnection(request[0])
         print(accept)
         self.request.sendall(responses.create101(accept))
-        WebsocketHandler.loop(self)
-        #WebsocketHandler.loop(self, cookie)
+
+        # also add username and address to dicts
+        self.addressToUser[self.client_address[0]] = cookie
+        self.userToAddress[cookie] = self.client_address[0]
+        # WebsocketHandler.loop(self)
+        WebsocketHandler.loop(self, cookie)
     elif path == "functions.js":
         file = open("functions.js")
         content = file.read()
