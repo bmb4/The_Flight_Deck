@@ -9,8 +9,8 @@ var pcs5 = 0;
 var pcs6 = 0;
 var pcs7 = 0;
 var moves = 0;
-const _purple = "rgb(120, 0, 138)";
-const _green = "rgb(0, 215, 0)";
+const _purple = "rgb(120, 0, 142)";
+const _green = "rgb(0, 235, 0)";
 
 
 var pcs = [pcs1, pcs2, pcs3, pcs4, pcs5, pcs6, pcs7];
@@ -60,12 +60,14 @@ function dropChecker(id) {
 }
 
 function winCheck1() {
-    var count = 0;
+    var count = 0;          
     var iterations = 0;
     var _colSlide = 0;
     var _rowPush = 0;
+
     // First we will check for vertical wins
     for (let _col = 0; _col < 7; _col++) {
+        count = 0;
         for (let _row = 5; _row > -1; _row--) {
             let check = columns[_col][_row];
             if (window.getComputedStyle(check).backgroundColor == _purple) {
@@ -80,9 +82,9 @@ function winCheck1() {
         }
     }
 
-    count = 0;
     // Next check for horizontal wins
     for (let _row = 0; _row < 6; _row++) {
+        count = 0;
         for (let _col = 0; _col < 7; _col++) {
             let check = rows[_row][_col];
             if (window.getComputedStyle(check).backgroundColor == _purple) {
@@ -97,13 +99,11 @@ function winCheck1() {
         }
     }
 
-    count = 0;
-
     // negative sloping diagonal wins 
     // on bottom half of the board
     // if slicing along row0,col0 to row5, col5
-
     for (let _row = 0; _row < 3; _row++) {
+        count = 0;
         _rowPush = 0;
         for (let _col = 0; _col < (6 - iterations); _col++) {
             let check = rows[_row + _rowPush][_col];
@@ -121,14 +121,12 @@ function winCheck1() {
         iterations += 1;
     }
 
-    count = 0;
-
     // negative sloping diagonal wins 
     // on top half of the board
     // if slicing along row0,col0 to row5, col5
-
     iterations = 0;
     for (let _col = 1; _col < 4; _col++) {
+        count = 0;
         _colSlide = 0;
         for (let _row = 0; _row < (6 - iterations); _row++) {
             let check = rows[_row][_col + _colSlide];
@@ -146,14 +144,12 @@ function winCheck1() {
         iterations += 1;
     }
 
-    count = 0;
-
     // positive sloping diagonal wins
     // on top half of board
     // if slicing along col0, row6 to col5, row0
-
     iterations = 0;
     for (let _row = 5; _row > 2; _row--) {
+        count = 0;
         _rowPush = 0;
         for (let _col = 0; _col < (6 - iterations); _col++) {
             let check = rows[_row - _rowPush][_col];
@@ -171,14 +167,12 @@ function winCheck1() {
         iterations += 1;
     }
 
-    count = 0;
-
     // positive sloping diagonal wins
     // on bottom half of board
     // if slicing along col0, row6 to col5, row0
-
     iterations = 0;
     for (let _col = 1; _col < 4; _col++) {
+        count = 0;
         _colSlide = 0;
         for (let _row = 5; _row > (iterations - 1); _row--) {
             let check = rows[_row][_col + _colSlide];
@@ -193,19 +187,20 @@ function winCheck1() {
             }
             _colSlide += 1;
         }
-        iterations += 1;
-        
+        iterations += 1;       
     }
 }
 
 
 function winCheck2() {
-    var count = 0;
+    var count = 0;          
     var iterations = 0;
     var _colSlide = 0;
     var _rowPush = 0;
+
     // First we will check for vertical wins
     for (let _col = 0; _col < 7; _col++) {
+        count = 0;
         for (let _row = 5; _row > -1; _row--) {
             let check = columns[_col][_row];
             if (window.getComputedStyle(check).backgroundColor == _green) {
@@ -220,9 +215,9 @@ function winCheck2() {
         }
     }
 
-    count = 0;
     // Next check for horizontal wins
     for (let _row = 0; _row < 6; _row++) {
+        count = 0;
         for (let _col = 0; _col < 7; _col++) {
             let check = rows[_row][_col];
             if (window.getComputedStyle(check).backgroundColor == _green) {
@@ -237,13 +232,11 @@ function winCheck2() {
         }
     }
 
-    count = 0;
-
     // negative sloping diagonal wins 
     // on bottom half of the board
     // if slicing along row0,col0 to row5, col5
-
     for (let _row = 0; _row < 3; _row++) {
+        count = 0;
         _rowPush = 0;
         for (let _col = 0; _col < (6 - iterations); _col++) {
             let check = rows[_row + _rowPush][_col];
@@ -261,18 +254,16 @@ function winCheck2() {
         iterations += 1;
     }
 
-    count = 0;
-
     // negative sloping diagonal wins 
     // on top half of the board
     // if slicing along row0,col0 to row5, col5
-
     iterations = 0;
     for (let _col = 1; _col < 4; _col++) {
+        count = 0;
         _colSlide = 0;
         for (let _row = 0; _row < (6 - iterations); _row++) {
             let check = rows[_row][_col + _colSlide];
-            if (window.getComputedStyle(check).backgroundColor == _green) {
+            if (window.getComputedStyle(check).backgroundColor ==_green) {
                 count += 1;
                 if (count >= 4) {
                     alert("PLAYER 2 WINS!!!");
@@ -286,14 +277,12 @@ function winCheck2() {
         iterations += 1;
     }
 
-    count = 0;
-
     // positive sloping diagonal wins
     // on top half of board
     // if slicing along col0, row6 to col5, row0
-
     iterations = 0;
     for (let _row = 5; _row > 2; _row--) {
+        count = 0;
         _rowPush = 0;
         for (let _col = 0; _col < (6 - iterations); _col++) {
             let check = rows[_row - _rowPush][_col];
@@ -311,14 +300,12 @@ function winCheck2() {
         iterations += 1;
     }
 
-    count = 0;
-
     // positive sloping diagonal wins
     // on bottom half of board
     // if slicing along col0, row6 to col5, row0
-
     iterations = 0;
     for (let _col = 1; _col < 4; _col++) {
+        count = 0;
         _colSlide = 0;
         for (let _row = 5; _row > (iterations - 1); _row--) {
             let check = rows[_row][_col + _colSlide];
@@ -333,7 +320,7 @@ function winCheck2() {
             }
             _colSlide += 1;
         }
-        iterations += 1;
-        
+        iterations += 1;       
     }
 }
+
