@@ -1,7 +1,7 @@
 var	request	= new XMLHttpRequest();
 request.onreadystatechange	=	function(){	
-				if	(this.readyState	===	4){
-				    console.log(this.response);
+				if	(this.readyState === 4 && this.status === 301){
+				    console.log("got this message");
 								//Do	something	with	the	response
 				}	
 };
@@ -12,5 +12,9 @@ function sendPost(name){
     request.send(JSON.stringify(data))
 }
 
-request.open("GET",	"/invite");
-request.send();
+function getMessages(){
+    request.open("GET",	"/invite");
+    request.send();
+}
+
+setInterval(getMessages, 1000)
