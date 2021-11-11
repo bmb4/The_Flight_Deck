@@ -52,10 +52,10 @@ def getHandler(self, request):
         return responses.create200(content, "text/javascript", len(content))
     elif path == "invite":
         username = cookie
-        while True:
-            for game in self.games:
-                if username in game:
-                    return responses.create301("/NewGame")
+        for game in self.games:
+            if username in game:
+                return responses.create301("/NewGame")
+        return responses.create404("Content not found.", "text/plain", 18)
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
         print(accept)
@@ -92,5 +92,4 @@ def getHandler(self, request):
             addedNames = addedNames + '<p><button onclick=\"sendPost(\"' + name + '\")\">' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
-    return responses.create404("Content not found.", "text/plain", 18)
 
