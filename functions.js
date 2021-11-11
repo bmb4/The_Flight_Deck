@@ -6,6 +6,14 @@ request.onreadystatechange	=	function(){
 				}	
 };
 
+function askForFriend(){
+    let friend = prompt("Please a friends name");
+    if (friend == null || friend == "") {
+    } else {
+        sendPost(friend);
+    }
+}
+
 function sendPost(name){
     request.open("POST", "/invite")
     let data = {'name': name}
