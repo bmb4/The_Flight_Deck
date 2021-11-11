@@ -7,7 +7,9 @@ import util
 GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 def createConnection(header):
+    print("Header: ", header)
     key = getKey(header)
+    print("Key: ", key)
     key = key + GUID
     hashed = hashlib.sha1(key.encode()).digest()
     base64_bytes = base64.b64encode(hashed)
@@ -16,17 +18,17 @@ def createConnection(header):
 
 def getKey(header):
     lines = header.split("\r\n")
-    # key = ""
-    # for line in lines:
-    #     if "Sec-WebSocket-Key: " in line:
-    #         key = line.split("Sec-Websocket-Key: ")[1]
-    # return key
-    key = lines[7].split("Sec-Websocket-Key: ")[1]
+    key = ""
+    for line in lines:
+        if "Sec-Websocket-Key: " in line:
+            key = line.split("Sec-Websocket-Key: ")[1]
+    #key = lines[7].split("Sec-Websocket-Key: ")[1]
     return key
 
 def loop(self, cookie):
     print("START OF LOOP:", self.addressToUser, self.client_address[0])
-    user = self.addressToUser[cookie]
+    # user = self.addressToUser[cookie]
+    user = self.addressToUser[self.client_address[0]]
     try:
         while True:
             print("Socket: ",self.request.client_address[0])
