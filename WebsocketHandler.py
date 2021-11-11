@@ -7,7 +7,6 @@ import util
 GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 def createConnection(header):
-    print("Header: ", header)
     key = getKey(header)
     print("Key: ", key)
     key = key + GUID
@@ -36,29 +35,29 @@ def loop(self, user):
             parse = frameParser(received_data).decode()
             clientJson = json.loads(parse)
             print(clientJson)
-            if clientJson["type"] == "move":
-                ### read the json for the move and return the json from the game logic
-
-        
-                ###return message is structured like the example below. Can use any key/value though
-                #returnMessage = {"type": "move", "name": user, "column": int}
-                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
-                frame = frameCreator(returnMessage.encode())
-                #sends back to initial sender
-                self.request.sendall(frame)
-
-                #other player = recipient. should be sent in the clientJson
-                self.userToAddress[recipient].sendall(frame)
-            if clientJson["type"] == "invite":
-                player1 = user
-                player2 = clientJson["name"]
-                self.games = self.games.append((player1,player2))
-                returnMessage = {"type": "invite"}
-                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
-                frame = frameCreator(returnMessage.encode())
-
-                self.userToAddress[player1].sendall(frame)
-                self.userToAddress[player2].sendall(frame)
+            # if clientJson["type"] == "move":
+            #     ### read the json for the move and return the json from the game logic
+            #
+            #
+            #     ###return message is structured like the example below. Can use any key/value though
+            #     #returnMessage = {"type": "move", "name": user, "column": int}
+            #     returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+            #     frame = frameCreator(returnMessage.encode())
+            #     #sends back to initial sender
+            #     self.request.sendall(frame)
+            #
+            #     #other player = recipient. should be sent in the clientJson
+            #     self.userToAddress[recipient].sendall(frame)
+            # if clientJson["type"] == "invite":
+            #     player1 = user
+            #     player2 = clientJson["name"]
+            #     self.games = self.games.append((player1,player2))
+            #     returnMessage = {"type": "invite"}
+            #     returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+            #     frame = frameCreator(returnMessage.encode())
+            #
+            #     self.userToAddress[player1].sendall(frame)
+            #     self.userToAddress[player2].sendall(frame)
     except:
         "Socket crashed"
         pass
