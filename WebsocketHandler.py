@@ -113,4 +113,5 @@ def frameCreator(data):
             output.append(byte)
     for byte in data:
         output.append(byte)
+    print("YAY I GOT HERE OUTPUT TIME WOOOOOO")
     return bytearray(output)
