@@ -6,6 +6,7 @@ new_line = "\r\n".encode()
 
 def httpParser(self, data):
     split = data.split(double_new_line, 1)
+    print("SPLIT: ", split)
     header = data.split(double_new_line)[0].decode()
     if len(split) == 1:
         body = b''
