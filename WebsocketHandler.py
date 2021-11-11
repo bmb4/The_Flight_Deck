@@ -25,7 +25,7 @@ def getKey(header):
     #key = lines[7].split("Sec-Websocket-Key: ")[1]
     return key
 
-def loop(self, cookie):
+def loop(self):
     print("START OF LOOP:", self.addressToUser, self.client_address[0])
     # user = self.addressToUser[cookie]
     user = self.addressToUser[self.client_address[0]]

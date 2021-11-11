@@ -14,6 +14,7 @@ test = db["UserAccounts"]
 
 
 def login(self, form):
+    print(form)
     username = form['username']
     password = form['password']
     if not DbHandler.nameExists(username):
