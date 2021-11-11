@@ -42,7 +42,8 @@ def postHandler(self, request):
         username = cookies["name"]
         friend = nameDict["name"]
         self.games.append((username,friend))
-        return responses.create301("/NewGame")
+        content = "NewGame"
+        return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
