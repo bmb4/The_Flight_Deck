@@ -39,8 +39,10 @@ def postHandler(self, request):
         return responses.create200(content, "text/plain", len(content))
     elif path == "invite":
         nameDict = json.loads(data.decode())
-        print(cookies, nameDict)
-
+        username = cookies["name"]
+        friend = nameDict["name"]
+        self.games.append((username,friend))
+        return responses.create301("/NewGame")
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):

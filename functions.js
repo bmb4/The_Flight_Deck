@@ -1,8 +1,8 @@
 var	request	= new XMLHttpRequest();
 request.onreadystatechange	=	function(){	
 				if	(this.readyState === 4 && this.status === 301){
-				    console.log("got this message");
-								//Do	something	with	the	response
+				    console.log("Got the 301");
+				     window.location.href = "NewGame"
 				}	
 };
 
