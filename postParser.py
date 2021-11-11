@@ -38,7 +38,9 @@ def postHandler(self, request):
         else: content = 'Winner is <b>' + winner + "</b> :) <br> Better luck next time <b>" + loser + "</b> :("
         return responses.create200(content, "text/plain", len(content))
     elif path == "invite":
-        print(data)
+        nameDict = json.loads(data.decode())
+        print(cookies, nameDict)
+
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
