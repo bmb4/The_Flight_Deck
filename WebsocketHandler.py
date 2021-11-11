@@ -60,6 +60,7 @@ def loop(self, user):
                 self.userToAddress[player1].sendall(frame)
                 self.userToAddress[player2].sendall(frame)
     except:
+        "Socket crashed"
         pass
 
 def frameParser(data):
