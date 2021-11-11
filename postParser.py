@@ -6,7 +6,8 @@ import json
 import DbHandler
 
 def postHandler(self, request):
-    print("REQUEST:  ", request)
+    for part in request:
+        print("REQUEST:   ", part)
     path = util.getPath(request[0])
     print(path)
     contentLen = util.getContentLen(request[0])
