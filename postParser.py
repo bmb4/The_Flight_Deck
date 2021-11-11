@@ -10,6 +10,7 @@ def postHandler(self, request):
     print(path)
     contentLen = util.getContentLen(request[0])
     boundary = util.getBoundary(request[0])
+    print(contentLen, boundary)
     data = buffer(self, request[1], contentLen)
     inputs = util.formParser(data,boundary)
     cookies = util.getCookies(request[0])
