@@ -55,7 +55,8 @@ def getHandler(self, request):
         while True:
             for game in self.games:
                 if username in game:
-                    return responses.create301("/NewGame")
+                    content = "NewGame"
+                    return responses.create200(content, "text/html", len(content))
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
         print(accept)
