@@ -1,11 +1,16 @@
-let socket = new WebSocket('ws://' + window.location.host + '/websocket');
+var	request	= new XMLHttpRequest();
+request.onreadystatechange	=	function(){	
+				if	(this.readyState	===	4){
+				    console.log(this.response);
+								//Do	something	with	the	response
+				}	
+};
 
-socket.onmessage = parseMessage;
-
-function parseMessage(message) {
-   const json = JSON.parse(message.data);
-   let type = json['type'];
-   if (type === 'invite'){
-       window.location.href = `NewGame`
-   }
+function sendPost(name){
+    request.open("POST", "/invite")
+    let data = {'name': name}
+    request.send(JSON.stringify(data))
 }
+
+request.open("GET",	"/invite");
+request.send();
