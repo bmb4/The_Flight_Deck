@@ -85,7 +85,6 @@ function dropChecker(id) {
         pcs[id] += 1;
         moves += 1;
         if (moves == 42) {
-//            alert("Draw!!!!!");
             game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
