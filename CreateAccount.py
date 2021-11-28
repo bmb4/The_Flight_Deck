@@ -1,6 +1,7 @@
 from logging import NullHandler
 import os
 import pymongo
+import re
 from flask import Flask, request, render_template, flash
 import User
 import responses
@@ -29,6 +30,8 @@ def createaccount(form):
     passsword2 = form['password_confirm']
     if password != passsword2:
 
+        return responses.create301("/signup")
+    if len(password) < 6 or not re.search("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-+_!@#$%^&*.,?]).+", password):
         return responses.create301("/signup")
     if not DbHandler.nameExists(username):
         newUser = User.User(username, password)
