@@ -14,7 +14,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     userToAddress = {}
     lastKnownAddress = {}
     games = []
-    LastMoves = {}
+    lastMoves = {}
     def handle(self):
                 received_data = self.request.recv(1024)
 

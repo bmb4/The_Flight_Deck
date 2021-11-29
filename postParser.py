@@ -42,7 +42,7 @@ def postHandler(self, request):
         username = cookies["name"]
         friend = nameDict["name"]
         self.games.append((username,friend))
-        self.LastMoves[(username,friend)] = (-1, False)
+        self.lastMoves[(username,friend)] = (-1, False)
         content = "NewGame"
         return responses.create200(content, "text/html", len(content))
     elif path == "moves":
@@ -53,7 +53,7 @@ def postHandler(self, request):
         for g in self.games:
             if username in g:
                 game = g
-        self.LastMoves[game] = (column, True)
+        self.lastMoves[game] = (column, True)
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):
