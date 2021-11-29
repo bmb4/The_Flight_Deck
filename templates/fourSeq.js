@@ -42,6 +42,7 @@ var player2_username = '';
 player1_username = document.getElementById("players").innerText.split(" vs ")[0];
 player2_username = document.getElementById("players").innerText.split(" vs ")[1];
 
+/*
 $(document).ready(function() {
     var player1 = player1_username;
     var player2 = player2_username;
@@ -57,7 +58,7 @@ $(document).ready(function() {
             else { player1_username = player1; player2_username = player2; }
         }
     });
-});
+});*/
 
 const spaces = document.querySelectorAll('.box');
 var gameLive = true;
