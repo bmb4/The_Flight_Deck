@@ -3,18 +3,10 @@ request.onreadystatechange	=	function(){
     if	(this.readyState === 4 && this.status === 200){
         if(this.responseText.includes("New Move: ")){
             /*Find the move and make to do stuff if correct player*/
-            dropChecker(this.responseText.split("New Move: ")[0])
+            dropChecker(this.responseText.split("New Move: ")[0], false)
         }
     }
 };
-
-function askForFriend(){
-    let friend = prompt("Please enter a friends name");
-    if (friend == null || friend == "") {
-    } else {
-        sendPost(friend);
-    }
-}
 
 function sendPost(number){
     request.open("POST", "/moves")
@@ -95,12 +87,13 @@ const col7 = [spaces[6], spaces[13], spaces[20], spaces[27], spaces[34], spaces[
 const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
 
-function dropChecker(id) {
+function dropChecker(id, fromButton) {
     if (pcs[id] >= 6) {
         alert("this column is full!");
     } else {
-
-        sendPost(id);
+        if (fromButton){
+            sendPost(id);
+        }
 
         if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
