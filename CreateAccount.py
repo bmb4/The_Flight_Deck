@@ -1,5 +1,7 @@
 from logging import NullHandler
 import os
+
+import bcrypt
 import pymongo
 import re
 from flask import Flask, request, render_template, flash
@@ -34,7 +36,8 @@ def createaccount(form):
     if len(password) < 6 or not re.search("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-+_!@#$%^&*.,?]).+", password):
         return responses.create301("/signup")
     if not DbHandler.nameExists(username):
-        newUser = User.User(username, password)
+        hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        newUser = User.User(username, hashed_password)
         DbHandler.saveUser(newUser)
         return responses.create301("/landingpage")
     else:
