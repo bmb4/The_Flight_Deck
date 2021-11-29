@@ -54,6 +54,7 @@ def postHandler(self, request):
             if username in g:
                 game = g
         self.lastMoves[game] = (column, True)
+        print("Just Posted: ", self.lastMoves)
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):

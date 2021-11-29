@@ -47,7 +47,8 @@ def getHandler(self, request):
         for g in self.games:
             if cookie in g:
                 game = g
-        content = content.replace("{{player1}}",game[0]).replace("{{player2}}",game[1])
+        if game is not ():
+            content = content.replace("{{player1}}",game[0]).replace("{{player2}}",game[1])
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
@@ -99,6 +100,7 @@ def getHandler(self, request):
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
     elif path == "moves":
+        print("Getting Move: ",self.lastMoves)
         game = ()
         for g in self.games:
             if cookie in g:
