@@ -35,6 +35,86 @@
         #divPfp:hover img {opacity: 0.3;}
         #divPfp:hover #innerDiv, #innerBtn {opacity: 1;}
 
+                /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 30%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0} 
+        to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+        }
+
+        /* The Close Button */
+        .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+        .modal-header {
+        padding: 2px 16px;
+        background-color: #3F5CF3;
+        color: white;
+        }
+
+        .modal-body {padding: 2px 16px;}
+
+        .button {
+            background-color: rgb(0, 215, 0); /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            }
+        .button2{background-color: #2b2929;}
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -65,6 +145,55 @@
         </table>
     </div>
     <input type="button" onclick="location.href='https://four-in-a-sequence.herokuapp.com/tutorial';" value="Tutorial" />  
+    <!-- Trigger/Open The Modal -->
+<button id="myBtn">Change Background Color</button>
+<!-- The Modal -->
+<div id="changeBack" class="modal">
 
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header" id = "mheader">
+        <span class="close">&times;</span>
+        <h2>Change Background Color</h2>
+      </div>
+      <div class="modal-body">
+        <input type="button" class = "button" onclick="changeBackgroundColor('green')" value="Green" />
+        <input type="button" class = "button button2" onclick="changeBackgroundColor('black')" value="Black" />
+      </div>
+    </div>
+  
+  </div>
+   
 </body>
+<script>
+document.body.style.backgroundColor = sessionStorage.getItem("backgroundColor") || "#3F5CF3";
+
+
+    // Get the modal
+var modal = document.getElementById("changeBack");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
 </html>
