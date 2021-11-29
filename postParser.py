@@ -44,6 +44,15 @@ def postHandler(self, request):
         self.games.append((username,friend))
         content = "NewGame"
         return responses.create200(content, "text/html", len(content))
+    elif path == "moves":
+        numberDict = json.loads(data.decode())
+        username = cookies["name"]
+        column = numberDict["number"]
+        game = ()
+        for g in self.games:
+            if username in g:
+                game = g
+        self.LastMoves[game] = (column, True)
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):

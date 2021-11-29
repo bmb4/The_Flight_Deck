@@ -98,7 +98,7 @@ function dropChecker(id) {
         alert("this column is full!");
     } else {
 
-        
+        sendPost(id);
 
         if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;

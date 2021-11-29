@@ -98,4 +98,16 @@ def getHandler(self, request):
             addedNames = addedNames + '<p><button onclick=\"sendPost(\"' + name + '\")\">' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
+    elif path == "moves":
+        game = ()
+        for g in self.games:
+            if cookie in g:
+                game = g
+        while True:
+            previousMove = self.lastMoves[game]
+            if previousMove[1]:
+                self.lastMoves[game] = (previousMove[0], False)
+                content = previousMove[0]
+                return responses.create200(content, "text/html", len(content))
+    return responses.create404("Content not found.", "text/plain", 18)
 
