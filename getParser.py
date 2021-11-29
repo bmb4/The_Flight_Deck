@@ -43,6 +43,7 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "NewGame":
         content = util.getFile("templates/gamePage.html")
+        print("FINDING NEW GAMES", self.games)
         game = ()
         for g in self.games:
             if cookie in g:

@@ -42,6 +42,7 @@ def postHandler(self, request):
         username = cookies["name"]
         friend = nameDict["name"]
         self.games.append((username,friend))
+        print("POST NEW GAME:", self.games)
         self.lastMoves[(username,friend)] = (-1, False)
         content = "NewGame"
         return responses.create200(content, "text/html", len(content))
