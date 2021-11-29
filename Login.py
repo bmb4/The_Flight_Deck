@@ -3,6 +3,7 @@ import os
 import pymongo
 import responses
 import DbHandler
+import bcrypt
 
 
 password = os.environ.get('DB_PASSWORD')
@@ -20,7 +21,7 @@ def login(form):
         return responses.create301("/login")
     else :
         correctUser = DbHandler.getUser(username)
-        if correctUser.password == password:
+        if bcrypt.checkpw(password.encode(), correctUser.password):
             #route to landing or profile page
             return responses.create301("/landingpage")
         else:
