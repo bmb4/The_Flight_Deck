@@ -107,7 +107,8 @@ def getHandler(self, request):
             previousMove = self.lastMoves[game]
             if previousMove[1]:
                 self.lastMoves[game] = (previousMove[0], False)
-                content = previousMove[0]
+                content = "New Move: "
+                content += previousMove[0]
                 return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 

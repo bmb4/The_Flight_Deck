@@ -1,8 +1,9 @@
 var	request	= new XMLHttpRequest();
 request.onreadystatechange	=	function(){
     if	(this.readyState === 4 && this.status === 200){
-        if(this.responseText.includes("New Move:")){
+        if(this.responseText.includes("New Move: ")){
             /*Find the move and make to do stuff if correct player*/
+            dropChecker(this.responseText.split("New Move: ")[0])
         }
     }
 };
