@@ -1,9 +1,49 @@
+var	request	= new XMLHttpRequest();
+request.onreadystatechange	=	function(){
+    if	(this.readyState === 4 && this.status === 200){
+        if(this.responseText.includes("New Move:")){
+            /*Find the move and make to do stuff if correct player*/
+        }
+    }
+};
+
+function askForFriend(){
+    let friend = prompt("Please enter a friends name");
+    if (friend == null || friend == "") {
+    } else {
+        sendPost(friend);
+    }
+}
+
+function sendPost(number){
+    request.open("POST", "/moves")
+    let data = {'column': number}
+    request.send(JSON.stringify(data))
+}
+
+function getMessages(){
+    request.open("GET",	"/moves");
+    request.send();
+}
+
+setInterval(getMessages, 30000)
+
+
+
+
+
+
+
+
 var player1_username = '';
 var player2_username = '';
 
+player1_username = document.getElementById("players").innerText.split(" vs ")[0];
+player2_username = document.getElementById("players").innerText.split(" vs ")[1];
+
 $(document).ready(function() {
-    var player1 = prompt("Please enter first player's username:", '');
-    var player2 = prompt("Please enter second player's your username:", '');
+    var player1 = player1_username;
+    var player2 = player2_username;
     $.ajax({
         type: 'POST',
         url: '/verify_users',
@@ -57,6 +97,9 @@ function dropChecker(id) {
     if (pcs[id] >= 6) {
         alert("this column is full!");
     } else {
+
+        
+
         if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
