@@ -43,7 +43,7 @@ def postHandler(self, request):
         friend = nameDict["name"]
         self.games.append((username,friend))
         print("POST NEW GAME:", self.games)
-        self.lastMoves[(username,friend)] = (-1, False)
+        self.lastMoves[(username,friend)] = (-1, username)
         content = "NewGame"
         return responses.create200(content, "text/html", len(content))
     elif path == "moves":
@@ -54,8 +54,18 @@ def postHandler(self, request):
         for g in self.games:
             if username in g:
                 game = g
-        self.lastMoves[game] = (column, True)
-        print("Just Posted: ", self.lastMoves)
+
+        if game[0] == username:
+            otherPlayer = game[1]
+        else:
+            otherPlayer = game[0]
+
+        prevMove = self.lastMoves[game]
+        if prevMove[1] == username:
+            self.lastMoves[game] = (column, otherPlayer)
+            print("Just Posted: ", self.lastMoves)
+        else:
+            print("NOT YOUR TURN")
     return responses.create404("Content not found.", "text/plain", 18)
 
 def buffer(self, data, contentLen):

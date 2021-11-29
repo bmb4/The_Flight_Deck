@@ -106,12 +106,11 @@ def getHandler(self, request):
         for g in self.games:
             if cookie in g:
                 game = g
-        while True:
-            previousMove = self.lastMoves[game]
-            if previousMove[1]:
-                self.lastMoves[game] = (previousMove[0], False)
-                content = "New Move: "
-                content += previousMove[0]
-                return responses.create200(content, "text/html", len(content))
+        previousMove = self.lastMoves[game]
+
+        if previousMove[1] == cookie :
+            content = "New Move: "
+            content += previousMove[0]
+            return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
