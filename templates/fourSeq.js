@@ -18,7 +18,7 @@ function askForFriend(){
 
 function sendPost(number){
     request.open("POST", "/moves")
-    let data = {'column': number}
+    let data = {'number': number}
     request.send(JSON.stringify(data))
 }
 
