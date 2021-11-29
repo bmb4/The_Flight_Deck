@@ -4,7 +4,9 @@ request.onreadystatechange	=	function(){
         if(this.responseText.includes("New Move: ")){
             /*Find the move and make to do stuff if correct player*/
             alert(this.responseText)
-            dropChecker(parseInt(this.responseText.split("New Move: ")[0]), false)
+            var number = parseInt(this.responseText.split("New Move: ")[0])
+            alert(number)
+            dropChecker(number, false)
         }
     }
 };
