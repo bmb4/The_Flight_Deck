@@ -31,12 +31,18 @@ def postHandler(self, request):
         if not DbHandler.nameExists(users[0]) or not DbHandler.nameExists(users[1]) or users[0] == users[1]: content = 'invalid'
         return responses.create200(content, "text/plain", len(content))
     elif path == 'game_result':
-        inputs = json.loads(data.decode())
-        isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
-        DbHandler.applyGameResults(isDraw, winner, loser)
-        if isDraw: content = "IT'S A DRAW"
-        else: content = 'Winner is <b>' + winner + "</b> :) <br> Better luck next time <b>" + loser + "</b> :("
-        return responses.create200(content, "text/plain", len(content))
+        username = cookies["name"]
+        game = ()
+        for g in self.games:
+            if username in g:
+                game = g
+        if game[0] == username:
+            inputs = json.loads(data.decode())
+            isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
+            DbHandler.applyGameResults(isDraw, winner, loser)
+            if isDraw: content = "IT'S A DRAW"
+            else: content = 'Winner is <b>' + winner + "</b> :) <br> Better luck next time <b>" + loser + "</b> :("
+            return responses.create200(content, "text/plain", len(content))
     elif path == "invite":
         nameDict = json.loads(data.decode())
         username = cookies["name"]
