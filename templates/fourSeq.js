@@ -118,7 +118,7 @@ function dropChecker(id, fromButton) {
         }
         myTurn = false
         }
-        else if(!myTurn){
+        else if(!myTurn && !fromButton){
             if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
