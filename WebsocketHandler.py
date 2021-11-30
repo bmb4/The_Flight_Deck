@@ -8,6 +8,7 @@ GUID = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 
 def createConnection(header):
     key = getKey(header)
+    print("Key: ", key)
     key = key + GUID
     hashed = hashlib.sha1(key.encode()).digest()
     base64_bytes = base64.b64encode(hashed)
@@ -16,17 +17,17 @@ def createConnection(header):
 
 def getKey(header):
     lines = header.split("\r\n")
-    # key = ""
-    # for line in lines:
-    #     if "Sec-WebSocket-Key: " in line:
-    #         key = line.split("Sec-Websocket-Key: ")[1]
-    # return key
-    key = lines[7].split("Sec-Websocket-Key: ")[1]
+    key = ""
+    for line in lines:
+        if "Sec-Websocket-Key: " in line:
+            key = line.split("Sec-Websocket-Key: ")[1]
+    #key = lines[7].split("Sec-Websocket-Key: ")[1]
     return key
 
-def loop(self, cookie):
-    print("START OF LOOP:", self.addressToUser, self.client_address[0])
-    user = self.addressToUser[cookie]
+def loop(self, user):
+    print("START OF LOOP:", user, self.client_address[0])
+    # user = self.addressToUser[cookie]
+    # user = self.addressToUser[self.client_address[0]]
     try:
         while True:
             print("Socket: ",self.request.client_address[0])
@@ -34,30 +35,31 @@ def loop(self, cookie):
             parse = frameParser(received_data).decode()
             clientJson = json.loads(parse)
             print(clientJson)
-            if clientJson["type"] == "move":
-                ### read the json for the move and return the json from the game logic
-
-        
-                ###return message is structured like the example below. Can use any key/value though
-                #returnMessage = {"type": "move", "name": user, "column": int}
-                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
-                frame = frameCreator(returnMessage.encode())
-                #sends back to initial sender
-                self.request.sendall(frame)
-
-                #other player = recipient. should be sent in the clientJson
-                self.userToAddress[recipient].sendall(frame)
-            if clientJson["type"] == "invite":
-                player1 = user
-                player2 = clientJson["name"]
-                self.games = self.games.append((player1,player2))
-                returnMessage = {"type": "invite"}
-                returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
-                frame = frameCreator(returnMessage.encode())
-
-                self.userToAddress[player1].sendall(frame)
-                self.userToAddress[player2].sendall(frame)
+            # if clientJson["type"] == "move":
+            #     ### read the json for the move and return the json from the game logic
+            #
+            #
+            #     ###return message is structured like the example below. Can use any key/value though
+            #     #returnMessage = {"type": "move", "name": user, "column": int}
+            #     returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+            #     frame = frameCreator(returnMessage.encode())
+            #     #sends back to initial sender
+            #     self.request.sendall(frame)
+            #
+            #     #other player = recipient. should be sent in the clientJson
+            #     self.userToAddress[recipient].sendall(frame)
+            # if clientJson["type"] == "invite":
+            #     player1 = user
+            #     player2 = clientJson["name"]
+            #     self.games = self.games.append((player1,player2))
+            #     returnMessage = {"type": "invite"}
+            #     returnMessage = str(returnMessage).replace("'", '"').replace(" ", "")
+            #     frame = frameCreator(returnMessage.encode())
+            #
+            #     self.userToAddress[player1].sendall(frame)
+            #     self.userToAddress[player2].sendall(frame)
     except:
+        "Socket crashed"
         pass
 
 def frameParser(data):
@@ -111,4 +113,5 @@ def frameCreator(data):
             output.append(byte)
     for byte in data:
         output.append(byte)
+    print("YAY I GOT HERE OUTPUT TIME WOOOOOO")
     return bytearray(output)

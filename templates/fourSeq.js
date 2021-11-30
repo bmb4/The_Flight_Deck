@@ -1,9 +1,44 @@
+var	request	= new XMLHttpRequest();
+request.onreadystatechange	=	function(){
+    if	(this.readyState === 4 && this.status === 200){
+        if(this.responseText.includes("New Move: ")){
+            /*Find the move and make to do stuff if correct player*/
+            var number = parseInt(this.responseText.split("New Move: ")[1]);
+            dropChecker(number, false);
+        }
+    }
+};
+
+function sendPost(number){
+    request.open("POST", "/moves");
+    let data = {'number': number};
+    request.send(JSON.stringify(data));
+}
+
+function getMessages(){
+    request.open("GET",	"/moves");
+    request.send();
+}
+
+setInterval(getMessages, 30000);
+
+
+
+
+var myTurn = {{turn}};
+
+
+
 var player1_username = '';
 var player2_username = '';
 
+player1_username = document.getElementById("players").innerText.split(" vs ")[0];
+player2_username = document.getElementById("players").innerText.split(" vs ")[1];
+
+/*
 $(document).ready(function() {
-    var player1 = prompt("Please enter first player's username:", '');
-    var player2 = prompt("Please enter second player's your username:", '');
+    var player1 = player1_username;
+    var player2 = player2_username;
     $.ajax({
         type: 'POST',
         url: '/verify_users',
@@ -16,7 +51,7 @@ $(document).ready(function() {
             else { player1_username = player1; player2_username = player2; }
         }
     });
-});
+});*/
 
 const spaces = document.querySelectorAll('.box');
 var gameLive = true;
@@ -53,11 +88,13 @@ const col7 = [spaces[6], spaces[13], spaces[20], spaces[27], spaces[34], spaces[
 const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
 
-function dropChecker(id) {
+function dropChecker(id, fromButton) {
     if (pcs[id] >= 6) {
         alert("this column is full!");
     } else {
-        if (player == 1) {
+        if (fromButton && myTurn){
+            sendPost(id);
+            if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
         } else {
@@ -76,7 +113,33 @@ function dropChecker(id) {
             } else {
                 winCheck2();
             }
-        }  
+        }
+        myTurn = false
+        }
+        else if(!myTurn && !fromButton){
+            if (player == 1) {
+            columns[id][5 - pcs[id]].style.background = _purple;
+            player = 2;
+        } else {
+            columns[id][5 - pcs[id]].style.background = _green;
+            player = 1;
+        }
+        pcs[id] += 1;
+        moves += 1;
+        if (moves == 42) {
+            alert("Draw!!!!!");
+            game_result(true, player1_username, player2_username);
+        }
+        if (moves > 6) {
+            if (player == 2) {
+                winCheck1();
+            } else {
+                winCheck2();
+            }
+        }
+        myTurn = true
+        }
+
     }
 }
 

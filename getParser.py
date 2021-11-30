@@ -10,8 +10,6 @@ def getHandler(self, request):
     print(path)
     cookie = util.getCookie(request[0])
     print("Cookie: ", cookie)
-    if cookie != "":
-        self.lastKnownAddress[self.addressToUser[cookie]] = self.client_address[0]
     if path == "":
         content = util.getFile("templates/homeScreen.html")
         return responses.create200(content, "text/html", len(content))
@@ -45,17 +43,44 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "NewGame":
         content = util.getFile("templates/gamePage.html")
+        print("FINDING NEW GAMES", self.games)
+        game = ()
+        for g in self.games:
+            if cookie in g:
+                game = g
+        if game is not ():
+            content = content.replace("{{player1}}",game[0]).replace("{{player2}}",game[1])
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
+        game = ()
+        for g in self.games:
+            if cookie in g:
+                game = g
+        if cookie == game[0]:
+            content = content.replace("{{turn}}", "true")
+        else:
+            content = content.replace("{{turn}}", "false")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")
         return responses.create200(content, "text/javascript", len(content))
+    elif path == "invite":
+        username = cookie
+        while True:
+            for game in self.games:
+                if username in game:
+                    content = "NewGame"
+                    return responses.create200(content, "text/html", len(content))
     elif path == "websocket":
         accept = WebsocketHandler.createConnection(request[0])
         print(accept)
         self.request.sendall(responses.create101(accept))
+
+        # also add username and address to dicts
+        self.addressToUser[self.client_address[0]] = cookie
+        self.userToAddress[cookie] = self.client_address[0]
+        # WebsocketHandler.loop(self)
         WebsocketHandler.loop(self, cookie)
     elif path == "functions.js":
         file = open("functions.js")
@@ -80,8 +105,20 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames = addedNames + '<p><button onclick=\'socket.send(JSON.stringify({\"type\": \"invite\", \"name\" : \"' + name + '\"}))\'>' + name + '</button></p>'
+            addedNames = addedNames + '<p><button onclick=\"sendPost(\"' + name + '\")\">' + name + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
+    elif path == "moves":
+        print("Getting Move: ",self.lastMoves)
+        game = ()
+        for g in self.games:
+            if cookie in g:
+                game = g
+        previousMove = self.lastMoves[game]
+
+        if previousMove[1] == cookie :
+            content = "New Move: "
+            content += previousMove[0]
+            return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 
