@@ -53,6 +53,14 @@ def getHandler(self, request):
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
+        game = ()
+        for g in self.games:
+            if cookie in g:
+                game = g
+        if cookie == game[0]:
+            content = content.replace("{{turn}}", "true")
+        else:
+            content = content.replace("{{turn}}", "false")
         return responses.create200(content, "text/javascript", len(content))
     elif path == "profileScript.js":
         content = util.getFile("profileScript.js")

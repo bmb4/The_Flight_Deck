@@ -27,7 +27,7 @@ setInterval(getMessages, 30000);
 
 
 
-
+var myTurn = {{turn}};
 
 
 
@@ -94,11 +94,9 @@ function dropChecker(id, fromButton) {
     if (pcs[id] >= 6) {
         alert("this column is full!");
     } else {
-        if (fromButton){
+        if (fromButton && myTurn){
             sendPost(id);
-        }
-
-        if (player == 1) {
+            if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
         } else {
@@ -117,7 +115,33 @@ function dropChecker(id, fromButton) {
             } else {
                 winCheck2();
             }
-        }  
+        }
+        myTurn = false
+        }
+        else if(!myTurn){
+            if (player == 1) {
+            columns[id][5 - pcs[id]].style.background = _purple;
+            player = 2;
+        } else {
+            columns[id][5 - pcs[id]].style.background = _green;
+            player = 1;
+        }
+        pcs[id] += 1;
+        moves += 1;
+        if (moves == 42) {
+            alert("Draw!!!!!");
+            game_result(true, player1_username, player2_username);
+        }
+        if (moves > 6) {
+            if (player == 2) {
+                winCheck1();
+            } else {
+                winCheck2();
+            }
+        }
+        myTurn = true
+        }
+
     }
 }
 
