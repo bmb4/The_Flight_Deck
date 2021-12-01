@@ -33,7 +33,7 @@ def createaccount(form):
     if password != passsword2:
 
         return responses.create301("/signup")
-    if len(password) < 6 or not re.search("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-+_!@#$%^&*.,?]).+", password):
+    if len(password) < 6 or not re.search("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).+", password):
         return responses.create301("/signup")
     if not DbHandler.nameExists(username):
         hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
