@@ -13,7 +13,8 @@ db = client["DB"]
 test = db["UserAccounts"]
 
 
-def login(form):
+def login(self, form):
+    print(form)
     username = form['username']
     password = form['password']
     if not DbHandler.nameExists(username):
@@ -22,7 +23,13 @@ def login(form):
         correctUser = DbHandler.getUser(username)
         if correctUser.password == password:
             #route to landing or profile page
-            return responses.create301("/landingpage")
+            #also add username and address to dicts
+            # self.addressToUser[self.client_address[0]] = username
+            # self.userToAddress[username] = self.client_address[0]
+            #self.lastKnownAddress[username] = self.client_address[0]
+
+            # return responses.create301("/landingpage")
+            return responses.create301WithCookie("/landingpage", username)
         else:
             return responses.create301("/login")
 

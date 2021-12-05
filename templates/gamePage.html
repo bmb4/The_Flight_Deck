@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!-- Tasks #6, #39-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/Website.css">
+    <title>Game Page</title>
+</head>
+<body>
+    <h1 id="players">{{player1}} vs {{player2}}</h1>
+    <h1>Four in a Sequence</h1>
+    <button class="gamebutton" id = "0" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "1" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "2" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "3" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "4" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "5" onclick="dropChecker(id, true)">Drop</button>
+    <button class="gamebutton" id = "6" onclick="dropChecker(id, true)">Drop</button>
+
+
+    <div class = "game-board">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        
+    </div>
+    <hr>
+    <button class="mx-auto d-block" onclick="window.location.reload()">New Game?</button>
+
+    <div class="modal fade" id="endgameModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title w-100 text-center text-success"></h2>
+                </div>
+                <div class="modal-body w-100 text-center">
+                    <button onclick=window.location.reload()>Rematch</button>
+                    <button onclick="location.href='https://four-in-a-sequence.herokuapp.com/landingpage';">Return to Landing Page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="fourSeq.js"></script>
+
+</body>
+<script>
+window.onload= function(){ document.body.style.backgroundColor = sessionStorage.getItem("backgroundColor") || "#3F5CF3";};
+   </script>
+</html>
