@@ -20,7 +20,7 @@ function getMessages(){
     request.send();
 }
 
-setInterval(getMessages, 30000);
+setInterval(getMessages, 5000);
 
 
 
