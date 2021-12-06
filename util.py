@@ -63,6 +63,7 @@ def getCookies(header):
     cookies = {}
     for line in lines:
         if "Cookie: " in line:
+            print("cookiesss: ", line)
             for cookie in line.split("Cookie: ")[1].split('; '):
                 key, val = cookie.split('=')
                 cookies[key] = val
