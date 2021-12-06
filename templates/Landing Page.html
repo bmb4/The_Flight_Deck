@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="static/Website.css">
     <meta charset="utf-8" />
     <title>Landing Page</title>
-
+    <script src="functions.js"></script>
 </head>
 <body style="padding-top: 0px">
 <a href="https://four-in-a-sequence.herokuapp.com/login" style="text-decoration: none; float:left; padding-top: 0px; color: #FFFFFF; font-size: 25px; padding-left: 10px">Logout</a>
@@ -13,12 +13,18 @@
 <p>
 </p>
 <p>
-<a href="https://four-in-a-sequence.herokuapp.com/NewGame" style="text-decoration: none; padding-top: 0px; color: #FFFFFF; font-size: 25px">New Game</a>
+
+    <input type = "button" onclick = "askForFriend()" value = "New Game"/>
+
 </p>
 <p style="position: fixed; bottom: 0; width:100%">
 <a href="https://four-in-a-sequence.herokuapp.com/Profile" style="text-decoration: none; float:left; padding-top: 0px; color: #FFFFFF; font-size: 25px; padding-left: 10px">Profile</a>
 <a href="https://four-in-a-sequence.herokuapp.com/leaderboard" style="text-decoration: none; float:right; padding-top: 0px; color: #FFFFFF; font-size: 25px; padding-right: 10px">Leaderboard</a>
-<input type="button" onclick="location.href='https://four-in-a-sequence.herokuapp.com/tutorial';" value="Tutorial" />      
+<input type="button" onclick="location.href='https://four-in-a-sequence.herokuapp.com/tutorial';" value="Tutorial" />  
+<input type="button" onclick="location.href='https://four-in-a-sequence.herokuapp.com/SupportPage';" value="Support Page"/>    
 </p>
 </body>
+<script>
+window.onload= function(){ document.body.style.backgroundColor = sessionStorage.getItem("backgroundColor") || "#3F5CF3";};
+   </script>
 </html>

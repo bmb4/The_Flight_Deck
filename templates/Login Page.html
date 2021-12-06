@@ -10,13 +10,21 @@
 <body>
     <!-- need some basic script on back end to redirect to dummy pages -->
     <h1 style="text-align:center ; color:white">User Login</h1>
-    <form action = "/login" method="post">
-        <label for="username" style="text-align:center; color:white">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password" style="text-align:center; color:white">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <input type="submit" value="Game Time"><br />
-        <a href="https://four-in-a-sequence.herokuapp.com/signup">Create new account</a><br />
+    <form action="/login" id="sign-up-form" method="post" enctype="multipart/form-data">
+                <div class="username-field">
+                    <label for="text-form-username">Username: </label>
+                    <input id="text-form-username" type="text" name="username">
+                </div>
+                <div class="password-field">
+                    <label for="form-password">Password: </label>
+                    <input id="form-password" type="password" name="password">
+                </div>
+                <div class="submit-button">
+                    <input type="submit" value="Submit">
+                </div>
     </form>
 </body>
+<script>
+    document.body.style.backgroundColor = sessionStorage.getItem("backgroundColor") || "#3F5CF3";
+   </script>
 </html>

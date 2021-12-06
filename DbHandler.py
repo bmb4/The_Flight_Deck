@@ -49,6 +49,16 @@ def getLeaders():
     # userWins = [(user["username"],user["stats"]["Wins"]) for user in userlist].sort(key = lambda x: x[1])
     return userWins
 
+def applyGameResults(isDraw, winner, loser):
+    winner_info = getUser(winner).stats
+    loser_info = getUser(loser).stats
+    if isDraw:
+        users.update({'username': winner}, {"$set": { 'stats.Draws': int(winner_info['Draws']) + 1, "stats.Games Played": int(winner_info['Games Played']) + 1 }})
+        users.update({'username': loser}, {"$set": { 'stats.Draws': int(loser_info['Draws']) + 1, "stats.Games Played": int(loser_info['Games Played']) + 1 }})
+    else:
+        users.update({'username': winner}, {"$set": { 'stats.Wins': int(winner_info['Wins']) + 1, "stats.Games Played": int(winner_info['Games Played']) + 1 }})
+        users.update({'username': loser}, {"$set": { 'stats.Losses': int(loser_info['Losses']) + 1, "stats.Games Played": int(loser_info['Games Played']) + 1 }})
+
 if __name__ == '__main__':
     getLeaders()
 # def allUsers():
