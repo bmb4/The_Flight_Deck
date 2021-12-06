@@ -96,3 +96,6 @@ def findFilename(bytestring):
     filename = string[index_of_quote+1:len(string)-1]
     print(filename)
     return filename
+
+def escapeHTML(string):
+    return string.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
