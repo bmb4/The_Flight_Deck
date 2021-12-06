@@ -64,6 +64,7 @@ function changePfp() {
         console.log(files);
         user['profile_pic'] = "../images/" + files[0]["name"];
         $('#imgPfp').attr("src", user['profile_pic']);
+        $("#formPfp").submit()
     }, false)
 }
 
