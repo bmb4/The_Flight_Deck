@@ -25,7 +25,7 @@ def postHandler(self, request):
             content = DbHandler.getUser(username).asDict()
             content['stats'] = json.dumps(content['stats'])
         else: content = ''
-        print(content)
+        print("content start:", content, "content end")
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
