@@ -37,7 +37,9 @@ function updateStats(data) {
         user['stats']['wins'] = stats['Wins'];
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
-        user["profile_pic"] = userInfo['profile_pic']
+        if (userInfo['profile_pic'] != '') {
+            user["profile_pic"] = "../images/" + userInfo['profile_pic'];
+        }
     }
     else { alert('User not found'); }
     console.log(user);
@@ -51,7 +53,7 @@ function displayInfo() {
         $(this).append(user['stats'][category]);
         console.log(user['stats']);
     });
-    $('#imgPfp').attr("src", "../images/" + user['profile_pic']);
+    $('#imgPfp').attr("src", user['profile_pic']);
 }
 
 function changePfp() {
@@ -62,6 +64,7 @@ function changePfp() {
         console.log(files);
         user['profile_pic'] = "../images/" + files[0]["name"];
         $('#imgPfp').attr("src", user['profile_pic']);
+        $("#formPfp").submit()
     }, false)
 }
 

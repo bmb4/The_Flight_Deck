@@ -13,7 +13,7 @@ def postHandler(self, request):
     boundary = util.getBoundary(request[0])
     print(contentLen, boundary)
     data = buffer(self, request[1], contentLen)
-    inputs = util.formParser(data,boundary)
+    inputs = util.formParser(data,boundary) if path != 'file-upload' else util.parse_multipart_form_bytes(data, boundary)
     cookies = util.getCookies(request[0])
     if path == "signup":
         return CreateAccount.createaccount(inputs)
@@ -24,22 +24,23 @@ def postHandler(self, request):
         if DbHandler.nameExists(username):
             content = DbHandler.getUser(username).asDict()
             content['stats'] = json.dumps(content['stats'])
+            content['password'] = 'do not access'
         else: content = ''
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
-        image_bytes = util.parse_multipart_form_bytes(request[1], boundary)['upload']
+        image_bytes = inputs['upload']
         print(image_bytes)
         filename = 'image_' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
         util.writeBytes('images/' + filename, image_bytes)
 
         username = cookies["name"]
         user = DbHandler.getUser(username)
-        user["profile_pic"] = filename
+        user.changeProfilePic(filename)
         DbHandler.updateUser(user)
 
         content = 'success'
-        return responses.create200(content, "text/plain", len(content))
+        return responses.create301('/Profile')
     elif path == 'verify_users':
         users, content = json.loads(data.decode()), 'valid'
         if not DbHandler.nameExists(users[0]) or not DbHandler.nameExists(users[1]) or users[0] == users[1]: content = 'invalid'

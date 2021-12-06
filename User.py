@@ -10,6 +10,9 @@ class User:
     def updateStats(self, stat, newNum):
         self.stats[stat] = newNum
 
+    def changeProfilePic(self, filename):
+        self.profile_pic = filename
+
     def asDict(self):
         newDict = {"username": self.username, "password": self.password, "stats": self.stats, "profile_pic": self.profile_pic}
         return newDict
