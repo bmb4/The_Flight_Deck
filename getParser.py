@@ -87,11 +87,6 @@ def getHandler(self, request):
         content = file.read()
         file.close()
         return responses.create200(content, "text/javascript", len(content))
-    # elif path == "get_stats":
-    #     # content = DbHandler.allUsers()
-    #     username = main.addressToUsername[self.client_address[0]]
-    #     content = json.dumps(DbHandler.getUser(username).asDict())
-    #     return responses.create200(content, "application/json", len(content))
     elif path == 'images':
         image_path = request[0].split("\r\n")[0].split(' ')[1].split('/')[2]
         print(path + '/' + image_path)
