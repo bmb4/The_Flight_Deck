@@ -30,7 +30,6 @@ def login(self, form):
             #self.lastKnownAddress[username] = self.client_address[0]
 
             # return responses.create301("/landingpage")
-            print(username)
             return responses.create301WithCookie("/landingpage", username)
         else:
             return responses.create301("/login")
