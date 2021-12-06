@@ -13,7 +13,7 @@ def postHandler(self, request):
     boundary = util.getBoundary(request[0])
     print(contentLen, boundary)
     data = buffer(self, request[1], contentLen)
-    inputs = util.formParser(data,boundary) if path != 'file-upload' else util.parse_multipart_form_bytes(request[1], boundary)
+    inputs = util.formParser(data,boundary) if path != 'file-upload' else util.parse_multipart_form_bytes(data, boundary)
     cookies = util.getCookies(request[0])
     if path == "signup":
         return CreateAccount.createaccount(inputs)
