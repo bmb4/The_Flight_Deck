@@ -20,11 +20,12 @@ def postHandler(self, request):
     elif path == "login":
         return Login.login(self, inputs)
     elif path == "get_profile":
-        username = cookies["names"]
+        username = cookies["name"]
         if DbHandler.nameExists(username):
             content = DbHandler.getUser(username).asDict()
             content['stats'] = json.dumps(content['stats'])
         else: content = ''
+        print(content)
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
@@ -33,7 +34,7 @@ def postHandler(self, request):
         filename = 'image_' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
         util.writeBytes('images/' + filename, image_bytes)
 
-        username = cookies["names"]
+        username = cookies["name"]
         user = DbHandler.getUser(username)
         user["profile_pic"] = filename
         DbHandler.updateUser(user)
