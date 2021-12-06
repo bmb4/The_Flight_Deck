@@ -29,7 +29,8 @@ def postHandler(self, request):
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
         image_bytes = util.parse_multipart_form_bytes(request[1], boundary)['upload']
-        filename = 'image' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
+        print(image_bytes)
+        filename = 'image_' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
         util.writeBytes('images/' + filename, image_bytes)
 
         username = cookies["names"]

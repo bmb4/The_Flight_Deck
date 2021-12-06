@@ -16,11 +16,9 @@ const _blue = "#3F5CF3";
 // BACKUP 2
 // GRAB FROM DB VIA PROMPT OF INPUT USERNAME
 $(document).ready(function () {
-    var username = prompt("Please enter your username:", '');
     $.ajax({
         type: 'POST',
         url: '/get_profile',
-        data: { username: username },
         success: function (data) {    // data as User class asDict() formatting
             updateStats(data);
         }
@@ -32,9 +30,6 @@ function updateStats(data) {
     // INPUT IN JSON FORMATTING, UPDATE user OBJECT AND LOAD STATS
     userInfo = JSON.parse(data);
     if (userInfo != '') {
-//        input = prompt("[1]Cats or [2]ducks?", 'type number');
-//        if (input == '1') { user["profile_pic"] = "../images/cat.jpg"; }
-//        else if (input == '2') { user["profile_pic"] = "../images/duck.png"; }
 
         stats = JSON.parse(userInfo['stats']);
         user['username'] = userInfo['username'];
@@ -56,7 +51,7 @@ function displayInfo() {
         $(this).append(user['stats'][category]);
         console.log(user['stats']);
     });
-    $('#imgPfp').attr("src", user['profile_pic']);
+    $('#imgPfp').attr("src", "../images/" + user['profile_pic']);
 }
 
 function changePfp() {
