@@ -36,7 +36,7 @@ def postHandler(self, request):
 
         username = cookies["name"]
         user = DbHandler.getUser(username)
-        user["profile_pic"] = filename
+        user.changeProfilePic(filename)
         DbHandler.updateUser(user)
 
         content = 'success'
