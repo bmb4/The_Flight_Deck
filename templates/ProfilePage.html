@@ -125,9 +125,9 @@
             <div id="divPfp" class="profile">
                 <img id="imgPfp" style="border-radius:50%;height:150px;width:150px;object-fit:cover;" src=""/>    <!--temp image-->
                 <div id="innerDiv">
-                    <button id="innerBtn" type="submit" onclick="changePfp()">Change profile picture</button>
                     <form action="/file-upload" method="post" enctype="multipart/form-data">
-                        <input id="innerFile" type="file" accept="image/*" style="display:none;" name="upload"/>
+                        <input id="innerBtn" type="submit" onclick="changePfp()" value="Change profile picture">
+                        <input id="innerFile" type="file" accept="image/*" style="display:none;" name="upload" hidden/>
                     </form>
                 </div>
             </div>
