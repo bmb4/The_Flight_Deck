@@ -28,12 +28,12 @@ def getHandler(self, request):
     elif path == "leaderboard":
         leaders = DbHandler.getLeaders()
         content = util.getFile("templates/leaderboard.html")
-        content = content.replace('{{ Wins 1 }}', str(leaders[0][1]))
-        content = content.replace('{{ Wins 2 }}', str(leaders[1][1]))
-        content = content.replace('{{ Wins 3 }}', str(leaders[2][1]))
-        content = content.replace('{{ Username 1 }}', str(leaders[0][0]))
-        content = content.replace('{{ Username 2 }}', str(leaders[1][0]))
-        content = content.replace('{{ Username 3 }}', str(leaders[2][0]))
+        content = content.replace('{{ Wins 1 }}', util.escapeHTML(str(leaders[0][1])))
+        content = content.replace('{{ Wins 2 }}', util.escapeHTML(str(leaders[1][1])))
+        content = content.replace('{{ Wins 3 }}', util.escapeHTML(str(leaders[2][1])))
+        content = content.replace('{{ Username 1 }}', util.escapeHTML(str(leaders[0][0])))
+        content = content.replace('{{ Username 2 }}', util.escapeHTML(str(leaders[1][0])))
+        content = content.replace('{{ Username 3 }}', util.escapeHTML(str(leaders[2][0])))
         return responses.create200(content, "text/html", str(len(content)))
     elif path == "static":
         content = util.getFile("templates/static/Website.CSS")
@@ -49,7 +49,7 @@ def getHandler(self, request):
             if cookie in g:
                 game = g
         if game is not ():
-            content = content.replace("{{player1}}",game[0]).replace("{{player2}}",game[1])
+            content = content.replace("{{player1}}",util.escapeHTML(game[0])).replace("{{player2}}",util.escapeHTML(game[1]))
         return responses.create200(content, "text/html", len(content))
     elif path == "fourSeq.js":
         content = util.getFile("templates/fourSeq.js")
@@ -87,9 +87,6 @@ def getHandler(self, request):
         content = file.read()
         file.close()
         return responses.create200(content, "text/javascript", len(content))
-    # elif path == "inSession.php":
-    #     content = util.getFile("inSession.php")
-    #     return responses.create200(content, "text/html", len(content))
     # elif path == "get_stats":
     #     # content = DbHandler.allUsers()
     #     username = main.addressToUsername[self.client_address[0]]
@@ -105,7 +102,7 @@ def getHandler(self, request):
         content = util.getFile("templates/InvitePage.html")
         addedNames = ""
         for name in self.userToAddress:
-            addedNames = addedNames + '<p><button onclick=\"sendPost(\"' + name + '\")\">' + name + '</button></p>'
+            addedNames = addedNames + '<p><button onclick=\"sendPost(\"' + util.escapeHTML(name) + '\")\">' + util.escapeHTML(name) + '</button></p>'
         content = content.replace("{{names}}", addedNames)
         return responses.create200(content, "text/html", len(content))
     elif path == "moves":
@@ -118,7 +115,7 @@ def getHandler(self, request):
 
         if previousMove[1] == cookie :
             content = "New Move: "
-            content += previousMove[0]
+            content += util.escapeHTML(previousMove[0])
             return responses.create200(content, "text/html", len(content))
     return responses.create404("Content not found.", "text/plain", 18)
 

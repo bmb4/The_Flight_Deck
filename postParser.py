@@ -41,7 +41,7 @@ def postHandler(self, request):
             isDraw, winner, loser = inputs['isDraw'], inputs['winner'], inputs['loser']
             DbHandler.applyGameResults(isDraw, winner, loser)
             if isDraw: content = "IT'S A DRAW"
-            else: content = 'Winner is <b>' + winner + "</b> :) <br> Better luck next time <b>" + loser + "</b> :("
+            else: content = 'Winner is <b>' + util.escapeHTML(winner) + "</b> :) <br> Better luck next time <b>" + util.escapeHTML(loser) + "</b> :("
             return responses.create200(content, "text/plain", len(content))
     elif path == "invite":
         nameDict = json.loads(data.decode())
