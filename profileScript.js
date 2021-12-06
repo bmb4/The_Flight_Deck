@@ -38,7 +38,7 @@ function updateStats(data) {
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
         if (userInfo['profile_pic'] != '') {
-            user["profile_pic"] = userInfo['profile_pic']
+            user["profile_pic"] = "../images/" + userInfo['profile_pic'];
         }
     }
     else { alert('User not found'); }
@@ -53,7 +53,7 @@ function displayInfo() {
         $(this).append(user['stats'][category]);
         console.log(user['stats']);
     });
-    $('#imgPfp').attr("src", "../images/" + user['profile_pic']);
+    $('#imgPfp').attr("src", user['profile_pic']);
 }
 
 function changePfp() {

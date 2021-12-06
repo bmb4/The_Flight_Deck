@@ -24,8 +24,8 @@ def postHandler(self, request):
         if DbHandler.nameExists(username):
             content = DbHandler.getUser(username).asDict()
             content['stats'] = json.dumps(content['stats'])
+            content['password'] = 'do not access'
         else: content = ''
-        print("content start:", content, "content end")
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
