@@ -39,7 +39,7 @@ def createaccount(form):
         hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         newUser = User.User(username, hashed_password)
         DbHandler.saveUser(newUser)
-        return responses.create301("/landingpage")
+        return responses.create301WithCookie("/landingpage", username)
     else:
         return responses.create301("/signup")
 

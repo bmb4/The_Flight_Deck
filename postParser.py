@@ -23,6 +23,7 @@ def postHandler(self, request):
         username = cookies["name"]
         if DbHandler.nameExists(username):
             content = DbHandler.getUser(username).asDict()
+            content['username'] = util.escapeHTML(content['username'])
             content['stats'] = json.dumps(content['stats'])
             content['password'] = 'do not access'
         else: content = ''
@@ -30,8 +31,7 @@ def postHandler(self, request):
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
         image_bytes = inputs['upload']
-        print(image_bytes)
-        filename = 'image_' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
+        filename = 'image_' + str(len([name for name in os.listdir('./images')]) + 1) + '.jpg'
         util.writeBytes('images/' + filename, image_bytes)
 
         username = cookies["name"]
