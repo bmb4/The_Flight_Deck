@@ -4,6 +4,7 @@ import CreateAccount
 import Login
 import json
 import DbHandler
+import os
 
 def postHandler(self, request):
     path = util.getPath(request[0])
@@ -18,13 +19,25 @@ def postHandler(self, request):
         return CreateAccount.createaccount(inputs)
     elif path == "login":
         return Login.login(self, inputs)
-    elif path == "simple_get_profile":
-        input_name = data.decode().split('=')[1]
-        if DbHandler.nameExists(input_name):
-            content = DbHandler.getUser(input_name).asDict()
+    elif path == "get_profile":
+        username = cookies["names"]
+        if DbHandler.nameExists(username):
+            content = DbHandler.getUser(username).asDict()
             content['stats'] = json.dumps(content['stats'])
         else: content = ''
         content = json.dumps(content)
+        return responses.create200(content, "text/plain", len(content))
+    elif path == 'file-upload':
+        image_bytes = util.parse_multipart_form_bytes(request[1], boundary)['upload']
+        filename = 'image' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
+        util.writeBytes('images/' + filename, image_bytes)
+
+        username = cookies["names"]
+        user = DbHandler.getUser(username)
+        user["profile_pic"] = filename
+        DbHandler.updateUser(user)
+
+        content = 'success'
         return responses.create200(content, "text/plain", len(content))
     elif path == 'verify_users':
         users, content = json.loads(data.decode()), 'valid'

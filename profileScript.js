@@ -7,7 +7,7 @@ var user = {
         'losses': 0,
         'draws': 0
     },
-    "profilePic": "../images/default.jpeg"
+    "profile_pic": "../images/default.jpeg"
 }
 const _green = "rgb(0, 215, 0)";
 const _black = "#2b2929";
@@ -19,7 +19,7 @@ $(document).ready(function () {
     var username = prompt("Please enter your username:", '');
     $.ajax({
         type: 'POST',
-        url: '/simple_get_profile',
+        url: '/get_profile',
         data: { username: username },
         success: function (data) {    // data as User class asDict() formatting
             updateStats(data);
@@ -32,9 +32,9 @@ function updateStats(data) {
     // INPUT IN JSON FORMATTING, UPDATE user OBJECT AND LOAD STATS
     userInfo = JSON.parse(data);
     if (userInfo != '') {
-        input = prompt("[1]Cats or [2]ducks?", 'type number');
-        if (input == '1') { user["profilePic"] = "../images/cat.jpg"; }
-        else if (input == '2') { user["profilePic"] = "../images/duck.png"; }
+//        input = prompt("[1]Cats or [2]ducks?", 'type number');
+//        if (input == '1') { user["profile_pic"] = "../images/cat.jpg"; }
+//        else if (input == '2') { user["profile_pic"] = "../images/duck.png"; }
 
         stats = JSON.parse(userInfo['stats']);
         user['username'] = userInfo['username'];
@@ -42,8 +42,9 @@ function updateStats(data) {
         user['stats']['wins'] = stats['Wins'];
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
+        user["profile_pic"] = userInfo['profile_pic']
     }
-    else { alert('User not found, using default Guest template'); }
+    else { alert('User not found'); }
     console.log(user);
     displayInfo();
 }
@@ -55,7 +56,7 @@ function displayInfo() {
         $(this).append(user['stats'][category]);
         console.log(user['stats']);
     });
-    $('#imgPfp').attr("src", user['profilePic']);
+    $('#imgPfp').attr("src", user['profile_pic']);
 }
 
 function changePfp() {
@@ -64,10 +65,9 @@ function changePfp() {
     inputFile.addEventListener("change", function () {
         var files = this.files;
         console.log(files);
-        user['profilePic'] = "../images/" + files[0]["name"];
-        $('#imgPfp').attr("src", user['profilePic']);
-    },
-        false)
+        user['profile_pic'] = "../images/" + files[0]["name"];
+        $('#imgPfp').attr("src", user['profile_pic']);
+    }, false)
 }
 
 // Get the modal

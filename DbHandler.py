@@ -24,15 +24,18 @@ def getUser(name):
     username = user["username"]
     password = user["password"]
     stats = user["stats"]
+    profile_pic = user["profile_pic"]
 
     newUser = u.User(username, password)
     newUser.stats = stats
+    newUser.profile_pic = profile_pic
     return newUser
 
 def updateUser(user):
     name = user.username
     users.delete_one({"username": name})
     saveUser(user)
+
 
 def getLeaders():
     userlist = users.find({})
