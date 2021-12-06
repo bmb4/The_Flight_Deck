@@ -40,7 +40,7 @@ def postHandler(self, request):
         DbHandler.updateUser(user)
 
         content = 'success'
-        return responses.create200(content, "text/plain", len(content))
+        return responses.create301('/Profile')
     elif path == 'verify_users':
         users, content = json.loads(data.decode()), 'valid'
         if not DbHandler.nameExists(users[0]) or not DbHandler.nameExists(users[1]) or users[0] == users[1]: content = 'invalid'
