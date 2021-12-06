@@ -13,7 +13,7 @@ def postHandler(self, request):
     boundary = util.getBoundary(request[0])
     print(contentLen, boundary)
     data = buffer(self, request[1], contentLen)
-    inputs = util.formParser(data,boundary)
+    inputs = util.formParser(data,boundary) if path != 'file-upload' else util.parse_multipart_form_bytes(request[1], boundary)
     cookies = util.getCookies(request[0])
     if path == "signup":
         return CreateAccount.createaccount(inputs)
@@ -29,7 +29,7 @@ def postHandler(self, request):
         content = json.dumps(content)
         return responses.create200(content, "text/plain", len(content))
     elif path == 'file-upload':
-        image_bytes = util.parse_multipart_form_bytes(request[1], boundary)['upload']
+        image_bytes = inputs['upload']
         print(image_bytes)
         filename = 'image_' + str(len([name for name in os.listdir('images') if os.path.isfile(name)]) + 1) + '.jpg'
         util.writeBytes('images/' + filename, image_bytes)
