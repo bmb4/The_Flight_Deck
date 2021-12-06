@@ -21,8 +21,10 @@ def postHandler(self, request):
         return Login.login(self, inputs)
     elif path == "get_profile":
         username = cookies["name"]
+        print(username)
         if DbHandler.nameExists(username):
             content = DbHandler.getUser(username).asDict()
+            content['username'] = util.escapeHTML(content['username'])
             content['stats'] = json.dumps(content['stats'])
             content['password'] = 'do not access'
         else: content = ''
