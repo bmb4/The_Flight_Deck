@@ -37,7 +37,9 @@ function updateStats(data) {
         user['stats']['wins'] = stats['Wins'];
         user['stats']['losses'] = stats['Losses'];
         user['stats']['draws'] = stats['Draws'];
-        user["profile_pic"] = userInfo['profile_pic']
+        if (userInfo['profile_pic'] != '') {
+            user["profile_pic"] = userInfo['profile_pic']
+        }
     }
     else { alert('User not found'); }
     console.log(user);
