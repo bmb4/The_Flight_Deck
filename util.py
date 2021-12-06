@@ -46,6 +46,10 @@ def getFileBytes(fileName):
     file.close()
     return content
 
+def writeBytes(filename, data):
+    with open(filename, "wb") as file: file.write(data)
+    file.close()
+
 def getBoundary(header):
     lines = header.split("\r\n")
     boundary = ""
@@ -107,6 +111,22 @@ def findFilename(bytestring):
     filename = string[index_of_quote+1:len(string)-1]
     print(filename)
     return filename
+
+def parse_multipart_form_bytes(body, boundary):
+    content = {}
+    boundary = ('--' + boundary).encode()
+    body_list = list(filter(lambda x: x != b'\r\n' and x != b'' and x != b'--', body.strip().split(boundary)))
+    for y in body_list:
+        header, body = y.strip().split(b"\r\n\r\n", 1)
+        header = header.decode().replace("\r\n", "; ").replace(": ", "=")
+        temp = {}
+        for x in header.split('; '):
+            key, val = x.split('=', 1)
+            temp[key] = val
+        name = temp.pop('name')[1:-1]            # remove quotations "" around name value
+        content[name] = body
+        for key, val in temp.items(): content[key] = val
+    return content
 
 def getCookie(request):
     cookie = ""
