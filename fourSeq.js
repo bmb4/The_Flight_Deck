@@ -53,11 +53,13 @@ const col7 = [spaces[6], spaces[13], spaces[20], spaces[27], spaces[34], spaces[
 const columns = [col1, col2, col3, col4, col5, col6, col7];
 const rows = [row1, row2, row3, row4, row5, row6];
 
-function dropChecker(id) {
+function dropChecker(id, fromButton) {
     if (pcs[id] >= 6) {
         alert("this column is full!");
     } else {
-        if (player == 1) {
+        if (fromButton && myTurn){
+            sendPost(id);
+            if (player == 1) {
             columns[id][5 - pcs[id]].style.background = _purple;
             player = 2;
         } else {
@@ -67,7 +69,7 @@ function dropChecker(id) {
         pcs[id] += 1;
         moves += 1;
         if (moves == 42) {
-//            alert("Draw!!!!!");
+            alert("Draw!!!!!");
             game_result(true, player1_username, player2_username);
         }
         if (moves > 6) {
@@ -76,7 +78,33 @@ function dropChecker(id) {
             } else {
                 winCheck2();
             }
-        }  
+        }
+        myTurn = false
+        }
+        else if(!myTurn && !fromButton){
+            if (player == 1) {
+            columns[id][5 - pcs[id]].style.background = _purple;
+            player = 2;
+        } else {
+            columns[id][5 - pcs[id]].style.background = _green;
+            player = 1;
+        }
+        pcs[id] += 1;
+        moves += 1;
+        if (moves == 42) {
+            alert("Draw!!!!!");
+            game_result(true, player1_username, player2_username);
+        }
+        if (moves > 6) {
+            if (player == 2) {
+                winCheck1();
+            } else {
+                winCheck2();
+            }
+        }
+        myTurn = true
+        }
+
     }
 }
 
@@ -92,7 +120,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -110,7 +138,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -133,7 +161,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -159,7 +187,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -185,7 +213,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -211,7 +239,7 @@ function winCheck1() {
             if (window.getComputedStyle(check).backgroundColor == _purple) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 1 WINS!!!");
+                    alert("PLAYER 1 WINS!!!");
                     game_result(false, player1_username, player2_username);
                     return;
                 }
@@ -238,7 +266,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
@@ -256,7 +284,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
@@ -279,7 +307,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
@@ -305,7 +333,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
@@ -331,7 +359,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
@@ -357,7 +385,7 @@ function winCheck2() {
             if (window.getComputedStyle(check).backgroundColor == _green) {
                 count += 1;
                 if (count >= 4) {
-//                    alert("PLAYER 2 WINS!!!");
+                    alert("PLAYER 2 WINS!!!");
                     game_result(false, player2_username, player1_username);
                     return;
                 }
